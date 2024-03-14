@@ -12,6 +12,10 @@ span,
 mat-icon {
   color: white;
 }
+a {
+  color: white;
+  text-decoration: none;
+}
 button:hover {
   box-shadow: 0 0 10px #00fffb, 0 0 15px #0081bc;
 }
@@ -45,4 +49,8 @@ button:hover {
 .nav-list-item span {
   width: 100px;
   text-transform: capitalize;
+}
+.active {
+  color: #00fffb;
+  text-shadow: 0 0 20px #00fffb, 0 0 40px #0081bc;
 }

@@ -1,12 +1,16 @@
-<div class="container-fluid g-0">
-
-  
-
-  <!-- MAIN CONTENT -->
-  <main class="black-border">
+<div class="container d-flex justify-content-center align-items-center">
+  <div class="row box-area mt-md-3 col-8">
+    <div
+      class="text-center mt-2 text-muted mb-2"
+      style="font-weight: bold; font-size: 1.5em"
+    >
+      Registration Form
+    </div>
+    <!-- MAIN CONTENT -->
+    <!-- <main class="black-border"> -->
 
     <!-- TOOBAR TO ADD AND SEARCH EMPLOYEES -->
-    <div class="toolbar">
+    <!-- <div class="toolbar">
 
       <div class="add-employee">
         <button type="button" class="btn btn-outline-success btn-lg" data-bs-toggle="modal"
@@ -18,10 +22,10 @@
           
       </div>
 
-    </div>
+    </div> -->
 
     <!-- AREA TO DISPLAY ALL THE EMPLOYEES -->
-    <div class="employees">
+    <!-- <div class="employees">
 
       
         <div class="col text-center">
@@ -32,119 +36,149 @@
       
     </div>
   </main>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Enter Employee Information</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-      </div>
-      <div class="modal-body">
-
-        <form>
-
-          <!-- FIRST AND LAST NAME -->
-          <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="First Name" formControlName="firstname">
-            </div>
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Last Name" formControlName="lastname">
-            </div>
+</div> -->
+    <!-- Modal -->
+    <div class="row mt-3">
+      <form>
+        <!-- FIRST AND LAST NAME -->
+        <div class="row">
+          <div class="col">
+            <input type="text" class="form-control" placeholder="First Name" />
           </div>
-
-          <!-- PERSONAL INFORMATION -->
-          <div class="row mt-5">
-            <div class="col form-heading">
-              <h6 class="text-secondary fst-italic">Personal Information</h6>
-            </div>
+          <div class="col">
+            <input type="text" class="form-control" placeholder="Last Name" />
           </div>
-          <div class="row">
-            <div class="col">
-              <h6>
-              <label for="mail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="mail" formControlName="email">
+        </div>
+
+        <!-- PERSONAL INFORMATION -->
+        <div class="row mt-2">
+          <div class="col">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              placeholder="Enter Your Email"
+              id="email"
+            />
+          </div>
+          <div class="col">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              placeholder="Enter Your Password"
+              id="password"
+            />
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col">
+            <h6>
+              <label for="datepicker" class="form-label mt-1">Birthdate</label>
             </h6>
-            </div>
+            <input type="date" class="form-control" id="datepicker" />
           </div>
-
-          <div class="row">
-            <div class="col">
-              <h6>
-              <label for="datepicker" class="form-label">Birthdate</label>
-              </h6>
-              <input type="date" class="form-control" id="datepicker" formControlName="birthday">
+          <div class="col">
+            <div class="row mb-2 mt-1">
+              <h6>Gender</h6>
             </div>
-            <div class="col">
-              <div class="row">
-                <h6 class="text-secondary">Gender</h6>
-              </div>
 
-              <div class="row">
-                <div class="col">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="m"
-                      formControlName="gender">
-                    <label class="form-check-label" for="male">Male</label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="f"
-                      formControlName="gender">
-                    <label class="form-check-label" for="female">Female</label>
-                  </div>
+            <div class="row">
+              <div class="col">
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="male"
+                    value="m"
+                  />
+                  <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="f"
+                  />
+                  <label class="form-check-label" for="female">Female</label>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="row mt-3">
-            <div class="col">
-              <select class="form-select" formControlName="education">
-                <option value="default" selected>Select your Education</option>
-                <option *ngFor="let option of educationOptions; let i = index;" value="{{i}}">
-                  {{option | titlecase}}
-                </option>
-              </select>
-            </div>
+        <div class="row mt-3">
+          <div class="col">
+            <select class="form-select">
+              <option value="default" selected hidden>Select your role</option>
+              <option
+                *ngFor="let option of roleOptions; let i = index"
+                value="{{ i }}"
+              >
+                {{ option | titlecase }}
+              </option>
+            </select>
           </div>
-
-          <div class="row mt-3">
-            <div class="col">
-              <label for="profile" class="form-label">Profile Image</label>
-              <input type="file" class="form-control" id="profile" #fileInput>
-            </div>
+          <div class="col">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Contact Number"
+            />
           </div>
+        </div>
 
-          <!-- JOB INFORMATION -->
-          <div class="row mt-5">
-            <div class="col form-heading">
-              <h6 class="text-secondary fst-italic">Job Information</h6>
-            </div>
+        <div class="row mt-3">
+          <div class="col">
+            <label for="profile" class="form-label">Profile Image</label>
+            <input type="file" class="form-control" id="profile" #fileInput />
           </div>
+        </div>
 
-          <div class="row">
-            <div class="col">
-              <input type="text" class="form-control" placeholder="Company Name" formControlName="company">
-            </div>
+        <!-- JOB INFORMATION -->
+        <div class="row mt-2">
+          <div class="col form-heading">
+            <h6 class="text-secondary fst-italic">Job Information</h6>
           </div>
+        </div>
 
-          <div class="row mt-3">
-            <div class="col">
-              <input type="number" class="form-control" placeholder="Job Experience (yrs)"
-                formControlName="jobExperience">
-            </div>
-            <div class="col">
-              <input type="number" class="form-control" placeholder="Salary (LPA)" formControlName="salary">
-            </div>
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Company Name"
+            />
           </div>
-        </form>
+        </div>
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >Insert</button>
+        <div class="row mt-3">
+          <div class="col">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Job Experience (yrs)"
+            />
+          </div>
+          <div class="col">
+            <input
+              type="number"
+              class="form-control"
+              placeholder="Salary (LPA)"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row mt-3 mb-3">
+      <div class="col text-center">
+        <button type="submit" class="btn btn-primary" disabled="true">
+          Signup
+        </button>
       </div>
     </div>
   </div>

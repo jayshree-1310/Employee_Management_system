@@ -1,45 +1,51 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, ReactiveFormsModule, FormControl } from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatButtonModule} from '@angular/material/button'; 
+import {
+  FormGroup,
+  FormBuilder,
+  ReactiveFormsModule,
+  FormControl,
+  Validators,
+} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-loginform',
   standalone: true,
   imports: [
-    ReactiveFormsModule,  
-    MatFormFieldModule, 
-    MatInputModule, 
-    CommonModule, 
-    MatButtonModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    CommonModule,
+    MatButtonModule,
+    RouterLink,
   ],
   templateUrl: './loginform.component.html',
-  styleUrl: './loginform.component.css'
+  styleUrl: './loginform.component.css',
 })
-export class LoginformComponent implements OnInit{
-
-  loginForm !: FormGroup;
-
-  constructor(private fb: FormBuilder){};
-
-  ngOnInit(): void {
-      this.loginForm = this.fb.group({
-        username: [''],
-        password: new FormControl(''),
-      })
+export class LoginformComponent {
+  loginform = new FormGroup({
+    email: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        '^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$'
+      ),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.pattern(
+        /^(?=\D*\d)(?=[^a-z]*[a-z])(?=.*[$@$!%*?&])(?=[^A-Z]*[A-Z]).{8,}$/
+      ),
+    ]),
+  });
+  get id(): FormControl {
+    return this.loginform.get('email') as FormControl;
   }
-
-  check(){
-    console.log(this.loginForm.value)
-    if(this.loginForm.value.username === "admin@gmail.com" && this.loginForm.value.password ==="admin"){
-      console.log("Login Successful");
-    }
-    else{
-      console.log("Try again");
-    }
-    this.loginForm.reset();
+  get password(): FormControl {
+    return this.loginform.get('password') as FormControl;
   }
-
+  submitLoginForm() {}
 }

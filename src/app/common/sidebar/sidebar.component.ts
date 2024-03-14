@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RegistrationformComponent } from '../registrationform/registrationform.component';
 
@@ -22,12 +22,16 @@ import { RegistrationformComponent } from '../registrationform/registrationform.
     RouterLink,
     RouterOutlet,
     CommonModule,
-    RegistrationformComponent
+    RegistrationformComponent,
+    RouterLinkActive,
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
+  isAdmin: boolean = false;
+  isEmployee: boolean = false;
+
   badgevisible = false;
   badgevisibility() {
     this.badgevisible = true;
