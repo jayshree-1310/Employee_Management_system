@@ -21,7 +21,8 @@
         <mat-list-item>
           <li class="nav-list-item">
             <i class="fa-solid fa-user-plus"></i>
-            <span><a>Register</a></span>
+            <span><a routerLink="register">Register</a></span>
+            
           </li>
         </mat-list-item>
       </ul>
@@ -30,6 +31,9 @@
   <mat-drawer-content class="drawerContent">
     <div style="text-align: center; min-height: 42rem">
       <h2 style="color: #378CE7">Welcome to our App</h2>
+      <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
+
+
