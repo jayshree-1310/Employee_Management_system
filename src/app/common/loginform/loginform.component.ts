@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   FormGroup,
   FormBuilder,
@@ -11,6 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+
+interface Credentials {
+  email: string;
+  password: string;
+}
 
 @Component({
   selector: 'app-loginform',
@@ -27,6 +33,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './loginform.component.css',
 })
 export class LoginformComponent {
+  
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -47,5 +54,24 @@ export class LoginformComponent {
   get password(): FormControl {
     return this.loginform.get('password') as FormControl;
   }
-  submitLoginForm() {}
+  
+
+
+
+  credentials: Credentials = { email: '', password: '' };
+
+  constructor(private router: Router) {}
+
+  submitLoginForm() {
+    
+
+    if (this.credentials.email === 'admin@gmail.com' && this.credentials.password === 'Abcdef@09') {
+      this.router.navigate(['/admin']);
+    } else if (this.credentials.email === 'employee@gmail.com' && this.credentials.password == 'Abcdef@09') {
+      this.router.navigate(['/emloyee']);
+    } else {
+      alert('Invalid credentials');
+    }
+  }
+    
 }
