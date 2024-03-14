@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
@@ -11,10 +12,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+=======
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+>>>>>>> 33d25014b94900da39b4f20c16734f3c4f79143a
 
 @Component({
   selector: 'app-loginform',
   standalone: true,
+<<<<<<< HEAD
   imports: [
     ReactiveFormsModule,
     MatFormFieldModule,
@@ -23,10 +29,14 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     MatButtonModule,
     RouterLink,
   ],
+=======
+  imports: [],
+>>>>>>> 33d25014b94900da39b4f20c16734f3c4f79143a
   templateUrl: './loginform.component.html',
   styleUrl: './loginform.component.css',
 })
 export class LoginformComponent {
+<<<<<<< HEAD
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -48,4 +58,7 @@ export class LoginformComponent {
     return this.loginform.get('password') as FormControl;
   }
   submitLoginForm() {}
+=======
+
+>>>>>>> 33d25014b94900da39b4f20c16734f3c4f79143a
 }
