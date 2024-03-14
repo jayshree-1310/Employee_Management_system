@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { RegistrationformComponent } from './common/registrationform/registrationform.component';
 import { LoginformComponent } from './common/loginform/loginform.component';
-import { AdminComponent } from './common/admin/admin.component';
-import { EmployeeComponent } from './common/employee/employee.component';
+import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
+import { EmployeeDashboardComponent } from './Employee/employee-dashboard/employee-dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -12,6 +12,14 @@ export const routes: Routes = [
     title: 'Register',
   },
   { path: 'login', component: LoginformComponent, title: 'Login' },
-  {path:'admin',component:AdminComponent},
-  {path:'employee',component:EmployeeComponent}
+  {
+    path: 'adminDashboard',
+    component: AdminDashboardComponent,
+    title: 'adminDashboard',
+  },
+  {
+    path: 'employeeDashboard',
+    component: EmployeeDashboardComponent,
+    title: 'employeeDashboard',
+  },
 ];

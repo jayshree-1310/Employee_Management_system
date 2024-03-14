@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormGroup,
-  FormBuilder,
   ReactiveFormsModule,
   FormControl,
   Validators,
@@ -11,12 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-
-interface Credentials {
-  email: string;
-  password: string;
-}
+import { RouterLink } from '@angular/router';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-loginform',
@@ -32,8 +27,8 @@ interface Credentials {
   templateUrl: './loginform.component.html',
   styleUrl: './loginform.component.css',
 })
-export class LoginformComponent {
-  
+export class LoginformComponent implements OnInit {
+  authService: AuthService = inject(AuthService);
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -54,24 +49,30 @@ export class LoginformComponent {
   get password(): FormControl {
     return this.loginform.get('password') as FormControl;
   }
-  
-
-
-
-  credentials: Credentials = { email: '', password: '' };
 
   constructor(private router: Router) {}
+  ngOnInit(): void {
+    this.authService.isAdmin.next(false);
+    this.authService.isEmployee.next(false);
+  }
 
   submitLoginForm() {
-    
-
-    if (this.credentials.email === 'admin@gmail.com' && this.credentials.password === 'Abcdef@09') {
-      this.router.navigate(['/admin']);
-    } else if (this.credentials.email === 'employee@gmail.com' && this.credentials.password == 'Abcdef@09') {
-      this.router.navigate(['/emloyee']);
+    if (
+      this.id.value === 'admin@gmail.com' &&
+      this.password.value === 'Abcdef@09'
+    ) {
+      this.authService.isAdmin.next(true);
+      this.router.navigate(['/adminDashboard']);
+    } else if (
+      this.id.value === 'employee@gmail.com' &&
+      this.password.value == 'Abcdef@09'
+    ) {
+      this.authService.isEmployee.next(true);
+      this.router.navigate(['/emloyeeDashboard']);
     } else {
+      this.authService.isAdmin.next(false);
+      this.authService.isEmployee.next(false);
       alert('Invalid credentials');
     }
   }
-    
 }
