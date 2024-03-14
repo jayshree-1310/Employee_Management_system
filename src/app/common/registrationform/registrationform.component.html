@@ -39,11 +39,16 @@
 </div> -->
     <!-- Modal -->
     <div class="row mt-3">
-      <form>
+      <form
+          [formGroup]="registrationForm"
+          novalidate
+          class="mb-md-3"
+          (ngSubmit)="submitregistrationForm()"
+        >
         <!-- FIRST AND LAST NAME -->
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" placeholder="First Name" />
+            <input type="text" class="form-control"  placeholder="First Name" required />
           </div>
           <div class="col">
             <input type="text" class="form-control" placeholder="Last Name" />
@@ -58,8 +63,16 @@
               type="email"
               class="form-control"
               placeholder="Enter Your Email"
+              name="email"
               id="email"
-            />
+              formControlName="email"
+              [ngClass]="{'is-valid':(id.touched || id.dirty)&&!(id.errors?.['required'] || (id.errors?.['pattern'])),'is-invalid':((id.touched||id.dirty) && (id.errors?.['required'] || (id.errors?.['pattern'])))}"
+              />
+              @if ((id.touched || id.dirty) && id.errors?.['required']) {
+              <div class="invalid-feedback ps-1">*Email is Required.</div>
+              } @if (id.errors?.['pattern']&&(id.touched || id.dirty)) {
+              <div class="invalid-feedback mb-1 ps-1">*Email is Invalid.</div>
+              }
           </div>
           <div class="col abc">
             <label for="password" class="form-label ps-1">Password</label>
@@ -68,7 +81,21 @@
               class="form-control"
               placeholder="Enter Your Password"
               id="password"
-            />
+              name="password"
+              formControlName="password"
+              [ngClass]="{'is-valid':(password.touched || password.dirty)&&!(password.errors?.['required'] || (password.errors?.['pattern'])),'is-invalid':((password.touched||password.dirty) && (password.errors?.['required'] || (password.errors?.['pattern'])))}"
+              />
+              @if ((password.touched || password.dirty) &&
+              password.errors?.['required']) {
+              <div class="invalid-feedback ps-1">*Password is Required.</div>
+              } @if (password.errors?.['pattern']&&(password.touched ||
+              password.dirty)) {
+              <div class="invalid-feedback mb-1 ps-1">
+                *Password must contain at least 8 characters,1 Uppercase,1
+                Lowercase,1 number,1 special characters.
+              </div>
+              }
+            
           </div>
         </div>
 
