@@ -3,10 +3,11 @@ import { RegistrationformComponent } from './common/registrationform/registratio
 import { LoginformComponent } from './common/loginform/loginform.component';
 
 export const routes: Routes = [
+  { path: '', component: LoginformComponent, pathMatch: 'full' },
   {
     path: 'register',
     component: RegistrationformComponent,
-    title: 'Registration',
+    title: 'Register',
   },
   { path: 'login', component: LoginformComponent, title: 'Login' },
 ];
