@@ -68,7 +68,7 @@ export class LoginformComponent implements OnInit {
       this.password.value == 'Abcdef@09'
     ) {
       this.authService.isEmployee.next(true);
-      this.router.navigate(['/emloyeeDashboard']);
+      this.router.navigate(['/employeeDashboard']);
     } else {
       this.authService.isAdmin.next(false);
       this.authService.isEmployee.next(false);
