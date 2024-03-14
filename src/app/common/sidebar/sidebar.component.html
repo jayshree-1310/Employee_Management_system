@@ -4,12 +4,13 @@
   </button>
   <span style="color: white" class="ms-2">EMS</span>
   <span class="example-spacer"></span>
+  @if(isAdmin || isEmployee){
   <button class="btn btn-outline-light ms-auto me-2 fw-bold border border-1">
-    Logout
-  </button>
+    Logout</button
+  >}
 </mat-toolbar>
 <mat-drawer-container autosize class="mt-1">
-  <mat-drawer #drawer opened="true" mode="side" position="start">
+  <mat-drawer #drawer opened="false" mode="side" position="start">
     <mat-nav-list>
       <ul class="nav-list">
         @if(isAdmin) {
