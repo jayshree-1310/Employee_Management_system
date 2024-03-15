@@ -16,10 +16,32 @@
         <!-- FIRST AND LAST NAME -->
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control"  placeholder="First Name" required />
+            <input type="text" class="form-control" formControlName="firstName" placeholder="First Name" 
+            [ngClass]="{'is-valid':(firstName.touched || firstName.dirty)&&!(firstName.errors?.['required'] || (firstName.errors?.['pattern'])),'is-invalid':((firstName.touched||firstName.dirty) && (firstName.errors?.['required'] || (firstName.errors?.['pattern'])))}"
+              />
+              @if ((firstName.touched || firstName.dirty) &&
+              firstName.errors?.['required']) {
+              <div class="invalid-feedback ps-1">*FirstName is Required.</div>
+              } @if (firstName.errors?.['pattern']&&(firstName.touched ||
+              firstName.dirty)) {
+              <div class="invalid-feedback mb-1 ps-1">
+                *Only alphabets and spaces allowed
+              </div>
+              } 
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Last Name" />
+            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" 
+            [ngClass]="{'is-valid':(lastName.touched || lastName.dirty)&&!(lastName.errors?.['required'] || (lastName.errors?.['pattern'])),'is-invalid':((lastName.touched||lastName.dirty) && (lastName.errors?.['required'] || (lastName.errors?.['pattern'])))}"
+              />
+              @if ((lastName.touched || lastName.dirty) &&
+              lastName.errors?.['required']) {
+              <div class="invalid-feedback ps-1">*LastName is Required.</div>
+              } @if (lastName.errors?.['pattern']&&(lastName.touched ||
+              lastName.dirty)) {
+              <div class="invalid-feedback mb-1 ps-1">
+                *Only alphabets and spaces allowed
+              </div>
+              }
           </div>
         </div>
 
@@ -135,7 +157,15 @@
               type="number"
               class="form-control"
               placeholder="Contact Number"
-            />
+              formControlName="contact"
+              [ngClass]="{'is-valid':(contact.touched || contact.dirty)&&!(contact.errors?.['required'] || (contact.errors?.['pattern'])),'is-invalid':((contact.touched||id.dirty) && (contact.errors?.['required'] || (contact.errors?.['pattern'])))}"
+              />
+              @if ((contact.touched || contact.dirty) && contact.errors?.['required']) {
+              <div class="invalid-feedback ps-1">*Contact Number is Required.</div>
+              } @if (contact.errors?.['pattern']&&(contact.touched || contact.dirty)) {
+              <div class="invalid-feedback mb-1 ps-1">*Number is Invalid.</div>
+              }
+            
           </div>
         </div>
 
