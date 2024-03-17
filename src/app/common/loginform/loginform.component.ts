@@ -59,13 +59,13 @@ export class LoginformComponent implements OnInit {
   submitLoginForm() {
     if (
       this.id.value === 'admin@gmail.com' &&
-      this.password.value === 'Abcdef@09'
+      this.password.value === 'Admin@123'
     ) {
       this.authService.isAdmin.next(true);
       this.router.navigate(['/adminDashboard']);
     } else if (
       this.id.value === 'employee@gmail.com' &&
-      this.password.value == 'Abcdef@09'
+      this.password.value == 'Employee@123'
     ) {
       this.authService.isEmployee.next(true);
       this.router.navigate(['/employeeDashboard']);
