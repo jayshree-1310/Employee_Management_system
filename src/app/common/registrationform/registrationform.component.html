@@ -3,45 +3,52 @@
     <div
       class="text-center mt-2 text-muted mb-2"
       style="font-weight: bold; font-size: 1.5em"
-    >
-    </div>
+    ></div>
     <!-- Modal -->
     <div class="row mt-3">
       <form
-          [formGroup]="registrationForm"
-          novalidate
-          class="mb-md-3"
-          (ngSubmit)="submitregistrationForm()"
-        >
+        [formGroup]="registrationForm"
+        novalidate
+        class="mb-md-3"
+        (ngSubmit)="submitregistrationForm()"
+      >
         <!-- FIRST AND LAST NAME -->
         <div class="row">
           <div class="col">
-            <input type="text" class="form-control" formControlName="firstName" placeholder="First Name" 
-            [ngClass]="{'is-valid':(firstName.touched || firstName.dirty)&&!(firstName.errors?.['required'] || (firstName.errors?.['pattern'])),'is-invalid':((firstName.touched||firstName.dirty) && (firstName.errors?.['required'] || (firstName.errors?.['pattern'])))}"
-              />
-              @if ((firstName.touched || firstName.dirty) &&
-              firstName.errors?.['required']) {
-              <div class="invalid-feedback ps-1">*FirstName is Required.</div>
-              } @if (firstName.errors?.['pattern']&&(firstName.touched ||
-              firstName.dirty)) {
-              <div class="invalid-feedback mb-1 ps-1">
-                *Only alphabets and spaces allowed
-              </div>
-              } 
+            <input
+              type="text"
+              class="form-control"
+              formControlName="firstName"
+              placeholder="First Name"
+              [ngClass]="{'is-valid':(firstName.touched || firstName.dirty)&&!(firstName.errors?.['required'] || (firstName.errors?.['pattern'])),'is-invalid':((firstName.touched||firstName.dirty) && (firstName.errors?.['required'] || (firstName.errors?.['pattern'])))}"
+            />
+            @if ((firstName.touched || firstName.dirty) &&
+            firstName.errors?.['required']) {
+            <div class="invalid-feedback ps-1">*FirstName is Required.</div>
+            } @if (firstName.errors?.['pattern']&&(firstName.touched ||
+            firstName.dirty)) {
+            <div class="invalid-feedback mb-1 ps-1 abc">
+              *Only alphabets and spaces allowed
+            </div>
+            }
           </div>
           <div class="col">
-            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" 
-            [ngClass]="{'is-valid':(lastName.touched || lastName.dirty)&&!(lastName.errors?.['required'] || (lastName.errors?.['pattern'])),'is-invalid':((lastName.touched||lastName.dirty) && (lastName.errors?.['required'] || (lastName.errors?.['pattern'])))}"
-              />
-              @if ((lastName.touched || lastName.dirty) &&
-              lastName.errors?.['required']) {
-              <div class="invalid-feedback ps-1">*LastName is Required.</div>
-              } @if (lastName.errors?.['pattern']&&(lastName.touched ||
-              lastName.dirty)) {
-              <div class="invalid-feedback mb-1 ps-1">
-                *Only alphabets and spaces allowed
-              </div>
-              }
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Last Name"
+              formControlName="lastName"
+              [ngClass]="{'is-valid':(lastName.touched || lastName.dirty)&&!(lastName.errors?.['required'] || (lastName.errors?.['pattern'])),'is-invalid':((lastName.touched||lastName.dirty) && (lastName.errors?.['required'] || (lastName.errors?.['pattern'])))}"
+            />
+            @if ((lastName.touched || lastName.dirty) &&
+            lastName.errors?.['required']) {
+            <div class="invalid-feedback ps-1">*LastName is Required.</div>
+            } @if (lastName.errors?.['pattern']&&(lastName.touched ||
+            lastName.dirty)) {
+            <div class="invalid-feedback mb-1 ps-1 abc">
+              *Only alphabets and spaces allowed
+            </div>
+            }
           </div>
         </div>
 
@@ -57,12 +64,12 @@
               id="email"
               formControlName="email"
               [ngClass]="{'is-valid':(id.touched || id.dirty)&&!(id.errors?.['required'] || (id.errors?.['pattern'])),'is-invalid':((id.touched||id.dirty) && (id.errors?.['required'] || (id.errors?.['pattern'])))}"
-              />
-              @if ((id.touched || id.dirty) && id.errors?.['required']) {
-              <div class="invalid-feedback ps-1">*Email is Required.</div>
-              } @if (id.errors?.['pattern']&&(id.touched || id.dirty)) {
-              <div class="invalid-feedback mb-1 ps-1">*Email is Invalid.</div>
-              }
+            />
+            @if ((id.touched || id.dirty) && id.errors?.['required']) {
+            <div class="invalid-feedback ps-1 abc">*Email is Required.</div>
+            } @if (id.errors?.['pattern']&&(id.touched || id.dirty)) {
+            <div class="invalid-feedback mb-1 ps-1 abc">*Email is Invalid.</div>
+            }
           </div>
           <div class="col abc">
             <label for="password" class="form-label ps-1">Password</label>
@@ -74,18 +81,17 @@
               name="password"
               formControlName="password"
               [ngClass]="{'is-valid':(password.touched || password.dirty)&&!(password.errors?.['required'] || (password.errors?.['pattern'])),'is-invalid':((password.touched||password.dirty) && (password.errors?.['required'] || (password.errors?.['pattern'])))}"
-              />
-              @if ((password.touched || password.dirty) &&
-              password.errors?.['required']) {
-              <div class="invalid-feedback ps-1">*Password is Required.</div>
-              } @if (password.errors?.['pattern']&&(password.touched ||
-              password.dirty)) {
-              <div class="invalid-feedback mb-1 ps-1">
-                *Password must contain at least 8 characters,1 Uppercase,1
-                Lowercase,1 number,1 special characters.
-              </div>
-              }
-            
+            />
+            @if ((password.touched || password.dirty) &&
+            password.errors?.['required']) {
+            <div class="invalid-feedback ps-1 abc">*Password is Required.</div>
+            } @if (password.errors?.['pattern']&&(password.touched ||
+            password.dirty)) {
+            <div class="invalid-feedback mb-1 ps-1 abc">
+              *Password must contain at least 8 characters,1 Uppercase,1
+              Lowercase,1 number,1 special characters.
+            </div>
+            }
           </div>
         </div>
 
@@ -96,7 +102,16 @@
                 >Birthdate</label
               >
             </h6>
-            <input type="date" class="form-control" id="datepicker" />
+            <input
+              type="date"
+              class="form-control"
+              id="datepicker"
+              formControlName="dateOfBirth"
+              [ngClass]="{'is-valid':(dob.touched || dob.dirty)&&!(dob.errors?.['required'] ),'is-invalid':((dob.touched||dob.dirty) && (dob.errors?.['required'] ))}"
+            />
+            @if ((dob.touched || dob.dirty) && dob.errors?.['required']) {
+            <div class="invalid-feedback ps-1 abc">*BirthDate is Required.</div>
+            }
           </div>
           <div class="col abc">
             <div class="row mb-2 mt-1">
@@ -112,8 +127,9 @@
                     name="gender"
                     id="male"
                     value="m"
+                    formControlName="gender"
                   />
-                  <label class="form-check-label" for="male">Male</label>
+                  <label class="form-label" for="male">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input
@@ -123,7 +139,7 @@
                     id="female"
                     value="f"
                   />
-                  <label class="form-check-label" for="female">Female</label>
+                  <label class="form-label" for="female">Female</label>
                 </div>
                 <div class="form-check form-check-inline">
                   <input
@@ -135,6 +151,11 @@
                   />
                   <label class="form-check-label" for="others">Others</label>
                 </div>
+                @if (gender.touched && gender.errors?.['required']) {
+                <div class="form-text text-danger ps-1 abc">
+                  *Gender is Required.
+                </div>
+                }
               </div>
             </div>
           </div>
@@ -142,7 +163,11 @@
 
         <div class="row mt-3">
           <div class="col">
-            <select class="form-select">
+            <select
+              class="form-select"
+              formControlName="department"
+              [ngClass]="{'is-valid':(department.touched || department.dirty)&&!(department.errors?.['required'] ),'is-invalid':((department.touched||department.dirty) && (department.errors?.['required'] ))}"
+            >
               <option value="default" selected hidden>Select your role</option>
               <option
                 *ngFor="let option of roleOptions; let i = index"
@@ -151,6 +176,12 @@
                 {{ option | titlecase }}
               </option>
             </select>
+            @if ((department.touched || department.dirty) &&
+            department.errors?.['required']) {
+            <div class="invalid-feedback ps-1 abc">
+              *Department is Required.
+            </div>
+            }
           </div>
           <div class="col">
             <input
@@ -159,21 +190,35 @@
               placeholder="Contact Number"
               formControlName="contact"
               [ngClass]="{'is-valid':(contact.touched || contact.dirty)&&!(contact.errors?.['required'] || (contact.errors?.['pattern'])),'is-invalid':((contact.touched||id.dirty) && (contact.errors?.['required'] || (contact.errors?.['pattern'])))}"
-              />
-              @if ((contact.touched || contact.dirty) && contact.errors?.['required']) {
-              <div class="invalid-feedback ps-1">*Contact Number is Required.</div>
-              } @if (contact.errors?.['pattern']&&(contact.touched || contact.dirty)) {
-              <div class="invalid-feedback mb-1 ps-1">*Number is Invalid.</div>
-              }
-            
+            />
+            @if ((contact.touched || contact.dirty) &&
+            contact.errors?.['required']) {
+            <div class="invalid-feedback ps-1 abc">
+              *Contact Number is Required.
+            </div>
+            } @if (contact.errors?.['pattern']&&(contact.touched ||
+            contact.dirty)) {
+            <div class="invalid-feedback mb-1 ps-1 abc">
+              *Number is Invalid.
+            </div>
+            }
           </div>
         </div>
 
         <div class="row mt-3">
           <div class="col">
             <label for="profile" class="form-label">Profile Image</label>
-            <input type="file" class="form-control" id="profile" #fileInput />
+            <input
+              type="file"
+              class="form-control"
+              id="profile"
+              formControlName="image"
+              [ngClass]="{'is-valid':(image.touched || image.dirty)&&!(image.errors?.['required'] ),'is-invalid':((image.touched||image.dirty) && (image.errors?.['required'] ))}"
+            />
           </div>
+          @if ((image.touched || image.dirty) && image.errors?.['required']) {
+          <div class="invalid-feedback ps-1 mb-1 abc">*Image is Required.</div>
+          }
         </div>
 
         <!-- JOB INFORMATION -->
@@ -189,6 +234,7 @@
               type="text"
               class="form-control"
               placeholder="Company Name"
+              formControlName="company"
             />
           </div>
         </div>
@@ -199,6 +245,7 @@
               type="number"
               class="form-control"
               placeholder="Job Experience (yrs)"
+              formControlName="experience"
             />
           </div>
           <div class="col">
@@ -206,6 +253,7 @@
               type="number"
               class="form-control"
               placeholder="Salary (LPA)"
+              formControlName="salary"
             />
           </div>
         </div>

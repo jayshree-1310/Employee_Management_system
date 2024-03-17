@@ -40,15 +40,11 @@ export class RegistrationformComponent {
     ]),
     firstName: new FormControl('', [
       Validators.required,
-      Validators.pattern(
-        /^[a-zA-Z ]*$/
-      ),
+      Validators.pattern(/^[a-zA-Z ]*$/),
     ]),
     lastName: new FormControl('', [
-      
-      Validators.pattern(
-        /^[a-zA-Z ]*$/
-      ),
+      Validators.required,
+      Validators.pattern(/^[a-zA-Z ]*$/),
     ]),
     contact: new FormControl('', [
       Validators.required,
@@ -56,9 +52,16 @@ export class RegistrationformComponent {
         /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
       ),
     ]),
+    gender: new FormControl('', [Validators.required]),
+    dateOfBirth: new FormControl('', Validators.required),
+    department: new FormControl('', Validators.required),
+    image: new FormControl('', Validators.required),
+    company: new FormControl(''),
+    experience: new FormControl(''),
+    salary: new FormControl(''),
   });
   get id(): FormControl {
-    return this.registrationForm .get('email') as FormControl;
+    return this.registrationForm.get('email') as FormControl;
   }
   get password(): FormControl {
     return this.registrationForm.get('password') as FormControl;
@@ -69,8 +72,29 @@ export class RegistrationformComponent {
   get lastName(): FormControl {
     return this.registrationForm.get('lastName') as FormControl;
   }
+  get gender(): FormControl {
+    return this.registrationForm.get('gender') as FormControl;
+  }
+  get dob(): FormControl {
+    return this.registrationForm.get('dateOfBirth') as FormControl;
+  }
+  get department(): FormControl {
+    return this.registrationForm.get('department') as FormControl;
+  }
+  get image(): FormControl {
+    return this.registrationForm.get('image') as FormControl;
+  }
   get contact(): FormControl {
     return this.registrationForm.get('contact') as FormControl;
   }
-  submitregistrationForm(){}
+  get company(): FormControl {
+    return this.registrationForm.get('company') as FormControl;
+  }
+  get experience(): FormControl {
+    return this.registrationForm.get('experience') as FormControl;
+  }
+  get salary(): FormControl {
+    return this.registrationForm.get('salary') as FormControl;
+  }
+  submitregistrationForm() {}
 }
