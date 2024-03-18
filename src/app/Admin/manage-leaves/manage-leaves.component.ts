@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { LeaveService } from '../../core/leave.service';
 interface LeaveRequest {
   id: number;
+  profileimage:string;
   employeeName: string;
+  department:string;
   leaveType: string;
   startDate: Date;
   endDate: Date;
