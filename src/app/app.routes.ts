@@ -71,4 +71,9 @@ export const routes: Routes = [
     component:HolidayListComponent,
     title:'holiday-list',
   },
+  {
+    path:'emp-profile',
+    component:EmpProfileComponent,
+    title:'emp-profile',
+  },
 ];
