@@ -7,6 +7,7 @@ import { ManageStaffComponent } from './Admin/manage-staff/manage-staff.componen
 import { AddStaffComponent } from './Admin/add-staff/add-staff.component';
 import { ManageDeptComponent } from './Admin/manage-dept/manage-dept.component';
 import { AddDeptComponent } from './Admin/add-dept/add-dept.component';
+import { ManageLeavesComponent } from './Admin/manage-leaves/manage-leaves.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -45,5 +46,10 @@ export const routes: Routes = [
     path:'add-dept',
     component:AddDeptComponent,
     title:'add-dept',
+  },
+  {
+    path:'manage-leaves',
+    component:ManageLeavesComponent,
+    title:'manage-leaves',
   },
 ];
