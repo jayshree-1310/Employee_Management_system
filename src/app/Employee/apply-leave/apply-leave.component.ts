@@ -32,12 +32,12 @@ export class ApplyLeaveComponent {
     // Call the service to submit the leave request
     this.leaveService.applyLeaveRequest(leaveRequestData).subscribe(
       () => {
-        // Handle success (e.g., display success message)
+        // Handle success 
         console.log('Leave request submitted successfully');
         this.leaveForm.reset();
       },
       (error: any) => {
-        // Handle error (e.g., display error message)
+        // Handle error 
         console.error('Error submitting leave request: ', error);
       }
     );
