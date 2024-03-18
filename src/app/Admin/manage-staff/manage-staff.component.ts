@@ -133,7 +133,7 @@ export class ManageStaffComponent implements OnInit, AfterViewInit {
         gender: 'Male',
         department: 'Department_9',
         contact: '+1234567899',
-        salary: 210000,
+        salary: 250000,
       },
       {
         fname: 'FirstName_10',
@@ -174,13 +174,13 @@ export class ManageStaffComponent implements OnInit, AfterViewInit {
   }
   displayColumns: string[] = [
     'no',
-    'name',
-    'email',
-    'contact',
-    'salary',
-    'department',
-    'birthdate',
-    'action',
+    'Name',
+    'Email',
+    'Contact',
+    'Salary',
+    'Department',
+    'Birthdate',
+    'Action',
   ];
 
   filterChange(data: Event) {
