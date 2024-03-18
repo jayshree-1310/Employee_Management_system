@@ -12,14 +12,20 @@
     Logout</button
   >}
 </mat-toolbar>
-<mat-drawer-container autosize class="mt-1">
-  <mat-drawer #drawer opened="false" mode="side" position="start">
+<mat-drawer-container class="mt-1">
+  <mat-drawer
+    #drawer
+    opened="false"
+    mode="side"
+    position="start"
+    style="width: 15em"
+  >
     <mat-nav-list>
       <ul class="nav-list">
         @if(isAdmin) {
         <mat-list-item>
           <li class="nav-list-item">
-            <i class="fa-solid fa-right-to-bracket"></i>
+            <i class="fa-solid fa-user-tie"></i>
             <span
               ><a routerLink="/adminDashboard" routerLinkActive="active"
                 >Admin</a
@@ -29,7 +35,7 @@
         </mat-list-item>
         <mat-list-item>
           <li class="nav-list-item">
-            <i class="fa-solid fa-right-to-bracket"></i>
+            <i class="fa-solid fa-people-roof"></i>
             <span
               ><a routerLink="/manage-staff" routerLinkActive="active"
                 >Manage Staff</a
@@ -39,7 +45,7 @@
         </mat-list-item>
         <mat-list-item>
           <li class="nav-list-item">
-            <i class="fa-solid fa-right-to-bracket"></i>
+            <i class="fa-solid fa-plus"></i>
             <span
               ><a routerLink="/add-staff" routerLinkActive="active"
                 >Add Staff</a
@@ -49,7 +55,7 @@
         </mat-list-item>
         <mat-list-item>
           <li class="nav-list-item">
-            <i class="fa-solid fa-right-to-bracket"></i>
+            <i class="fa-solid fa-building"></i>
             <span
               ><a routerLink="/manage-dept" routerLinkActive="active"
                 >Manage Department</a
@@ -59,7 +65,7 @@
         </mat-list-item>
         <mat-list-item>
           <li class="nav-list-item">
-            <i class="fa-solid fa-right-to-bracket"></i>
+            <i class="fa-solid fa-plus"></i>
             <span
               ><a routerLink="/add-dept" routerLinkActive="active"
                 >Add Department</a
@@ -101,7 +107,7 @@
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content class="drawerContent">
-    <div style="text-align: center; min-height: 42rem">
+    <div style="text-align: center; min-height: 41rem">
       <router-outlet></router-outlet>
     </div>
   </mat-drawer-content>

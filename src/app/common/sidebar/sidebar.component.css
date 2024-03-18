@@ -50,6 +50,14 @@ button:hover {
   width: 100px;
   text-transform: capitalize;
 }
+.nav-list-item span:hover {
+  color: #00fffb;
+  text-shadow: 0 0 20px #00fffb, 0 0 40px #0081bc;
+}
+.nav-list-item span a:hover {
+  color: #00fffb;
+  text-shadow: 0 0 20px #00fffb, 0 0 40px #0081bc;
+}
 .active {
   color: #00fffb;
   text-shadow: 0 0 20px #00fffb, 0 0 40px #0081bc;
