@@ -1,0 +1,11 @@
+.box-area {
+  background-color: #ecf0f3;
+  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.abc {
+  text-align: left;
+}

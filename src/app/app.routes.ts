@@ -4,6 +4,7 @@ import { LoginformComponent } from './common/loginform/loginform.component';
 import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
 import { EmployeeDashboardComponent } from './Employee/employee-dashboard/employee-dashboard.component';
 import { ManageStaffComponent } from './Admin/manage-staff/manage-staff.component';
+import { AddStaffComponent } from './Admin/add-staff/add-staff.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -27,5 +28,10 @@ export const routes: Routes = [
     path: 'manage-staff',
     component: ManageStaffComponent,
     title: 'manage-staff',
+  },
+  {
+    path: 'add-staff',
+    component: AddStaffComponent,
+    title: 'add-staff',
   },
 ];
