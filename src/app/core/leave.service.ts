@@ -18,7 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
   providedIn: 'root'
 })
 export class LeaveService {
-  private apiUrl = 'http://example.com/api/'; // Replace with your API URL
+  private apiUrl = 'http://example.com/api/'; // we will replace this with  API URL after springboot
 
   constructor(private http: HttpClient) { }
 
@@ -32,5 +32,13 @@ export class LeaveService {
 
   rejectLeaveRequest(leaveRequestId: number): Observable<any> {
     return this.http.put<any>(`${this.apiUrl}leave-requests/${leaveRequestId}/reject`, {});
+  }
+
+
+
+  private baseUrl = 'your-api-base-url';
+  applyLeaveRequest(leaveRequestData: any): Observable<any> {
+    const url = `${this.baseUrl}/apply-leave`;
+    return this.http.post(url, leaveRequestData);
   }
 }

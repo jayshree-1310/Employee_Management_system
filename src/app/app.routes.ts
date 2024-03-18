@@ -12,6 +12,7 @@ import { EmpProfileComponent } from './Employee/emp-profile/emp-profile.componen
 import { ManageSalaryComponent } from './Admin/manage-salary/manage-salary.component';
 import { AddSalaryComponent } from './Admin/add-salary/add-salary.component';
 import { HolidayListComponent } from './Employee/holiday-list/holiday-list.component';
+import { ApplyLeaveComponent } from './Employee/apply-leave/apply-leave.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -70,5 +71,10 @@ export const routes: Routes = [
     path:'holiday-list',
     component:HolidayListComponent,
     title:'holiday-list',
+  },
+  {
+    path:'apply-leave',
+    component:ApplyLeaveComponent,
+    title:'apply-leave',
   },
 ];
