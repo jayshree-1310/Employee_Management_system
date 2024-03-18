@@ -2,6 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  OnDestroy,
   OnInit,
   ViewChild,
   inject,
@@ -38,7 +39,8 @@ import { Router } from '@angular/router';
   templateUrl: './manage-staff.component.html',
   styleUrl: './manage-staff.component.css',
 })
-export class ManageStaffComponent implements OnInit, AfterViewInit {
+export class ManageStaffComponent implements OnInit, AfterViewInit, OnDestroy {
+  
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
@@ -190,4 +192,7 @@ export class ManageStaffComponent implements OnInit, AfterViewInit {
   addEmployee() {
     this.route.navigate(['/add-staff']);
   }
+
+  ngOnDestroy(): void { }
+  
 }
