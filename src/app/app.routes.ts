@@ -9,6 +9,7 @@ import { ManageDeptComponent } from './Admin/manage-dept/manage-dept.component';
 import { AddDeptComponent } from './Admin/add-dept/add-dept.component';
 import { ManageLeavesComponent } from './Admin/manage-leaves/manage-leaves.component';
 import { EmpProfileComponent } from './Employee/emp-profile/emp-profile.component';
+import { HolidayListComponent } from './Employee/holiday-list/holiday-list.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -57,5 +58,10 @@ export const routes: Routes = [
     path:'emp-profile',
     component:EmpProfileComponent,
     title:'emp-profile',
+  },
+  {
+    path:'holiday-list',
+    component:HolidayListComponent,
+    title:'holiday-list',
   },
 ];
