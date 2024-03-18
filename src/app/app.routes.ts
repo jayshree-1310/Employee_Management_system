@@ -8,7 +8,8 @@ import { AddStaffComponent } from './Admin/add-staff/add-staff.component';
 import { ManageDeptComponent } from './Admin/manage-dept/manage-dept.component';
 import { AddDeptComponent } from './Admin/add-dept/add-dept.component';
 import { ManageLeavesComponent } from './Admin/manage-leaves/manage-leaves.component';
-import { EmpProfileComponent } from './Employee/emp-profile/emp-profile.component';
+import { AddSalaryComponent } from './Admin/add-salary/add-salary.component';
+import { ManageSalaryComponent } from './Admin/manage-salary/manage-salary.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -54,8 +55,13 @@ export const routes: Routes = [
     title:'manage-leaves',
   },
   {
-    path:'emp-profile',
-    component:EmpProfileComponent,
-    title:'emp-profile',
+    path:'manage-salary',
+    component:ManageSalaryComponent,
+    title:'manage-salary',
+  },
+  {
+    path:'add-salary',
+    component:AddSalaryComponent,
+    title:'add-salary',
   },
 ];
