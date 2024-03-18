@@ -47,15 +47,19 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
     const userdata = [
       {
         name: "Human Resource",
+        Empno:"6"
       },
       {
         name: "Finance",
+        Empno:"14"
       },
       {
         name: "IT",
+        Empno:"15"
       },
       {
         name:"Marketing",
+        Empno:"20"
       },
     ];
     this.dataSource = new MatTableDataSource(userdata);
@@ -67,6 +71,7 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
   displayColumns: string[] = [
     'no',
     'name',
+    'number',
     'action',
   ];
 

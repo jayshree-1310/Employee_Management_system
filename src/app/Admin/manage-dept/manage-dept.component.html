@@ -50,6 +50,12 @@
             {{ element.name }}
           </td>
         </ng-container>
+        <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef>No of Employees</th>
+            <td mat-cell *matCellDef="let element">
+              {{ element.Empno }}
+            </td>
+          </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef>Action</th>
           <td mat-cell *matCellDef="let element">
