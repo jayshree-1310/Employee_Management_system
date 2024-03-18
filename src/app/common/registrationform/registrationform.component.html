@@ -169,12 +169,11 @@
               [ngClass]="{'is-valid':(department.touched || department.dirty)&&!(department.errors?.['required'] ),'is-invalid':((department.touched||department.dirty) && (department.errors?.['required'] ))}"
             >
               <option value="default" selected hidden>Select your role</option>
-              <option
-                *ngFor="let option of roleOptions; let i = index"
-                value="{{ i }}"
-              >
-                {{ option | titlecase }}
+              @for (item of roleOptions; track $index) {
+              <option value="{{ $index }}">
+                {{ item | titlecase }}
               </option>
+              }
             </select>
             @if ((department.touched || department.dirty) &&
             department.errors?.['required']) {
