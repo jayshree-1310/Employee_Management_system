@@ -1,38 +1,109 @@
-<!-- leave-management.component.html -->
-
-<div class="leave-management-container">
-    <h2>Leave Management</h2>
-    <table class="leave-table">
-      <thead>
-        <tr>
-          <th>Profile Image</th>
-          <th>Employee Name</th>
-          <th>Department</th>
-          <th>Leave Type</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Status</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let request of leaveRequests">
-          <td>{{ request.profileimage }}</td>
-          <td>{{ request.employeeName }}</td>
-          <td>{{ request.department }}</td>
-          <td>{{ request.leaveType }}</td>
-          <td>{{ request.startDate | date }}</td>
-          <td>{{ request.endDate | date }}</td>
-          <td>{{ request.status }}</td>
-          <td>
-            <button class="approve-btn" (click)="approveLeaveRequest(request.id)">Approve</button>
-            <button class="reject-btn" (click)="rejectLeaveRequest(request.id)">Reject</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <div *ngIf="leaveRequests.length === 0" class="no-leave-requests">
-      No leave requests found.
-    </div>
+<div class="container mt-3">
+  <div class="row">
+    <h2 class="fw-bold fs-4 text-muted">Leaves Management</h2>
+    <hr />
   </div>
-  
+</div>
+<mat-card class="ms-2 me-2">
+  <mat-card-header>
+    <div fxFlex="45" fxFlex.lt-md="100" class="mb5">
+      <mat-form-field class="w-75">
+        <input
+          matInput
+          type="text"
+          placeholder="Search here..."
+          (keyup)="filterChange($event)"
+        />
+        <button matSuffix mat-icon-button color="primary">
+          <mat-icon class="search-icon">search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <table
+      matSort
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8"
+      id="table"
+    >
+      <ng-container matColumnDef="no">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>ID</th>
+        <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
+      </ng-container>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.image }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.name }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="department">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Department</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.department }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="reason">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Reason</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.reason }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="from">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>From</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.from | date : "dd-MM-yyyy" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="to">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>To</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.to | date : "dd-MM-yyyy" }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Status</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.status }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let element">
+          <div class="d-flex">
+            <button
+              mat-raised-button
+              color="primary"
+              matTooltip="Approve"
+              class="me-2"
+            >
+              Approve
+            </button>
+            <button mat-raised-button color="warn" matTooltip="Reject">
+              Reject
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayColumns"></tr>
+    </table>
+  </mat-card-content>
+  <br />
+  <mat-card-footer>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15]"
+      [pageSize]="5"
+      [pageIndex]="0"
+      [length]="dataSource.data.length"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card-footer>
+</mat-card>
