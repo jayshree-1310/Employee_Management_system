@@ -11,7 +11,7 @@
       </div>
       <div class="form-group">
           <label for="empNum">Number of Employee</label>
-          <input type="number" class="form-control" id="empNum" placeholder="Enter No. of Employee" [(ngModel)]="department" (keyup)="onInputChange()">
+          <input type="number" class="form-control" id="empNum" placeholder="Enter No. of Employee">
       </div>
-      <button type="submit" class="btn btn-primary" (click)="addDepartment">Submit</button>
+      <button type="submit" class="btn btn-primary" (onclick)="addDepartment">Submit</button>
     </form>
