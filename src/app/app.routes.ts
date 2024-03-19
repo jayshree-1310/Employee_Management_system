@@ -6,15 +6,14 @@ import { EmployeeDashboardComponent } from './Employee/employee-dashboard/employ
 import { ManageStaffComponent } from './Admin/manage-staff/manage-staff.component';
 import { AddStaffComponent } from './Admin/add-staff/add-staff.component';
 import { ManageDeptComponent } from './Admin/manage-dept/manage-dept.component';
-import { AddDeptComponent } from './Admin/add-dept/add-dept.component';
 import { ManageLeavesComponent } from './Admin/manage-leaves/manage-leaves.component';
 import { EmpProfileComponent } from './Employee/emp-profile/emp-profile.component';
 import { ManageSalaryComponent } from './Admin/manage-salary/manage-salary.component';
 import { AddSalaryComponent } from './Admin/add-salary/add-salary.component';
 import { HolidayListComponent } from './Employee/holiday-list/holiday-list.component';
 import { ApplyLeaveComponent } from './Employee/apply-leave/apply-leave.component';
-import { EditDeptComponent } from './Admin/edit-dept/edit-dept.component';
 import { UpdateProfileComponent } from './common/update-profile/update-profile.component';
+import { ManageAttendanceComponent } from './Admin/manage-attendance/manage-attendance.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -45,53 +44,48 @@ export const routes: Routes = [
     title: 'add-staff',
   },
   {
-    path:'manage-dept',
-    component:ManageDeptComponent,
-    title:'manage-dept',
+    path: 'manage-dept',
+    component: ManageDeptComponent,
+    title: 'manage-dept',
   },
   {
-    path:'add-dept',
-    component:AddDeptComponent,
-    title:'add-dept',
+    path: 'manage-leaves',
+    component: ManageLeavesComponent,
+    title: 'manage-leaves',
   },
   {
-    path:'manage-leaves',
-    component:ManageLeavesComponent,
-    title:'manage-leaves',
+    path: 'manage-salary',
+    component: ManageSalaryComponent,
+    title: 'manage-salary',
   },
   {
-    path:'manage-salary',
-    component:ManageSalaryComponent,
-    title:'manage-salary',
+    path: 'add-salary',
+    component: AddSalaryComponent,
+    title: 'add-salary',
   },
   {
-    path:'add-salary',
-    component:AddSalaryComponent,
-    title:'add-salary',
+    path: 'holiday-list',
+    component: HolidayListComponent,
+    title: 'holiday-list',
   },
   {
-    path:'holiday-list',
-    component:HolidayListComponent,
-    title:'holiday-list',
+    path: 'emp-profile',
+    component: EmpProfileComponent,
+    title: 'emp-profile',
   },
   {
-    path:'emp-profile',
-    component:EmpProfileComponent,
-    title:'emp-profile',
+    path: 'apply-leave',
+    component: ApplyLeaveComponent,
+    title: 'apply-leave',
   },
   {
-    path:'apply-leave',
-    component:ApplyLeaveComponent,
-    title:'apply-leave',
+    path: 'update-profile',
+    component: UpdateProfileComponent,
+    title: 'update-profile',
   },
   {
-    path:'edit-dept',
-    component:EditDeptComponent,
-    title:'edit-dept',
-  },
-  {
-    path:'update-profile',
-    component:UpdateProfileComponent,
-    title:'update-profile',
+    path: 'manage-attendance',
+    component: ManageAttendanceComponent,
+    title: 'manage-attendance',
   },
 ];

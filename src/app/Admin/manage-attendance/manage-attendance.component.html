@@ -1,10 +1,10 @@
 <div class="container mt-3">
   <div class="row">
-    <h2 class="fw-bold fs-4 text-muted">Department</h2>
+    <h2 class="fw-bold fs-4 text-muted">Leaves Management</h2>
     <hr />
   </div>
 </div>
-<mat-card class="ms-2 me-2">
+<mat-card class="ms-5 me-5 mt-5">
   <mat-card-header>
     <div fxFlex="45" fxFlex.lt-md="100" class="mb5">
       <mat-form-field class="w-75">
@@ -19,18 +19,6 @@
         </button>
       </mat-form-field>
     </div>
-    <div class="d-flex ms-auto align-items-center">
-      <div class="me-2">
-        <button
-          mat-mini-fab
-          color="primary"
-          matTooltip="Add new Department"
-          (click)="addEmployee()"
-        >
-          <mat-icon>add</mat-icon>
-        </button>
-      </div>
-    </div>
   </mat-card-header>
   <mat-card-content>
     <table
@@ -44,33 +32,39 @@
         <th mat-header-cell mat-sort-header *matHeaderCellDef>ID</th>
         <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
       </ng-container>
+      <ng-container matColumnDef="image">
+        <th mat-header-cell *matHeaderCellDef>Image</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.image }}
+        </td>
+      </ng-container>
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Department Name</th>
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Name</th>
         <td mat-cell *matCellDef="let element">
           {{ element.name }}
         </td>
       </ng-container>
-      <ng-container matColumnDef="number">
-        <th mat-header-cell *matHeaderCellDef>No of Employees</th>
+      <ng-container matColumnDef="department">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef>Department</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.Empno }}
+          {{ element.department }}
         </td>
       </ng-container>
+
       <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef>Action</th>
         <td mat-cell *matCellDef="let element">
           <div class="d-flex">
             <button
-              mat-icon-button
+              mat-raised-button
               color="primary"
-              matTooltip="Edit row"
-              (click)="editDepartment(element)"
+              matTooltip="Approve"
+              class="me-2"
             >
-              <mat-icon>edit</mat-icon>
+              Present
             </button>
-
-            <button mat-icon-button color="primary" matTooltip="Delete row">
-              <mat-icon>delete</mat-icon>
+            <button mat-raised-button color="warn" matTooltip="Reject">
+              Absent
             </button>
           </div>
         </td>

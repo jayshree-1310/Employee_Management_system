@@ -17,6 +17,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddDepartmentPopupComponent } from '../add-department-popup/add-department-popup.component';
+import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-department-popup.component';
 
 @Component({
   selector: 'app-manage-dept',
@@ -39,6 +42,7 @@ import { Router } from '@angular/router';
   styleUrl: './manage-dept.component.css',
 })
 export class ManageDeptComponent implements OnInit, AfterViewInit {
+  constructor(private dialog: MatDialog) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
@@ -46,20 +50,20 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     const userdata = [
       {
-        name: "Human Resource",
-        Empno:"6"
+        name: 'Human Resource',
+        Empno: '6',
       },
       {
-        name: "Finance",
-        Empno:"14"
+        name: 'Finance',
+        Empno: '14',
       },
       {
-        name: "IT",
-        Empno:"15"
+        name: 'IT',
+        Empno: '15',
       },
       {
-        name:"Marketing",
-        Empno:"20"
+        name: 'Marketing',
+        Empno: '20',
       },
     ];
     this.dataSource = new MatTableDataSource(userdata);
@@ -68,21 +72,27 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  displayColumns: string[] = [
-    'no',
-    'name',
-    'number',
-    'action',
-  ];
+  displayColumns: string[] = ['no', 'name', 'number', 'action'];
 
   filterChange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
     this.dataSource.filter = value.trim().toLowerCase();
   }
   addEmployee() {
-    this.route.navigate(['/add-dept']);
+    this.dialog.open(AddDepartmentPopupComponent, {
+      width: '50%',
+      enterAnimationDuration: '350ms',
+      exitAnimationDuration: '350ms',
+    });
   }
-  editDepartment() {
-    this.route.navigate(['/edit-dept']);
+  editDepartment(element: any) {
+    this.dialog.open(EditDepartmentPopupComponent, {
+      width: '50%',
+      enterAnimationDuration: '350ms',
+      exitAnimationDuration: '350ms',
+      data: {
+        data: element,
+      },
+    });
   }
 }
