@@ -9,11 +9,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './add-dept.component.css'
 })
 export class AddDeptComponent {
-  onInputChange() {
-    throw new Error('Method not implemented.');
-  }
   addDepartment() {
-    console.log(['/add-dept'])
+    console.log(['add-dept'])
     window.alert("Department Added Successfully")
   }
   department: number = 0;
