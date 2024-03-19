@@ -12,6 +12,28 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
+import { LoginAuthService } from '../../login-auth.service';
+
+export const data = [
+  {
+    email: 'admin@gmail.com',
+    password: 'Admin@123',
+    role: 'admin',
+  },
+  {
+    email: 'employee@gmail.com',
+    password: 'Employee@123',
+    role: 'employee',
+  },
+  {
+    email: 'emp3@gmail.com',
+    password: 'emp3',
+  },
+  {
+    email: 'emp4@gmail.com',
+    password: 'emp4',
+  },
+];
 
 @Component({
   selector: 'app-loginform',
@@ -29,6 +51,7 @@ import { AuthService } from '../../core/auth.service';
 })
 export class LoginformComponent implements OnInit {
   authService: AuthService = inject(AuthService);
+  logInAuthService: LoginAuthService = inject(LoginAuthService);
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -57,24 +80,26 @@ export class LoginformComponent implements OnInit {
   }
 
   submitLoginForm() {
-    if (
-      this.id.value === 'admin@gmail.com' &&
-      this.password.value === 'Admin@123'
-    ) {
-      this.authService.isAdmin.next(true);
-      // this.loginAuth.setToken(res);
-      this.router.navigate(['/adminDashboard']);
-    } else if (
-      this.id.value === 'employee@gmail.com' &&
-      this.password.value == 'Employee@123'
-    ) {
-      this.authService.isEmployee.next(true);
-      // this.loginAuth.setToken(res);
-      this.router.navigate(['/employeeDashboard']);
-    } else {
+    let obj = data.find((o) => o.email === this.id.value);
+    let isUser = this.password.value === obj?.password;
+    if (!isUser) {
       this.authService.isAdmin.next(false);
       this.authService.isEmployee.next(false);
       alert('Invalid credentials');
+      return;
     }
+    if (obj?.role === 'admin') {
+      this.authService.isAdmin.next(true);
+      this.logInAuthService.login();
+      this.router.navigate(['/adminDashboard']);
+      return;
+    } else {
+      this.authService.isEmployee.next(true);
+      this.router.navigate(['/employeeDashboard']);
+      return;
+    }
+    this.authService.isAdmin.next(false);
+    this.authService.isEmployee.next(false);
+    alert('Invalid credentials');
   }
 }
