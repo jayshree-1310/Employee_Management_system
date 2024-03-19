@@ -14,6 +14,7 @@ import { AddSalaryComponent } from './Admin/add-salary/add-salary.component';
 import { HolidayListComponent } from './Employee/holiday-list/holiday-list.component';
 import { ApplyLeaveComponent } from './Employee/apply-leave/apply-leave.component';
 import { EditDeptComponent } from './Admin/edit-dept/edit-dept.component';
+import { UpdateProfileComponent } from './common/update-profile/update-profile.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -87,5 +88,10 @@ export const routes: Routes = [
     path:'edit-dept',
     component:EditDeptComponent,
     title:'edit-dept',
+  },
+  {
+    path:'update-profile',
+    component:UpdateProfileComponent,
+    title:'update-profile',
   },
 ];

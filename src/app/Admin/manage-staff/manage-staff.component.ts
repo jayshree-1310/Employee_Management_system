@@ -17,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-manage-staff',
@@ -35,6 +35,9 @@ import { Router } from '@angular/router';
     MatMenuModule,
     DatePipe,
     CurrencyPipe,
+    RouterLink,
+    RouterLinkActive,
+    RouterOutlet
   ],
   templateUrl: './manage-staff.component.html',
   styleUrl: './manage-staff.component.css',
