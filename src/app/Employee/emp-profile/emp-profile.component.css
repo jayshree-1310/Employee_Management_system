@@ -1,40 +1,44 @@
-
 .main {
-    margin-top: 2%;
-    margin-left: 29%;
-    font-size: 28px;
-    padding: 0 10px;
-    width: 58%;
+  margin-top: 2%;
+  margin-left: 29%;
+  font-size: 28px;
+  padding: 0 10px;
+  width: 58%;
 }
-
+.box-area {
+  background-color: #ecf0f3;
+  box-shadow: 10px 10px 10px #d1d9e6, -10px -10px 10px #f9f9f9;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  z-index: 0;
+}
 .main h2 {
-    color: #333;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 24px;
-    margin-bottom: 10px;
+  color: #333;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
 }
 
 .main .card {
-    background-color: #fff;
-    border-radius: 18px;
-    box-shadow: 1px 1px 8px 0 grey;
-    height: auto;
-    margin-bottom: 20px;
-    padding: 20px 0 20px 50px;
+  background-color: #fff;
+  border-radius: 18px;
+  box-shadow: 1px 1px 8px 0 grey;
+  height: auto;
+  margin-bottom: 20px;
+  padding: 20px 0 20px 50px;
 }
 
 .main .card table {
-    border: none;
-    font-size: 16px;
-    height: 270px;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+  border: none;
+  font-size: 16px;
+  height: 270px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .edit {
-    position: absolute;
-    color: #e7e7e8;
-    right: 14%;
+  position: absolute;
+  color: #e7e7e8;
+  right: 14%;
 }
-

@@ -40,7 +40,6 @@ import { Router } from '@angular/router';
   styleUrl: './manage-staff.component.css',
 })
 export class ManageStaffComponent implements OnInit, AfterViewInit, OnDestroy {
-  
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
@@ -176,13 +175,13 @@ export class ManageStaffComponent implements OnInit, AfterViewInit, OnDestroy {
   }
   displayColumns: string[] = [
     'no',
-    'Name',
-    'Email',
-    'Contact',
-    'Salary',
-    'Department',
-    'Birthdate',
-    'Action',
+    'name',
+    'email',
+    'contact',
+    'salary',
+    'department',
+    'birthdate',
+    'action',
   ];
 
   filterChange(data: Event) {
@@ -193,6 +192,5 @@ export class ManageStaffComponent implements OnInit, AfterViewInit, OnDestroy {
     this.route.navigate(['/add-staff']);
   }
 
-  ngOnDestroy(): void { }
-  
+  ngOnDestroy(): void {}
 }
