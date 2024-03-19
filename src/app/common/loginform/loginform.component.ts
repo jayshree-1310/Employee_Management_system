@@ -62,13 +62,14 @@ export class LoginformComponent implements OnInit {
       this.password.value === 'Admin@123'
     ) {
       this.authService.isAdmin.next(true);
+      // this.loginAuth.setToken(res);
       this.router.navigate(['/adminDashboard']);
     } else if (
       this.id.value === 'employee@gmail.com' &&
       this.password.value == 'Employee@123'
     ) {
       this.authService.isEmployee.next(true);
-
+      // this.loginAuth.setToken(res);
       this.router.navigate(['/employeeDashboard']);
     } else {
       this.authService.isAdmin.next(false);
