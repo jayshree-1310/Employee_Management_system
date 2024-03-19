@@ -82,4 +82,7 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
   addEmployee() {
     this.route.navigate(['/add-dept']);
   }
+  editDepartment() {
+    this.route.navigate(['/edit-dept']);
+  }
 }
