@@ -1,28 +1,21 @@
-
-<header>
-  <h3>Leave Application</h3>
-</header>
-<p style="color:red;">Your application will be reviewed within 48 hours</p>
-
-<div class="apply-leave-container">
-    <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" class="leave-form">
-      <div class="form-group">
-        <label for="leaveType">Leave Type</label>
-        <input type="text" formControlName="leaveType" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="startDate">Start Date</label>
-        <input type="date" formControlName="startDate" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="endDate">End Date</label>
-        <input type="date" formControlName="endDate" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="reason">Reason</label>
-        <textarea formControlName="reason" class="form-control"></textarea>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-  </div>
-  
+<div class="apply-leave-container mt-5">
+  <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" class="leave-form">
+    <div class="form-group">
+      <label for="leaveType">Leave Type</label>
+      <input type="text" formControlName="leaveType" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="startDate">Start Date</label>
+      <input type="date" formControlName="startDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="endDate">End Date</label>
+      <input type="date" formControlName="endDate" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="reason">Reason</label>
+      <textarea formControlName="reason" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
