@@ -63,7 +63,7 @@ export class ManageLeavesComponent implements OnInit, AfterViewInit {
       {
         id: 1,
         image: 'abc',
-        name: 'John Doe',
+        name: 'Smita Kumari',
         department: 'def',
         reason: 'Sick Leave',
         from: new Date('2024-03-19'),
