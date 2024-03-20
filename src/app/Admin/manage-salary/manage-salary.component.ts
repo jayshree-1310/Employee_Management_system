@@ -17,11 +17,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { AddSalaryComponent } from '../add-salary/add-salary.component';
+import { EditSalaryPopupComponent } from '../edit-salary-popup/edit-salary-popup.component';
 
 @Component({
   selector: 'app-manage-salary',
   standalone: true,
-  imports: [MatTableModule,
+  imports: [
+    MatTableModule,
     MatPaginatorModule,
     MatSortModule,
     MatCardModule,
@@ -37,7 +41,8 @@ import { Router } from '@angular/router';
   templateUrl: './manage-salary.component.html',
   styleUrl: './manage-salary.component.css'
 })
-export class ManageSalaryComponent {
+export class ManageSalaryComponent implements OnInit, AfterViewInit{
+  constructor(private dialog: MatDialog) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
@@ -88,6 +93,19 @@ export class ManageSalaryComponent {
     this.dataSource.filter = value.trim().toLowerCase();
   }
   addSalary() {
-    this.route.navigate(['/add-salary']);
+    this.dialog.open(AddSalaryComponent, {
+      width: '50%',
+      enterAnimationDuration: '350ms',
+      exitAnimationDuration: '350ms',
+    });
   }
-}
+  editSalary(element: any) {
+    this.dialog.open(EditSalaryPopupComponent, {
+      width: '50%',
+      enterAnimationDuration: '350ms',
+      exitAnimationDuration: '350ms',
+      data: {
+        data: element,
+      },
+    });
+  }}
