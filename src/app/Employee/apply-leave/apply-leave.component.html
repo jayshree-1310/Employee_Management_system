@@ -1,21 +1,23 @@
 <div class="apply-leave-container mt-5">
-  <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" class="leave-form">
-    <div class="form-group">
-      <label for="leaveType">Leave Type</label>
-      <input type="text" formControlName="leaveType" class="form-control" />
-    </div>
-    <div class="form-group">
-      <label for="startDate">Start Date</label>
-      <input type="date" formControlName="startDate" class="form-control" />
-    </div>
-    <div class="form-group">
-      <label for="endDate">End Date</label>
-      <input type="date" formControlName="endDate" class="form-control" />
-    </div>
-    <div class="form-group">
-      <label for="reason">Reason</label>
-      <textarea formControlName="reason" class="form-control"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <div class="row box-area">
+    <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()" class="leave-form">
+      <div class="form-group">
+        <label for="leaveType">Leave Type</label>
+        <input type="text" formControlName="leaveType" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="startDate">Start Date</label>
+        <input type="date" formControlName="startDate" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="endDate">End Date</label>
+        <input type="date" formControlName="endDate" class="form-control" />
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason</label>
+        <textarea formControlName="reason" class="form-control"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
 </div>
