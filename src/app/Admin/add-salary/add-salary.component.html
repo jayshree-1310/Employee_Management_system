@@ -1,21 +1,56 @@
-<div class="container mt-3">
-  <div class="row">
-    <h2 class="fw-bold fs-4 text-muted">Add Salary</h2>
+<div class="changebac container">
+  <div class="row mt-3 col-12">
+    <h2 class="fw-bold fs-4 text-muted text-start">Add Salary</h2>
     <hr />
   </div>
+
+  <div class="row col-12 ms-sm-5 mt-3">
+    <form class="mb-3">
+      <div class="col-sm-8">
+        <div class="form-group">
+          <label for="empName" class="form-label">Employee Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="empName"
+            name="empName"
+            placeholder="Enter name"
+          />
+        </div>
+      </div>
+      <div class="col-sm-8 mt-2">
+        <div class="form-group">
+          <label for="empSal" class="form-label">Salary</label>
+          <input
+            type="number"
+            class="form-control"
+            id="empSal"
+            placeholder="Enter Salary"
+            [(ngModel)]="salary"
+            name="salary"
+            (keyup)="onInputChange()"
+          />
+        </div>
+      </div>
+      <div class="col-sm-8 mt-2">
+        <div class="form-group">
+          <label for="empAllowance" class="form-label">Allowance</label>
+          <input
+            type="number"
+            class="form-control"
+            id="empAllowance"
+            placeholder="Enter Salary"
+            [(ngModel)]="allowance"
+            name="empAllowance"
+            (keyup)="onInputChange()"
+          />
+        </div>
+      </div>
+      <div class="col-sm-4 mt-3 ms-0">
+        <button type="submit" class="btn btn-primary" (click)="(addSalary)">
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
 </div>
-<form>
-    <div class="form-group">
-      <label for="empName">Employee Name</label>
-      <input type="text" class="form-control" id="empName" placeholder="Enter name">
-    </div>
-    <div class="form-group">
-        <label for="empSal">Salary</label>
-        <input type="number" class="form-control" id="empSal" placeholder="Enter Salary" [(ngModel)]="salary" (keyup)="onInputChange()">
-      </div>
-      <div class="form-group">
-        <label for="empAllowance">Allowance</label>
-        <input type="number" class="form-control" id="empAllowance" placeholder="Enter Salary" [(ngModel)]="allowance" (keyup)="onInputChange()">
-      </div>
-    <button type="submit" class="btn btn-primary" (click)="addSalary">Submit</button>
-  </form>

@@ -62,3 +62,14 @@ button:hover {
   color: #00fffb;
   text-shadow: 0 0 20px #00fffb, 0 0 40px #0081bc;
 }
+.responsive-drawer {
+  width: 15em;
+}
+@media screen and (max-width: 768px) {
+  .responsive-drawer {
+    width: fit-content; /* Decrease width for smaller screens */
+  }
+  .nav-list-item {
+    font-size: 0.9rem; /* Decrease font size for smaller screens */
+  }
+}

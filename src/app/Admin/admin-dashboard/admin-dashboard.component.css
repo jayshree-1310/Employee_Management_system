@@ -54,3 +54,17 @@
 .selectbg:hover {
   cursor: pointer;
 }
+.resp-margin {
+  margin-top: 0em;
+}
+@media (max-width: 768px) {
+  .resp-margin {
+    margin-top: 1em;
+  }
+}
+
+@media (max-width: 576px) {
+  .resp-margin {
+    margin-top: 1em;
+  }
+}

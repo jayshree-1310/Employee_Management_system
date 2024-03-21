@@ -39,9 +39,9 @@ import { EditSalaryPopupComponent } from '../edit-salary-popup/edit-salary-popup
     CurrencyPipe,
   ],
   templateUrl: './manage-salary.component.html',
-  styleUrl: './manage-salary.component.css'
+  styleUrl: './manage-salary.component.css',
 })
-export class ManageSalaryComponent implements OnInit, AfterViewInit{
+export class ManageSalaryComponent implements OnInit, AfterViewInit {
   constructor(private dialog: MatDialog) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -50,30 +50,29 @@ export class ManageSalaryComponent implements OnInit, AfterViewInit{
   ngOnInit(): void {
     const userdata = [
       {
-        name: "First Employee",
-        salary:"60000"
+        name: 'First Employee',
+        salary: '60000',
       },
       {
-        name: "Second Employee",
-        salary:"140000"
+        name: 'Second Employee',
+        salary: '140000',
       },
       {
-        name: "Third Employee",
-        salary:"1500000"
+        name: 'Third Employee',
+        salary: '1500000',
       },
       {
-        name:"Fourth Employee",
-        salary:"2000000"
+        name: 'Fourth Employee',
+        salary: '2000000',
       },
       {
-        name:"Fifth Employee",
-        salary:"2000000"
+        name: 'Fifth Employee',
+        salary: '2000000',
       },
       {
-        name:"Sixth Employee",
-        salary:"200000"
+        name: 'Sixth Employee',
+        salary: '200000',
       },
-      
     ];
     this.dataSource = new MatTableDataSource(userdata);
   }
@@ -81,12 +80,7 @@ export class ManageSalaryComponent implements OnInit, AfterViewInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  displayColumns: string[] = [
-    'no',
-    'name',
-    'number',
-    'action',
-  ];
+  displayColumns: string[] = ['no', 'name', 'number', 'action'];
 
   filterChange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
@@ -94,18 +88,17 @@ export class ManageSalaryComponent implements OnInit, AfterViewInit{
   }
   addSalary() {
     this.dialog.open(AddSalaryComponent, {
-      width: '50%',
       enterAnimationDuration: '350ms',
       exitAnimationDuration: '350ms',
     });
   }
   editSalary(element: any) {
     this.dialog.open(EditSalaryPopupComponent, {
-      width: '50%',
       enterAnimationDuration: '350ms',
       exitAnimationDuration: '350ms',
       data: {
         data: element,
       },
     });
-  }}
+  }
+}

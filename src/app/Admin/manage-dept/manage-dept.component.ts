@@ -80,14 +80,12 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
   }
   addEmployee() {
     this.dialog.open(AddDepartmentPopupComponent, {
-      width: '50%',
       enterAnimationDuration: '350ms',
       exitAnimationDuration: '350ms',
     });
   }
   editDepartment(element: any) {
     this.dialog.open(EditDepartmentPopupComponent, {
-      width: '50%',
       enterAnimationDuration: '350ms',
       exitAnimationDuration: '350ms',
       data: {

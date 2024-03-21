@@ -6,8 +6,24 @@
   z-index: 0;
 }
 
- 
-.abc{
+.abc {
   text-align: left;
 }
 
+@media (max-width: 768px) {
+  .box-area {
+    padding: 10px;
+  }
+  .form-control {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .box-area {
+    padding: 5px;
+  }
+  .form-control {
+    font-size: 0.8rem;
+  }
+}

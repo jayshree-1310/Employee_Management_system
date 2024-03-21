@@ -13,22 +13,6 @@ table {
   width: 100%;
 }
 
-@media screen and (max-width: 768px) {
-  .mat-mdc-row .mat-mdc-cell {
-    padding: 5px;
-    font-size: 14px;
-  }
-
-  mat-card,
-  mat-card-footer,
-  mat-paginator {
-    background-color:  #ecf0f3;
-    margin: 10px;
-  }
-  table {
-    background-color:  #ecf0f3;
-    overflow-x: auto;
-    display: block;
-    white-space: nowrap;
-  }
+.table-responsive {
+  overflow-x: auto;
 }

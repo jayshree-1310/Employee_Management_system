@@ -6,3 +6,6 @@ mat-paginator {
 table {
   background-color: #ecf0f3;
 }
+.table-responsive {
+  overflow-x: auto;
+}
