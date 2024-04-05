@@ -14,6 +14,7 @@ import { HolidayListComponent } from './Employee/holiday-list/holiday-list.compo
 import { ApplyLeaveComponent } from './Employee/apply-leave/apply-leave.component';
 import { UpdateProfileComponent } from './common/update-profile/update-profile.component';
 import { ManageAttendanceComponent } from './Admin/manage-attendance/manage-attendance.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -27,11 +28,14 @@ export const routes: Routes = [
     path: 'adminDashboard',
     component: AdminDashboardComponent,
     title: 'adminDashboard',
+    canActivate: [AuthGuard]
   },
   {
     path: 'employeeDashboard',
     component: EmployeeDashboardComponent,
     title: 'employeeDashboard',
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'manage-staff',
