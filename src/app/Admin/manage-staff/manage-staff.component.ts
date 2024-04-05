@@ -18,6 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { EmployeeService } from '../../core/employee-service.service';
 
 @Component({
   selector: 'app-manage-staff',
@@ -37,144 +40,28 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
     CurrencyPipe,
     RouterLink,
     RouterLinkActive,
-    RouterOutlet
+    RouterOutlet,
+    HttpClientModule,
+    
+    
   ],
   templateUrl: './manage-staff.component.html',
   styleUrl: './manage-staff.component.css',
 })
-export class ManageStaffComponent implements OnInit, AfterViewInit, OnDestroy {
+export class ManageStaffComponent implements OnInit, OnDestroy {
+  dataSource!: MatTableDataSource<any>;; 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource: any;
+  
   route: Router = inject(Router);
+  constructor(private employeeService: EmployeeService,private http:HttpClient) {}
+  
   ngOnInit(): void {
-    const userdata = [
-      {
-        fname: 'Smita',
-        lname: 'Kumari',
-        email: 'smita@example.com',
-        birthdate: '1991-01-01',
-        gender: 'female',
-        department: 'HR',
-        contact: '9999999999',
-        salary: 120000,
-      },
-      {
-        fname: 'Akshay',
-        lname: 'Kumar',
-        email: 'Akshay@example.com',
-        birthdate: '1992-01-01',
-        gender: 'Male',
-        department: 'IT',
-        contact: '9090909090',
-        salary: 125000,
-      },
-      {
-        fname: 'Vikram',
-        lname: 'Singh',
-        email: 'vikram@example.com',
-        birthdate: '1993-01-01',
-        gender: 'Male',
-        department: 'Cloud',
-        contact: '9898989898',
-        salary: 225000,
-      },
-      {
-        fname: 'Puja',
-        lname: 'Kumari',
-        email: 'puja@example.com',
-        birthdate: '1994-01-01',
-        gender: 'Female',
-        department: 'Testing',
-        contact: '9292929292',
-        salary: 100000,
-      },
-      {
-        fname: 'Ranjan',
-        lname: 'Kedia',
-        email: 'ranjan@example.com',
-        birthdate: '1995-01-01',
-        gender: 'Male',
-        department: 'IT',
-        contact: '9191919191',
-        salary: 150000,
-      },
-      {
-        fname: 'Vivek',
-        lname: 'Agnihotri',
-        email: 'vivek@example.com',
-        birthdate: '1996-01-01',
-        gender: 'Male',
-        department: 'IT',
-        contact: '9393939393',
-        salary: 175000,
-      },
-      {
-        fname: 'Vivek',
-        lname: 'singh',
-        email: 'Vivek@example.com',
-        birthdate: '1997-01-01',
-        gender: 'Male',
-        department: 'Cloud',
-        contact: '+1234567897',
-        salary: 165000,
-      },
-      {
-        fname: 'Akhil',
-        lname: 'Mishra',
-        email: 'akhil@example.com',
-        birthdate: '1998-01-01',
-        gender: 'Male',
-        department: 'Testing',
-        contact: '+1234567898',
-        salary: 135000,
-      },
-      {
-        fname: 'Siddharth',
-        lname: 'Malhotra',
-        email: 'sid@example.com',
-        birthdate: '1999-01-01',
-        gender: 'Male',
-        department: 'HR',
-        contact: '+1234567899',
-        salary: 250000,
-      },
-      {
-        fname: 'Zeenat',
-        lname: 'Khan',
-        email: 'zeenat@example.com',
-        birthdate: '2000-01-01',
-        gender: 'Female',
-        department: 'IT',
-        contact: '+12345678910',
-        salary: 129500,
-      },
-      {
-        fname: 'Lucky',
-        lname: 'Singh',
-        email: 'lucky@example.com',
-        birthdate: '2001-01-01',
-        gender: 'Male',
-        department: 'Cloud',
-        contact: '+12345678911',
-        salary: 115000,
-      },
-      {
-        fname: 'Khushi',
-        lname: 'Kumari',
-        email: 'khushi@example.com',
-        birthdate: '2002-01-01',
-        gender: 'Female',
-        department: 'HR',
-        contact: '+12345678912',
-        salary: 190000,
-      },
-    ];
-    this.dataSource = new MatTableDataSource(userdata);
-  }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.employeeService.getAllEmployees().subscribe((data: any[]) => { 
+      this.dataSource = new MatTableDataSource(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
   displayColumns: string[] = [
     'no',
@@ -196,4 +83,12 @@ export class ManageStaffComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {}
+  private apiUrl = 'http://localhost:8080/api/employees';
+
+
+
+  getAllEmployees(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+  
 }
