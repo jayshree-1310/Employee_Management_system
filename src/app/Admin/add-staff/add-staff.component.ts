@@ -1,4 +1,5 @@
-import { NgClass, TitleCasePipe } from '@angular/common';
+import { CommonModule, NgClass, TitleCasePipe } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {
   FormGroup,
@@ -10,7 +11,7 @@ import {
 @Component({
   selector: 'app-add-staff',
   standalone: true,
-  imports: [NgClass, TitleCasePipe, ReactiveFormsModule],
+  imports: [NgClass, TitleCasePipe, ReactiveFormsModule,HttpClientModule,CommonModule],
   templateUrl: './add-staff.component.html',
   styleUrl: './add-staff.component.css',
 })
@@ -23,6 +24,7 @@ export class AddStaffComponent {
     'Cloud',
   ];
 
+  constructor(private http: HttpClient) {}
   addStaffForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -58,7 +60,7 @@ export class AddStaffComponent {
     experience: new FormControl(''),
     salary: new FormControl(''),
   });
-  get id(): FormControl {
+  get email(): FormControl {
     return this.addStaffForm.get('email') as FormControl;
   }
   get password(): FormControl {
@@ -94,5 +96,25 @@ export class AddStaffComponent {
   get salary(): FormControl {
     return this.addStaffForm.get('salary') as FormControl;
   }
-  submitaddStaffForm() {}
+  submitaddStaffForm() {
+    if (this.addStaffForm.valid) {
+      this.http.post<any>('http://localhost:8080/api/employees', this.addStaffForm.value)
+        .subscribe(
+          response => {
+            console.log('Employee added successfully:', response);
+            // Reset the form after successful addition
+            this.addStaffForm.reset();
+          },
+          error => {
+            console.error('Error adding employee:', error);
+            // Handle error
+          }
+        );
+    } else {
+      // Form is invalid, mark all fields as touched to display validation messages
+      Object.values(this.addStaffForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
+  }
 }
