@@ -12,7 +12,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { LoginAuthService } from '../../login-auth.service';
 
 export const data = [
   {
@@ -51,7 +50,7 @@ export const data = [
 })
 export class LoginformComponent implements OnInit {
   authService: AuthService = inject(AuthService);
-  logInAuthService: LoginAuthService = inject(LoginAuthService);
+
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -90,7 +89,6 @@ export class LoginformComponent implements OnInit {
     }
     if (obj?.role === 'admin') {
       this.authService.isAdmin.next(true);
-      this.logInAuthService.login();
       this.router.navigate(['/adminDashboard']);
       return;
     } else {

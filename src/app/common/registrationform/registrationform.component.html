@@ -8,9 +8,9 @@
     <div class="row mt-3">
       <form
         [formGroup]="registrationForm"
-        novalidate
         class="mb-md-3"
         (ngSubmit)="submitregistrationForm()"
+        enctype="multipart/form-data"
       >
         <!-- FIRST AND LAST NAME -->
         <div class="row">
@@ -126,7 +126,7 @@
                     type="radio"
                     name="gender"
                     id="male"
-                    value="m"
+                    value="male"
                     formControlName="gender"
                   />
                   <label class="form-label" for="male">Male</label>
@@ -137,7 +137,8 @@
                     type="radio"
                     name="gender"
                     id="female"
-                    value="f"
+                    value="female"
+                    formControlName="gender"
                   />
                   <label class="form-label" for="female">Female</label>
                 </div>
@@ -147,7 +148,8 @@
                     type="radio"
                     name="gender"
                     id="others"
-                    value="o"
+                    value="other"
+                    formControlName="gender"
                   />
                   <label class="form-check-label" for="others">Others</label>
                 </div>
@@ -170,7 +172,7 @@
             >
               <option value="default" selected hidden>Select your role</option>
               @for (item of roleOptions; track $index) {
-              <option value="{{ $index }}">
+              <option value="{{ item }}">
                 {{ item | titlecase }}
               </option>
               }
@@ -212,6 +214,7 @@
               class="form-control"
               id="profile"
               formControlName="image"
+              (change)="onChangeFileField($event)"
               [ngClass]="{'is-valid':(image.touched || image.dirty)&&!(image.errors?.['required'] ),'is-invalid':((image.touched||image.dirty) && (image.errors?.['required'] ))}"
             />
           </div>
@@ -256,14 +259,12 @@
             />
           </div>
         </div>
+        <div class="row mt-3 mb-3">
+          <div class="col text-center">
+            <button type="submit" mat-raised-button>Signup</button>
+          </div>
+        </div>
       </form>
-    </div>
-    <div class="row mt-3 mb-3">
-      <div class="col text-center">
-        <button type="submit" class="btn btn-primary" disabled="true">
-          Signup
-        </button>
-      </div>
     </div>
   </div>
 </div>

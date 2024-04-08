@@ -61,7 +61,7 @@
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef>Name</th>
           <td mat-cell *matCellDef="let element">
-            {{ element.fname + " " + element.lname }}
+            {{ element.firstName + " " + element.lastName }}
           </td>
         </ng-container>
         <ng-container matColumnDef="email">
@@ -107,7 +107,12 @@
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button mat-icon-button color="primary" matTooltip="Delete row">
+              <button
+                mat-icon-button
+                color="primary"
+                matTooltip="Delete row"
+                (click)="deleteEmployee(element.id)"
+              >
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

@@ -1,16 +1,19 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AuthService } from '../../core/auth.service';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-registrationform',
   standalone: true,
-  imports: [FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [FormsModule, CommonModule, ReactiveFormsModule, MatButton],
   templateUrl: './registrationform.component.html',
   styleUrl: './registrationform.component.css',
 })
 export class RegistrationformComponent {
+  authService: AuthService = inject(AuthService);
   roleOptions = [
     'HR',
     'Fullstack Developer',
@@ -90,5 +93,26 @@ export class RegistrationformComponent {
   get salary(): FormControl {
     return this.registrationForm.get('salary') as FormControl;
   }
-  submitregistrationForm() {}
+  filetoUpload!: File;
+  onChangeFileField(event: any) {
+    this.filetoUpload = event.target.files[0];
+  }
+  submitregistrationForm() {
+    const formData = new FormData();
+    formData.append('fname', this.firstName.value);
+    formData.append('lname', this.lastName.value);
+    formData.append('email', this.id.value);
+    formData.append('phone', this.contact.value);
+    formData.append('gender', this.gender.value);
+    formData.append('department', this.department.value);
+    formData.append('dateOfBirth', this.dob.value);
+    formData.append('file', this.filetoUpload);
+    formData.append('company', this.company.value);
+    formData.append('password', this.password.value);
+    formData.append('experience', this.experience.value);
+    formData.append('salary', this.salary.value);
+    this.authService.addEmployee(formData).subscribe((res) => {
+      console.log(res);
+    });
+  }
 }
