@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 import { NgClass, TitleCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+=======
+import { CommonModule, NgClass, TitleCasePipe } from '@angular/common';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component } from '@angular/core';
+>>>>>>> e42140a39a3783b3968bd4c75521fd8ac8b971f4
 import {
   FormGroup,
   FormControl,
@@ -11,7 +17,7 @@ import { AuthService } from '../../core/auth.service';
 @Component({
   selector: 'app-add-staff',
   standalone: true,
-  imports: [NgClass, TitleCasePipe, ReactiveFormsModule],
+  imports: [NgClass, TitleCasePipe, ReactiveFormsModule,HttpClientModule,CommonModule],
   templateUrl: './add-staff.component.html',
   styleUrl: './add-staff.component.css',
 })
@@ -25,6 +31,7 @@ export class AddStaffComponent {
     'Cloud',
   ];
 
+  constructor(private http: HttpClient) {}
   addStaffForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -60,7 +67,7 @@ export class AddStaffComponent {
     experience: new FormControl(''),
     salary: new FormControl(''),
   });
-  get id(): FormControl {
+  get email(): FormControl {
     return this.addStaffForm.get('email') as FormControl;
   }
   get password(): FormControl {
@@ -96,6 +103,7 @@ export class AddStaffComponent {
   get salary(): FormControl {
     return this.addStaffForm.get('salary') as FormControl;
   }
+<<<<<<< HEAD
   filetoUpload!: File;
   onChangeFileField(event: any) {
     this.filetoUpload = event.target.files[0];
@@ -118,5 +126,27 @@ export class AddStaffComponent {
       console.log(res);
       this.addStaffForm.reset();
     });
+=======
+  submitaddStaffForm() {
+    if (this.addStaffForm.valid) {
+      this.http.post<any>('http://localhost:8080/api/employees', this.addStaffForm.value)
+        .subscribe(
+          response => {
+            console.log('Employee added successfully:', response);
+            // Reset the form after successful addition
+            this.addStaffForm.reset();
+          },
+          error => {
+            console.error('Error adding employee:', error);
+            // Handle error
+          }
+        );
+    } else {
+      // Form is invalid, mark all fields as touched to display validation messages
+      Object.values(this.addStaffForm.controls).forEach(control => {
+        control.markAsTouched();
+      });
+    }
+>>>>>>> e42140a39a3783b3968bd4c75521fd8ac8b971f4
   }
 }

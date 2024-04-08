@@ -1,11 +1,11 @@
 <div class="container d-flex justify-content-center align-items-center mt-5">
   <div class="row box-area mt-md-3 col-md-8">
-    <div
-      class="text-center mt-2 text-muted mb-2"
-      style="font-weight: bold; font-size: 1.5em"
-    ></div>
+    <div class="text-center mt-2 text-muted mb-2" style="font-weight: bold; font-size: 1.5em">
+      Add Staff
+    </div>
     <!-- Modal -->
     <div class="row mt-3">
+<<<<<<< HEAD
       <form
         [formGroup]="addStaffForm"
         novalidate
@@ -13,39 +13,30 @@
         (ngSubmit)="submitaddStaffForm()"
         enctype="multipart/form-data"
       >
+=======
+      <form [formGroup]="addStaffForm" novalidate class="mb-md-3" (ngSubmit)="submitaddStaffForm()">
+>>>>>>> e42140a39a3783b3968bd4c75521fd8ac8b971f4
         <!-- FIRST AND LAST NAME -->
         <div class="row">
           <div class="col">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="firstName"
-              placeholder="First Name"
-              [ngClass]="{'is-valid':(firstName.touched || firstName.dirty)&&!(firstName.errors?.['required'] || (firstName.errors?.['pattern'])),'is-invalid':((firstName.touched||firstName.dirty) && (firstName.errors?.['required'] || (firstName.errors?.['pattern'])))}"
-            />
-            @if ((firstName.touched || firstName.dirty) &&
-            firstName.errors?.['required']) {
-            <div class="invalid-feedback ps-1">*FirstName is Required.</div>
-            } @if (firstName.errors?.['pattern']&&(firstName.touched ||
-            firstName.dirty)) {
+            <input type="text" class="form-control" formControlName="firstName" id="firstName" name="firstName"
+              placeholder="First Name" autocomplete="given-name"
+              [ngClass]="{'is-valid': (firstName.touched || firstName.dirty) && !(firstName.errors?.['required'] || (firstName.errors?.['pattern'])), 'is-invalid': ((firstName.touched || firstName.dirty) && (firstName.errors?.['required'] || (firstName.errors?.['pattern'])))}" />
+            @if ((firstName.touched || firstName.dirty) && firstName.errors?.['required']) {
+            <div class="invalid-feedback ps-1">*First Name is Required.</div>
+            } @if (firstName.errors?.['pattern'] && (firstName.touched || firstName.dirty)) {
             <div class="invalid-feedback mb-1 ps-1 abc">
               *Only alphabets and spaces allowed
             </div>
             }
           </div>
           <div class="col">
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Last Name"
-              formControlName="lastName"
-              [ngClass]="{'is-valid':(lastName.touched || lastName.dirty)&&!(lastName.errors?.['required'] || (lastName.errors?.['pattern'])),'is-invalid':((lastName.touched||lastName.dirty) && (lastName.errors?.['required'] || (lastName.errors?.['pattern'])))}"
-            />
-            @if ((lastName.touched || lastName.dirty) &&
-            lastName.errors?.['required']) {
-            <div class="invalid-feedback ps-1">*LastName is Required.</div>
-            } @if (lastName.errors?.['pattern']&&(lastName.touched ||
-            lastName.dirty)) {
+            <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" id="lastName"
+              name="lastName" autocomplete="family-name"
+              [ngClass]="{'is-valid': (lastName.touched || lastName.dirty) && !(lastName.errors?.['required'] || (lastName.errors?.['pattern'])), 'is-invalid': ((lastName.touched || lastName.dirty) && (lastName.errors?.['required'] || (lastName.errors?.['pattern'])))}" />
+            @if ((lastName.touched || lastName.dirty) && lastName.errors?.['required']) {
+            <div class="invalid-feedback ps-1">*Last Name is Required.</div>
+            } @if (lastName.errors?.['pattern'] && (lastName.touched || lastName.dirty)) {
             <div class="invalid-feedback mb-1 ps-1 abc">
               *Only alphabets and spaces allowed
             </div>
@@ -57,68 +48,122 @@
         <div class="row mt-2">
           <div class="col abc">
             <label for="email" class="form-label ps-1">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              placeholder="Enter Your Email"
-              name="email"
-              id="email"
-              formControlName="email"
-              [ngClass]="{'is-valid':(id.touched || id.dirty)&&!(id.errors?.['required'] || (id.errors?.['pattern'])),'is-invalid':((id.touched||id.dirty) && (id.errors?.['required'] || (id.errors?.['pattern'])))}"
-            />
-            @if ((id.touched || id.dirty) && id.errors?.['required']) {
+            <input type="email" class="form-control" placeholder="Enter Your Email" name="email" id="email"
+              formControlName="email" autocomplete="email"
+              [ngClass]="{'is-valid': (email.touched || email.dirty) && !(email.errors?.['required'] || (email.errors?.['pattern'])), 'is-invalid': ((email.touched || email.dirty) && (email.errors?.['required'] || (email.errors?.['pattern'])))}" />
+            @if ((email.touched || email.dirty) && email.errors?.['required']) {
             <div class="invalid-feedback ps-1 abc">*Email is Required.</div>
-            } @if (id.errors?.['pattern']&&(id.touched || id.dirty)) {
+            } @if (email.errors?.['pattern'] && (email.touched || email.dirty)) {
             <div class="invalid-feedback mb-1 ps-1 abc">*Email is Invalid.</div>
             }
           </div>
           <div class="col abc">
             <label for="password" class="form-label ps-1">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              placeholder="Enter Your Password"
-              id="password"
-              name="password"
-              formControlName="password"
-              [ngClass]="{'is-valid':(password.touched || password.dirty)&&!(password.errors?.['required'] || (password.errors?.['pattern'])),'is-invalid':((password.touched||password.dirty) && (password.errors?.['required'] || (password.errors?.['pattern'])))}"
-            />
-            @if ((password.touched || password.dirty) &&
-            password.errors?.['required']) {
+            <input type="password" class="form-control" placeholder="Enter Your Password" id="password"
+              name="password" formControlName="password" autocomplete="new-password"
+              [ngClass]="{'is-valid': (password.touched || password.dirty) && !(password.errors?.['required'] || (password.errors?.['pattern'])), 'is-invalid': ((password.touched || password.dirty) && (password.errors?.['required'] || (password.errors?.['pattern'])))}" />
+            @if ((password.touched || password.dirty) && password.errors?.['required']) {
             <div class="invalid-feedback ps-1 abc">*Password is Required.</div>
-            } @if (password.errors?.['pattern']&&(password.touched ||
-            password.dirty)) {
+            } @if (password.errors?.['pattern'] && (password.touched || password.dirty)) {
             <div class="invalid-feedback mb-1 ps-1 abc">
-              *Password must contain at least 8 characters,1 Uppercase,1
-              Lowercase,1 number,1 special characters.
+              *Password must contain at least 8 characters, 1 Uppercase, 1 Lowercase, 1 number, 1 special characters.
             </div>
             }
           </div>
         </div>
 
-        <div class="row mt-1">
-          <div class="col abc">
-            <h6>
-              <label for="datepicker" class="form-label mt-1 ps-1"
-                >Birthdate</label
-              >
-            </h6>
-            <input
-              type="date"
-              class="form-control"
-              id="datepicker"
-              formControlName="dateOfBirth"
-              [ngClass]="{'is-valid':(dob.touched || dob.dirty)&&!(dob.errors?.['required'] ),'is-invalid':((dob.touched||dob.dirty) && (dob.errors?.['required'] ))}"
-            />
-            @if ((dob.touched || dob.dirty) && dob.errors?.['required']) {
-            <div class="invalid-feedback ps-1 abc">*BirthDate is Required.</div>
-            }
-          </div>
-          <div class="col abc">
-            <div class="row mb-2 mt-1">
-              <h6>Gender</h6>
-            </div>
+        <!-- Rest of the form fields go here -->
+        <!-- Rest of the form fields -->
+<!-- PERSONAL INFORMATION -->
+<div class="row mt-2">
+  <div class="col abc">
+    <label for="contact" class="form-label ps-1">Contact Number</label>
+    <input type="text" class="form-control" placeholder="Enter Your Contact Number" name="contact" id="contact"
+      formControlName="contact" autocomplete="tel"
+      [ngClass]="{'is-valid': (contact.touched || contact.dirty) && !(contact.errors?.['required'] || (contact.errors?.['pattern'])), 'is-invalid': ((contact.touched || contact.dirty) && (contact.errors?.['required'] || (contact.errors?.['pattern'])))}" />
+    @if ((contact.touched || contact.dirty) && contact.errors?.['required']) {
+    <div class="invalid-feedback ps-1 abc">*Contact Number is Required.</div>
+    } @if (contact.errors?.['pattern'] && (contact.touched || contact.dirty)) {
+    <div class="invalid-feedback mb-1 ps-1 abc">*Number is Invalid.</div>
+    }
+  </div>
+  <div class="col abc">
+    <h6>Gender</h6>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="male" value="m" formControlName="gender" />
+      <label class="form-check-label" for="male">Male</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="female" value="f" formControlName="gender" />
+      <label class="form-check-label" for="female">Female</label>
+    </div>
+    <div class="form-check form-check-inline">
+      <input class="form-check-input" type="radio" name="gender" id="others" value="o" formControlName="gender" />
+      <label class="form-check-label" for="others">Others</label>
+    </div>
+    @if (gender.touched && gender.errors?.['required']) {
+    <div class="form-text text-danger ps-1 abc">
+      *Gender is Required.
+    </div>
+    }
+  </div>
+</div>
 
+<div class="row mt-2">
+  <div class="col abc">
+    <label for="dateOfBirth" class="form-label ps-1">Date of Birth</label>
+    <input type="date" class="form-control" id="dateOfBirth" name="dateOfBirth" formControlName="dateOfBirth"
+      autocomplete="bday"
+      [ngClass]="{'is-valid': (dob.touched || dob.dirty) && !(dob.errors?.['required']), 'is-invalid': ((dob.touched || dob.dirty) && (dob.errors?.['required']))}" />
+    @if ((dob.touched || dob.dirty) && dob.errors?.['required']) {
+    <div class="invalid-feedback ps-1 abc">*Date of Birth is Required.</div>
+    }
+  </div>
+  <div class="col abc">
+    <label for="department" class="form-label ps-1">Department</label>
+    <select class="form-select" formControlName="department" id="department"
+      [ngClass]="{'is-valid': (department.touched || department.dirty) && !(department.errors?.['required']), 'is-invalid': ((department.touched || department.dirty) && (department.errors?.['required']))}" autocomplete="organization">
+      <option value="default" selected hidden>Select your role</option>
+      <option *ngFor="let role of roleOptions">{{ role }}</option>
+    </select>
+    @if ((department.touched || department.dirty) && department.errors?.['required']) {
+    <div class="invalid-feedback ps-1 abc">*Department is Required.</div>
+    }
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col abc">
+    <label for="image" class="form-label ps-1">Profile Image</label>
+    <input type="file" class="form-control" id="image" formControlName="image"
+      [ngClass]="{'is-valid': (image.touched || image.dirty) && !(image.errors?.['required']), 'is-invalid': ((image.touched || image.dirty) && (image.errors?.['required']))}" />
+    @if ((image.touched || image.dirty) && image.errors?.['required']) {
+    <div class="invalid-feedback ps-1 mb-1 abc">*Image is Required.</div>
+    }
+  </div>
+</div>
+
+<!-- JOB INFORMATION -->
+<div class="row mt-2">
+  <div class="col">
+    <label for="company" class="form-label ps-1">Company Name</label>
+    <input type="text" class="form-control" placeholder="Enter Company Name" formControlName="company"
+      autocomplete="organization" />
+  </div>
+</div>
+
+<div class="row mt-2">
+  <div class="col abc">
+    <label for="experience" class="form-label ps-1">Job Experience (yrs)</label>
+    <input type="number" class="form-control" placeholder="Enter Job Experience" formControlName="experience" />
+  </div>
+  <div class="col abc">
+    <label for="salary" class="form-label ps-1">Salary (INR)</label>
+    <input type="number" class="form-control" placeholder="Enter Salary" formControlName="salary" />
+  </div>
+</div>
+
+<<<<<<< HEAD
             <div class="row">
               <div class="col">
                 <div class="form-check form-check-inline">
@@ -258,6 +303,12 @@
               placeholder="Salary (INR)"
               formControlName="salary"
             />
+=======
+
+        <div class="row mt-3">
+          <div class="col text-center">
+            <button type="submit" class="btn btn-primary">Signup</button>
+>>>>>>> e42140a39a3783b3968bd4c75521fd8ac8b971f4
           </div>
         </div>
         <div class="row mt-3 mb-3">

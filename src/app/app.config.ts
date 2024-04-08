@@ -5,12 +5,17 @@ import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AuthGuard } from './auth.guard';
 
 export const appConfig: ApplicationConfig = {
+<<<<<<< HEAD
   providers: [
     provideRouter(routes),
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
   ],
+=======
+  providers: [provideRouter(routes), provideClientHydration(), provideAnimationsAsync(),provideHttpClient(withFetch()), AuthGuard]
+>>>>>>> e42140a39a3783b3968bd4c75521fd8ac8b971f4
 };

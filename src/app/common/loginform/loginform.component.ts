@@ -94,6 +94,7 @@ export class LoginformComponent implements OnInit {
     } else {
       this.authService.isEmployee.next(true);
       this.router.navigate(['/employeeDashboard']);
+      this.logInAuthService.login();
       return;
     }
     this.authService.isAdmin.next(false);
