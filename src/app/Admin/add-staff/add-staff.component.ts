@@ -1,11 +1,13 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { AuthService } from '../../core/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-staff',
@@ -15,6 +17,7 @@ import {
   styleUrl: './add-staff.component.css',
 })
 export class AddStaffComponent {
+  authService: AuthService = inject(AuthService);
   roleOptions = [
     'HR',
     'Fullstack Developer',
@@ -23,6 +26,7 @@ export class AddStaffComponent {
     'Cloud',
   ];
 
+  constructor(private http: HttpClient) {}
   addStaffForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -58,7 +62,7 @@ export class AddStaffComponent {
     experience: new FormControl(''),
     salary: new FormControl(''),
   });
-  get id(): FormControl {
+  get email(): FormControl {
     return this.addStaffForm.get('email') as FormControl;
   }
   get password(): FormControl {
@@ -94,5 +98,27 @@ export class AddStaffComponent {
   get salary(): FormControl {
     return this.addStaffForm.get('salary') as FormControl;
   }
-  submitaddStaffForm() {}
+  filetoUpload!: File;
+  onChangeFileField(event: any) {
+    this.filetoUpload = event.target.files[0];
+  }
+  submitaddStaffForm() {
+    const formData = new FormData();
+    formData.append('fname', this.firstName.value);
+    formData.append('lname', this.lastName.value);
+    formData.append('email', this.email.value);
+    formData.append('phone', this.contact.value);
+    formData.append('gender', this.gender.value);
+    formData.append('department', this.department.value);
+    formData.append('dateOfBirth', this.dob.value);
+    formData.append('file', this.filetoUpload);
+    formData.append('company', this.company.value);
+    formData.append('password', this.password.value);
+    formData.append('experience', this.experience.value);
+    formData.append('salary', this.salary.value);
+    this.authService.addEmployee(formData).subscribe((res) => {
+      console.log(res);
+      this.addStaffForm.reset();
+    });
+  }
 }

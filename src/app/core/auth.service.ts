@@ -1,4 +1,4 @@
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -12,20 +12,28 @@ export class AuthService {
   public isEmployee = new BehaviorSubject<boolean>(false);
   logoutAdmin() {
     this.isAdmin.next(false);
-    this._router.navigate(['/login'])
-    localStorage.removeItem('token')
+    this._router.navigate(['/login']);
+    localStorage.removeItem('token');
   }
   logoutEmployee() {
     this.isEmployee.next(false);
-    this._router.navigate(['/login'])
-    localStorage.removeItem('token')
+    this._router.navigate(['/login']);
+    localStorage.removeItem('token');
   }
-  loggedIn(){
-    return !!localStorage.getItem('token')
-  }
-
-  getToken(){
-    return localStorage.getItem('token')
+  loggedIn() {
+    return !!localStorage.getItem('token');
   }
 
+  getToken() {
+    return localStorage.getItem('token');
+  }
+  addEmployee(formData: any) {
+    return this.http.post('http://localhost:9090/api/addEmployee', formData);
+  }
+  getAllEmployee() {
+    return this.http.get('http://localhost:9090/api/getAllEmployee');
+  }
+  deleteEmployee(id: any) {
+    return this.http.delete('http://localhost:9090/api/deleteEmployee/' + id);
+  }
 }

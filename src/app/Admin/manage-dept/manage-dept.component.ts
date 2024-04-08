@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { AddDepartmentPopupComponent } from '../add-department-popup/add-department-popup.component';
 import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-department-popup.component';
+import { DepartmentService } from '../../core/department.service';
 
 @Component({
   selector: 'app-manage-dept',
@@ -42,37 +43,29 @@ import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-depa
   styleUrl: './manage-dept.component.css',
 })
 export class ManageDeptComponent implements OnInit, AfterViewInit {
+  departmentService: DepartmentService = inject(DepartmentService);
   constructor(private dialog: MatDialog) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
   route: Router = inject(Router);
+  departmentData: any;
   ngOnInit(): void {
-    const userdata = [
-      {
-        name: 'Human Resource',
-        Empno: '6',
-      },
-      {
-        name: 'Finance',
-        Empno: '14',
-      },
-      {
-        name: 'IT',
-        Empno: '15',
-      },
-      {
-        name: 'Marketing',
-        Empno: '20',
-      },
-    ];
-    this.dataSource = new MatTableDataSource(userdata);
+    this.loadData();
   }
   ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-  displayColumns: string[] = ['no', 'name', 'number', 'action'];
+  loadData() {
+    this.departmentService.getAllDepartment().subscribe((res) => {
+      this.departmentData = res;
+    });
+    this.dataSource = new MatTableDataSource(this.departmentData);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  displayColumns: string[] = ['no', 'name', 'action'];
 
   filterChange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
@@ -85,12 +78,20 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
     });
   }
   editDepartment(element: any) {
-    this.dialog.open(EditDepartmentPopupComponent, {
+    const _editUserPopup = this.dialog.open(EditDepartmentPopupComponent, {
       enterAnimationDuration: '350ms',
       exitAnimationDuration: '350ms',
       data: {
         data: element,
       },
+    });
+    _editUserPopup.afterClosed().subscribe((r) => {
+      this.loadData();
+    });
+  }
+  deleteDepartment(id: any) {
+    this.departmentService.deleteDepartment(id).subscribe((res) => {
+      console.log(res);
     });
   }
 }
