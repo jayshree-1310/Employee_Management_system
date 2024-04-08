@@ -42,7 +42,7 @@ import { DepartmentService } from '../../core/department.service';
   templateUrl: './manage-dept.component.html',
   styleUrl: './manage-dept.component.css',
 })
-export class ManageDeptComponent implements OnInit, AfterViewInit {
+export class ManageDeptComponent implements OnInit {
   departmentService: DepartmentService = inject(DepartmentService);
   constructor(private dialog: MatDialog) {}
   @ViewChild(MatSort) sort!: MatSort;
@@ -53,17 +53,14 @@ export class ManageDeptComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.loadData();
   }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
+
   loadData() {
     this.departmentService.getAllDepartment().subscribe((res) => {
       this.departmentData = res;
+      this.dataSource = new MatTableDataSource(this.departmentData);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-    this.dataSource = new MatTableDataSource(this.departmentData);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
   displayColumns: string[] = ['no', 'name', 'action'];
 

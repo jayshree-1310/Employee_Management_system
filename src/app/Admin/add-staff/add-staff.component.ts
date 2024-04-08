@@ -62,7 +62,7 @@ export class AddStaffComponent {
     experience: new FormControl(''),
     salary: new FormControl(''),
   });
-  get email(): FormControl {
+  get id(): FormControl {
     return this.addStaffForm.get('email') as FormControl;
   }
   get password(): FormControl {
@@ -106,7 +106,7 @@ export class AddStaffComponent {
     const formData = new FormData();
     formData.append('fname', this.firstName.value);
     formData.append('lname', this.lastName.value);
-    formData.append('email', this.email.value);
+    formData.append('email', this.id.value);
     formData.append('phone', this.contact.value);
     formData.append('gender', this.gender.value);
     formData.append('department', this.department.value);

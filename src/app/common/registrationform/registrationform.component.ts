@@ -113,6 +113,7 @@ export class RegistrationformComponent {
     formData.append('salary', this.salary.value);
     this.authService.addEmployee(formData).subscribe((res) => {
       console.log(res);
+      this.registrationForm.reset();
     });
   }
 }

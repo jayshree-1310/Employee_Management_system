@@ -24,7 +24,6 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-manage-staff',
@@ -56,7 +55,7 @@ export class ManageStaffComponent implements OnInit {
   dataSource: any;
   userdata: any;
   route: Router = inject(Router);
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   ngOnInit(): void {
     this.loadData();
@@ -64,15 +63,12 @@ export class ManageStaffComponent implements OnInit {
   loadData() {
     this.authService.getAllEmployee().subscribe((res) => {
       this.userdata = res;
+      this.dataSource = new MatTableDataSource(this.userdata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-    this.dataSource = new MatTableDataSource(this.userdata);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
-  // ngAfterViewInit(): void {
-  //   this.dataSource.paginator = this.paginator;
-  //   this.dataSource.sort = this.sort;
-  // }
+
   displayColumns: string[] = [
     'no',
     'name',
