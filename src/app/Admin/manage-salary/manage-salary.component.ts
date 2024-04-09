@@ -14,12 +14,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
-import { Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { AddSalaryComponent } from '../add-salary/add-salary.component';
-import { EditSalaryPopupComponent } from '../edit-salary-popup/edit-salary-popup.component';
+
+import { AuthService } from '../../core/auth.service';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-salary',
@@ -33,72 +30,57 @@ import { EditSalaryPopupComponent } from '../edit-salary-popup/edit-salary-popup
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MatTooltipModule,
-    MatMenuModule,
-    DatePipe,
-    CurrencyPipe,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   templateUrl: './manage-salary.component.html',
   styleUrl: './manage-salary.component.css',
 })
-export class ManageSalaryComponent implements OnInit, AfterViewInit {
-  constructor(private dialog: MatDialog) {}
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource: any;
-  route: Router = inject(Router);
-  ngOnInit(): void {
-    const userdata = [
-      {
-        name: 'First Employee',
-        salary: '60000',
-      },
-      {
-        name: 'Second Employee',
-        salary: '140000',
-      },
-      {
-        name: 'Third Employee',
-        salary: '1500000',
-      },
-      {
-        name: 'Fourth Employee',
-        salary: '2000000',
-      },
-      {
-        name: 'Fifth Employee',
-        salary: '2000000',
-      },
-      {
-        name: 'Sixth Employee',
-        salary: '200000',
-      },
-    ];
-    this.dataSource = new MatTableDataSource(userdata);
-  }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
-  displayColumns: string[] = ['no', 'name', 'number', 'action'];
+export class ManageSalaryComponent implements OnInit {
+  salaryService: AuthService = inject(AuthService);
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  sdata: any;
+  dataSource: any;
+  salaryData: any;
+  displayColumns: string[] = [
+    'no',
+    'Name',
+    'department',
+    'Basic',
+    'allowance',
+    'total',
+    'action',
+  ];
+  ngOnInit(): void {
+    this.loadData();
+  }
+  loadData() {
+    this.salaryService.getAllEmployee().subscribe((res: any) => {
+      this.sdata = res.map((item: any) => ({
+        ...item,
+        basic: 0,
+        allowance: 0,
+        total: 0,
+      }));
+      this.dataSource = new MatTableDataSource(this.sdata);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
   filterChange(data: Event) {
     const value = (data.target as HTMLInputElement).value;
     this.dataSource.filter = value.trim().toLowerCase();
   }
-  addSalary() {
-    this.dialog.open(AddSalaryComponent, {
-      enterAnimationDuration: '350ms',
-      exitAnimationDuration: '350ms',
-    });
+  calculateTotal(row: any): void {
+    row.total = row.basic + row.allowance;
   }
-  editSalary(element: any) {
-    this.dialog.open(EditSalaryPopupComponent, {
-      enterAnimationDuration: '350ms',
-      exitAnimationDuration: '350ms',
-      data: {
-        data: element,
-      },
+  addSalary(element: any) {
+    const formData = new FormData();
+    formData.append('salary', element.total);
+    this.salaryService.addSalary(element.email, formData).subscribe((res) => {
+      console.log('Added');
     });
   }
 }

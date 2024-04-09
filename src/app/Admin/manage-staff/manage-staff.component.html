@@ -99,10 +99,10 @@
           <td mat-cell *matCellDef="let element">
             <div class="d-flex">
               <button
-                routerLink="/update-profile"
                 mat-icon-button
                 color="primary"
                 matTooltip="Edit row"
+                (click)="editUser(element)"
               >
                 <mat-icon>edit</mat-icon>
               </button>

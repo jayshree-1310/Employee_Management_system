@@ -24,6 +24,8 @@ import {
   RouterOutlet,
 } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { EditUserPopupComponent } from '../../Common/edit-user-popup/edit-user-popup.component';
 
 @Component({
   selector: 'app-manage-staff',
@@ -44,12 +46,14 @@ import { AuthService } from '../../core/auth.service';
     RouterLink,
     RouterLinkActive,
     RouterOutlet,
+    MatDialogModule,
   ],
   templateUrl: './manage-staff.component.html',
   styleUrl: './manage-staff.component.css',
 })
 export class ManageStaffComponent implements OnInit {
   authService: AuthService = inject(AuthService);
+  dialog: MatDialog = inject(MatDialog);
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
@@ -89,6 +93,19 @@ export class ManageStaffComponent implements OnInit {
   }
   deleteEmployee(id: any) {
     this.authService.deleteEmployee(id).subscribe((res) => {
+      this.loadData();
+    });
+  }
+  editUser(element: any) {
+    const _editUserPopup = this.dialog.open(EditUserPopupComponent, {
+      width: '50%',
+      enterAnimationDuration: '350ms',
+      exitAnimationDuration: '350ms',
+      data: {
+        data: element,
+      },
+    });
+    _editUserPopup.afterClosed().subscribe((r) => {
       this.loadData();
     });
   }

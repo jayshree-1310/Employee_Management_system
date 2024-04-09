@@ -1,18 +1,23 @@
-/* Default styles */
-.mat-mdc-row .mat-mdc-cell {
-  cursor: pointer;
-}
-
 mat-card,
 mat-card-footer,
 mat-paginator {
   background-color: #ecf0f3;
+  height: auto;
 }
 table {
   background-color: #ecf0f3;
-  width: 100%;
 }
-
 .table-responsive {
   overflow-x: auto;
+}
+img {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.5s;
+  object-fit: cover;
+}
+img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 5px #00fffb, 0 0 2px #0081bc;
 }

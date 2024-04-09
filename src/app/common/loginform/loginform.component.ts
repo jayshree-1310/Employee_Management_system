@@ -90,9 +90,13 @@ export class LoginformComponent implements OnInit {
     if (obj?.role === 'admin') {
       this.authService.isAdmin.next(true);
       this.router.navigate(['/adminDashboard']);
+      localStorage.setItem('role', 'admin');
+      localStorage.setItem('email', this.id.value);
       return;
     } else {
       this.authService.isEmployee.next(true);
+      localStorage.setItem('role', 'employee');
+      localStorage.setItem('email', this.id.value);
       this.router.navigate(['/employeeDashboard']);
       // this.logInAuthService.login();
       return;

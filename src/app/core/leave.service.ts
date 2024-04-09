@@ -15,30 +15,33 @@ import { Observable } from 'rxjs';
 import { HttpClientModule } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LeaveService {
-  private apiUrl = 'http://example.com/api/'; // we will replace this with  API URL after springboot
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
-
-  getLeaveRequests(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}leave-requests`);
+  submitLeaveRequest(leaveRequest: any) {
+    return this.http.post<any>(
+      'http://localhost:9090/api/leaveRequest',
+      leaveRequest
+    );
   }
-
-  approveLeaveRequest(leaveRequestId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}leave-requests/${leaveRequestId}/approve`, {});
+  getPendingLeaveRequests() {
+    return this.http.get<any[]>('http://localhost:9090/api/pendingLeaves');
   }
-
-  rejectLeaveRequest(leaveRequestId: number): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}leave-requests/${leaveRequestId}/reject`, {});
+  approveLeaveRequest(requestId: any) {
+    return this.http.post<any>(
+      'http://localhost:9090/api/approveLeave' + '/' + requestId,
+      {}
+    );
   }
-
-
-
-  private baseUrl = 'your-api-base-url';
-  applyLeaveRequest(leaveRequestData: any): Observable<any> {
-    const url = `${this.baseUrl}/apply-leave`;
-    return this.http.post(url, leaveRequestData);
+  rejectLeaveRequest(requestId: any) {
+    return this.http.post<any>(
+      'http://localhost:9090/api/rejectLeave' + '/' + requestId,
+      {}
+    );
+  }
+  getAllLeave() {
+    return this.http.get<any[]>('http://localhost:9090/api/getAllLeave');
   }
 }

@@ -9,11 +9,13 @@ import { ManageDeptComponent } from './Admin/manage-dept/manage-dept.component';
 import { ManageLeavesComponent } from './Admin/manage-leaves/manage-leaves.component';
 import { EmpProfileComponent } from './Employee/emp-profile/emp-profile.component';
 import { ManageSalaryComponent } from './Admin/manage-salary/manage-salary.component';
-import { AddSalaryComponent } from './Admin/add-salary/add-salary.component';
+
 import { HolidayListComponent } from './Employee/holiday-list/holiday-list.component';
 import { ApplyLeaveComponent } from './Employee/apply-leave/apply-leave.component';
 import { UpdateProfileComponent } from './common/update-profile/update-profile.component';
 import { ManageAttendanceComponent } from './Admin/manage-attendance/manage-attendance.component';
+import { LeaveHistoryComponent } from './Admin/leave-history/leave-history.component';
+import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -54,15 +56,16 @@ export const routes: Routes = [
     title: 'manage-leaves',
   },
   {
+    path: 'leave-history',
+    component: LeaveHistoryComponent,
+    title: 'Leave-History',
+  },
+  {
     path: 'manage-salary',
     component: ManageSalaryComponent,
     title: 'manage-salary',
   },
-  {
-    path: 'add-salary',
-    component: AddSalaryComponent,
-    title: 'add-salary',
-  },
+
   {
     path: 'holiday-list',
     component: HolidayListComponent,
@@ -87,5 +90,10 @@ export const routes: Routes = [
     path: 'manage-attendance',
     component: ManageAttendanceComponent,
     title: 'manage-attendance',
+  },
+  {
+    path: 'view-attendance',
+    component: ViewAttendanceComponent,
+    title: 'view-attendance',
   },
 ];

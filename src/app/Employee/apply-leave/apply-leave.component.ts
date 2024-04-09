@@ -1,5 +1,11 @@
-import { Component } from '@angular/core';
-import {  FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, OnInit, inject } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { LeaveService } from '../../core/leave.service';
 
 @Component({
@@ -7,40 +13,45 @@ import { LeaveService } from '../../core/leave.service';
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './apply-leave.component.html',
-  styleUrl: './apply-leave.component.css'
+  styleUrl: './apply-leave.component.css',
 })
-export class ApplyLeaveComponent {
+export class ApplyLeaveComponent implements OnInit {
   leaveForm: FormGroup;
-
-  constructor(private formBuilder: FormBuilder, private leaveService: LeaveService) {
+  userMail: any;
+  leaveService: LeaveService = inject(LeaveService);
+  ngOnInit(): void {
+    this.userMail = localStorage.getItem('email');
+    console.log(this.userMail);
+  }
+  constructor(private formBuilder: FormBuilder) {
     this.leaveForm = this.formBuilder.group({
       leaveType: ['', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required],
-      reason: ['', Validators.required]
+      reason: ['', Validators.required],
     });
   }
-
-  onSubmit() {
-    if (this.leaveForm.invalid) {
-      return;
-    }
-
-    // Extract leave request data from the form
-    const leaveRequestData = this.leaveForm.value;
-
-    // Call the service to submit the leave request
-    this.leaveService.applyLeaveRequest(leaveRequestData).subscribe(
-      () => {
-        // Handle success 
-        console.log('Leave request submitted successfully');
-        this.leaveForm.reset();
-      },
-      (error: any) => {
-        // Handle error 
-        console.error('Error submitting leave request: ', error);
-      }
-    );
+  get reason(): FormControl {
+    return this.leaveForm.get('reason') as FormControl;
   }
-
+  get leaveFromDate(): FormControl {
+    return this.leaveForm.get('startDate') as FormControl;
+  }
+  get leaveToDate(): FormControl {
+    return this.leaveForm.get('endDate') as FormControl;
+  }
+  get description(): FormControl {
+    return this.leaveForm.get('leaveType') as FormControl;
+  }
+  onSubmit() {
+    const formData = new FormData();
+    formData.append('reason', this.reason.value);
+    formData.append('leaveFromDate', this.leaveFromDate.value);
+    formData.append('leaveToDate', this.leaveToDate.value);
+    formData.append('description', this.description.value);
+    formData.append('register_id', this.userMail);
+    this.leaveService.submitLeaveRequest(formData).subscribe((res) => {
+      this.leaveForm.reset();
+    });
+  }
 }

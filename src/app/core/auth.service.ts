@@ -36,4 +36,16 @@ export class AuthService {
   deleteEmployee(id: any) {
     return this.http.delete('http://localhost:9090/api/deleteEmployee/' + id);
   }
+  updateEmployee(id: any, formData: any) {
+    return this.http.patch(
+      'http://localhost:9090/api/updateEmployee/' + id,
+      formData
+    );
+  }
+  addSalary(id: string, formData: any) {
+    return this.http.patch(
+      'http://localhost:9090/api/addSalary' + '/' + id,
+      formData
+    );
+  }
 }

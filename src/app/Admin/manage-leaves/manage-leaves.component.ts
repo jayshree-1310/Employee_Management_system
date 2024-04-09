@@ -18,16 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-interface LeaveRequest {
-  id: number;
-  image: string;
-  name: string;
-  department: string;
-  reason: string;
-  from: Date;
-  to: Date;
-  status: string;
-}
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-manage-leaves',
@@ -49,36 +40,28 @@ interface LeaveRequest {
   templateUrl: './manage-leaves.component.html',
   styleUrl: './manage-leaves.component.css',
 })
-export class ManageLeavesComponent implements OnInit, AfterViewInit {
-  leaveRequests: LeaveRequest[] = [];
+export class ManageLeavesComponent implements OnInit {
+  leaveService: LeaveService = inject(LeaveService);
+  leaveRequests: any;
+  sanitizer: DomSanitizer = inject(DomSanitizer);
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
 
-  constructor(private leaveService: LeaveService) {}
+  constructor() {}
 
   ngOnInit(): void {
-    // this.loadLeaveRequests();
-    this.leaveRequests = [
-      {
-        id: 1,
-        image: 'abc',
-        name: 'Smita Kumari',
-        department: 'def',
-        reason: 'Sick Leave',
-        from: new Date('2024-03-19'),
-        to: new Date('2024-03-20'),
-        status: 'Pending',
-      },
+    this.loadData();
+  }
+  loadData() {
+    this.leaveService.getPendingLeaveRequests().subscribe((res) => {
+      this.leaveRequests = res;
+      this.dataSource = new MatTableDataSource(this.leaveRequests);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
+  }
 
-      // Add more test data as needed
-    ];
-    this.dataSource = new MatTableDataSource(this.leaveRequests);
-  }
-  ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-  }
   displayColumns: string[] = [
     'no',
     'image',
@@ -95,38 +78,34 @@ export class ManageLeavesComponent implements OnInit, AfterViewInit {
     const value = (data.target as HTMLInputElement).value;
     this.dataSource.filter = value.trim().toLowerCase();
   }
-  // loadLeaveRequests() {
-  //   this.leaveService.getLeaveRequests().subscribe(
-  //     (data: LeaveRequest[]) => {
-  //       this.leaveRequests = data;
-  //     },
-  //     (error: any) => {
-  //       console.error('Error fetching leave requests: ', error);
-  //     }
-  //   );
-  // }
+  getImageUrl(element: any): SafeUrl {
+    if (element) {
+      // Extracting image type from base64 string
+      const typeMatch = element.employee.image.match(
+        /^data:(image\/[a-z]+);base64,/i
+      );
 
-  // approveLeaveRequest(leaveRequestId: number) {
-  //   this.leaveService.approveLeaveRequest(leaveRequestId).subscribe(
-  //     () => {
-  //       console.log('Leave request approved successfully');
-  //       this.loadLeaveRequests();
-  //     },
-  //     (error: any) => {
-  //       console.error('Error approving leave request: ', error);
-  //     }
-  //   );
-  // }
-
-  // rejectLeaveRequest(leaveRequestId: number) {
-  //   this.leaveService.rejectLeaveRequest(leaveRequestId).subscribe(
-  //     () => {
-  //       console.log('Leave request rejected successfully');
-  //       this.loadLeaveRequests();
-  //     },
-  //     (error: any) => {
-  //       console.error('Error rejecting leave request: ', error);
-  //     }
-  //   );
-  // }
+      if (typeMatch && typeMatch.length > 1) {
+        const imageType = typeMatch[1];
+        return this.sanitizer.bypassSecurityTrustUrl(
+          'data:' + imageType + ';base64,' + element.employee.image
+        );
+      } else {
+        return this.sanitizer.bypassSecurityTrustUrl(
+          'data:image/png;base64,' + element.employee.image
+        );
+      }
+    }
+    return ''; // Or provide a placeholder image
+  }
+  approveLeave(element: any) {
+    this.leaveService.approveLeaveRequest(element.id).subscribe((res) => {
+      this.loadData();
+    });
+  }
+  rejectLeave(element: any) {
+    this.leaveService.rejectLeaveRequest(element.id).subscribe((res) => {
+      this.loadData();
+    });
+  }
 }
