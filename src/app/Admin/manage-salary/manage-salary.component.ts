@@ -62,7 +62,7 @@ export class ManageSalaryComponent implements OnInit {
         ...item,
         basic: 0,
         allowance: 0,
-        total: 0,
+        total: item.salary,
       }));
       this.dataSource = new MatTableDataSource(this.sdata);
       this.dataSource.paginator = this.paginator;

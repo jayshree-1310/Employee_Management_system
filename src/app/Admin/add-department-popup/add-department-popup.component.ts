@@ -17,7 +17,7 @@ import { DepartmentService } from '../../core/department.service';
   styleUrl: './add-department-popup.component.css',
 })
 export class AddDepartmentPopupComponent {
-  departmeneService: DepartmentService = inject(DepartmentService);
+  departmentService: DepartmentService = inject(DepartmentService);
   constructor(private ref: MatDialogRef<AddDepartmentPopupComponent>) {}
   addDepartmentForm = new FormGroup({
     departmentName: new FormControl('', [Validators.required]),
@@ -26,7 +26,7 @@ export class AddDepartmentPopupComponent {
     return this.addDepartmentForm.get('departmentName') as FormControl;
   }
   submitAddDepartmentForm() {
-    this.departmeneService
+    this.departmentService
       .addDepartment(this.addDepartmentForm.value)
       .subscribe((res) => {
         console.log(res);

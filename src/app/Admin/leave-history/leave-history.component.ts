@@ -9,7 +9,7 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
-import { DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { LeaveService } from '../../core/leave.service';
 
@@ -28,6 +28,7 @@ import { LeaveService } from '../../core/leave.service';
     MatTooltipModule,
     MatChipsModule,
     DatePipe,
+    CommonModule
   ],
   templateUrl: './leave-history.component.html',
   styleUrl: './leave-history.component.css',
