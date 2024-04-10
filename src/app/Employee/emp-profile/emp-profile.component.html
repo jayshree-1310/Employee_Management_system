@@ -2,12 +2,19 @@
   <div class="row col-sm-5 box-area">
     <div class="row col-12 text-center mt-4">
       <img
-        [src]="employee?.image || '../assets/prof.jpg'"
-        style="width: 250px; height: 250px; margin-left: auto; margin-right: auto;"
+        [src]="getImageUrl() || '../assets/prof.jpg'"
+        style="
+          width: 250px;
+          height: 250px;
+          margin-left: auto;
+          margin-right: auto;
+        "
       />
     </div>
     <div class="row">
-      <div class="col d-flex justify-content-center align-items-center mt-3 mb-2">
+      <div
+        class="col d-flex justify-content-center align-items-center mt-3 mb-2"
+      >
         <table>
           <tbody>
             <tr>
