@@ -1,1 +1,32 @@
-<p>salary works!</p>
+<div class="container mt-3">
+    <div class="row">
+      <h2 class="fw-bold fs-3 text-muted">Employee Salary</h2>
+      <hr />
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card text-center">
+          <div class="card-header bg-primary text-white py-4">
+            <h5 class="fs-2">My Salary</h5>
+          </div>
+          <div class="card-body">
+            <div class="row align-items-center">
+              <div class="col">
+                <i class="fa fa-money-bill-alt fa-5x text-primary"></i>
+              </div>
+              <div class="col">
+                <h1 class="fs-1">{{ "INR " + employee?.salary }}</h1>
+                <p class="fs-5 text-muted">Per Annum</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer bg-light">
+            <a routerLink="/salary-breakup" class="btn btn-primary">
+              View Salary Breakup <i class="fa fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
