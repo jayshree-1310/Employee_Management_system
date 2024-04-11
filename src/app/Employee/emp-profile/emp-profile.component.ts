@@ -1,11 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet ,Router} from '@angular/router';
 import { EmployeeService } from '../../core/employee-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-
+import { EditUserPopupComponent } from '../../Common/edit-user-popup/edit-user-popup.component';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../../core/auth.service';
 @Component({
   selector: 'app-emp-profile',
   standalone: true,
@@ -25,7 +27,10 @@ export class EmpProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private employeeService: EmployeeService
+    private employeeService: EmployeeService,
+    private dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -53,4 +58,24 @@ export class EmpProfileComponent implements OnInit {
     }
     return ''; // Or provide a placeholder image
   }
+  editUser(element: any) {
+    const _editUserPopup = this.dialog.open(EditUserPopupComponent, {
+      width: '50%',
+      enterAnimationDuration: '350ms',
+      exitAnimationDuration: '350ms',
+      data: {
+        data: element,
+      },
+    });
+    _editUserPopup.afterClosed().subscribe((updatedProfile) => {
+      if (updatedProfile) {
+        
+        element = updatedProfile;
+        
+        
+      }
+    });
+  }
+  
+  
 }
