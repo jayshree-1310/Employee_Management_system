@@ -16,6 +16,8 @@ import { UpdateProfileComponent } from './common/update-profile/update-profile.c
 import { ManageAttendanceComponent } from './Admin/manage-attendance/manage-attendance.component';
 import { LeaveHistoryComponent } from './Admin/leave-history/leave-history.component';
 import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance.component';
+import path from 'path';
+import { SalaryComponent } from './Employee/salary/salary.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -96,4 +98,9 @@ export const routes: Routes = [
     component: ViewAttendanceComponent,
     title: 'view-attendance',
   },
+  {
+    path: 'salary-breakup',
+    component:SalaryComponent,
+    title:'my-salary'
+  }
 ];
