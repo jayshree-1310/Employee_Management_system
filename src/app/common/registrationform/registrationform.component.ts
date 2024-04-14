@@ -99,14 +99,14 @@ export class RegistrationformComponent {
   }
   submitregistrationForm() {
     const formData = new FormData();
-    formData.append('fname', this.firstName.value);
-    formData.append('lname', this.lastName.value);
+    formData.append('firstName', this.firstName.value);
+    formData.append('lastName', this.lastName.value);
     formData.append('email', this.id.value);
-    formData.append('phone', this.contact.value);
+    formData.append('contact', this.contact.value);
     formData.append('gender', this.gender.value);
     formData.append('department', this.department.value);
-    formData.append('dateOfBirth', this.dob.value);
-    formData.append('file', this.filetoUpload);
+    formData.append('birthdate', this.dob.value);
+    formData.append('image', this.filetoUpload);
     formData.append('company', this.company.value);
     formData.append('password', this.password.value);
     formData.append('experience', this.experience.value);
