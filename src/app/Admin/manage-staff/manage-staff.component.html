@@ -41,11 +41,11 @@
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu1="matMenu">
-          <button mat-menu-item>
+          <button mat-menu-item (click)="export('xlsx')">
             <span>Export as Excel</span>
           </button>
-          <button mat-menu-item>
-            <span>Export as Pdf </span>
+          <button mat-menu-item (click)="export('csv')">
+            <span>Export as CSV </span>
           </button>
         </mat-menu>
       </div>

@@ -170,8 +170,8 @@
             >
               <option value="default" selected hidden>Select your role</option>
               @for (item of roleOptions; track $index) {
-              <option value="{{ $index }}">
-                {{ item | titlecase }}
+              <option value="{{ item.departmentName }}">
+                {{ item.departmentName | titlecase }}
               </option>
               }
             </select>

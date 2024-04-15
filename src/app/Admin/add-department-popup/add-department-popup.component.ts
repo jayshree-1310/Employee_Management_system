@@ -9,6 +9,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { DepartmentService } from '../../core/department.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-add-department-popup',
   standalone: true,
@@ -18,6 +19,7 @@ import { DepartmentService } from '../../core/department.service';
 })
 export class AddDepartmentPopupComponent {
   departmentService: DepartmentService = inject(DepartmentService);
+  toast: ToastrService = inject(ToastrService);
   constructor(private ref: MatDialogRef<AddDepartmentPopupComponent>) {}
   addDepartmentForm = new FormGroup({
     departmentName: new FormControl('', [Validators.required]),
@@ -29,7 +31,10 @@ export class AddDepartmentPopupComponent {
     this.departmentService
       .addDepartment(this.addDepartmentForm.value)
       .subscribe((res) => {
-        console.log(res);
+        this.toast.success('Added Successfully', 'Success', {
+          timeOut: 3000,
+          closeButton: true,
+        });
       });
     this.addDepartmentForm.reset();
     this.ref.close();

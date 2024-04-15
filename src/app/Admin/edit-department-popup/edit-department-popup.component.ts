@@ -13,6 +13,7 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { DepartmentService } from '../../core/department.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-department-popup',
@@ -23,6 +24,7 @@ import { DepartmentService } from '../../core/department.service';
 })
 export class EditDepartmentPopupComponent implements OnInit {
   departmentService: DepartmentService = inject(DepartmentService);
+  toast: ToastrService = inject(ToastrService);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<EditDepartmentPopupComponent>
@@ -47,7 +49,10 @@ export class EditDepartmentPopupComponent implements OnInit {
         this.editDepartmentForm.value
       )
       .subscribe((res) => {
-        console.log(res);
+        this.toast.success('Edited Successfully', 'Success', {
+          timeOut: 3000,
+          closeButton: true,
+        });
       });
     this.editDepartmentForm.reset();
     this.ref.close();

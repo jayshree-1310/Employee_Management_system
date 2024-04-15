@@ -11,6 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AuthService } from '../../core/auth.service';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-salary',
@@ -32,7 +33,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 })
 export class ManageSalaryComponent implements OnInit {
   salaryService: AuthService = inject(AuthService);
-
+  toast: ToastrService = inject(ToastrService);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   sdata: any;
@@ -74,7 +75,10 @@ export class ManageSalaryComponent implements OnInit {
     const formData = new FormData();
     formData.append('salary', element.total);
     this.salaryService.addSalary(element.email, formData).subscribe((res) => {
-      console.log('Added');
+      this.toast.success('Salary Added Successfully ', 'Success', {
+        timeOut: 3000,
+        closeButton: true,
+      });
     });
   }
 }

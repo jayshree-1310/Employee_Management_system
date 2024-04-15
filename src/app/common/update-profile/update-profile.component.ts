@@ -1,28 +1,28 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component } from '@angular/core';
-import
-{ ReactiveFormsModule,
-FormControl,
-FormGroup,
-Validators 
+import { Component, OnInit, inject } from '@angular/core';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup,
+  Validators,
 } from '@angular/forms';
+import { DepartmentService } from '../../core/department.service';
 
 @Component({
   selector: 'app-update-profile',
   standalone: true,
-  imports: [NgClass,TitleCasePipe,ReactiveFormsModule],
+  imports: [NgClass, TitleCasePipe, ReactiveFormsModule],
   templateUrl: './update-profile.component.html',
-  styleUrl: './update-profile.component.css'
+  styleUrl: './update-profile.component.css',
 })
-export class UpdateProfileComponent {
-  roleOptions = [
-    'HR',
-    'Fullstack Developer',
-    'Frontend Developer',
-    'Backend Developer',
-    'Cloud',
-  ];
-
+export class UpdateProfileComponent implements OnInit {
+  deptService: DepartmentService = inject(DepartmentService);
+  roleOptions: any;
+  ngOnInit(): void {
+    this.deptService.getAllDepartment().subscribe((res) => {
+      this.roleOptions = res;
+    });
+  }
   updateProfileForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -95,5 +95,4 @@ export class UpdateProfileComponent {
     return this.updateProfileForm.get('salary') as FormControl;
   }
   submitupdateProfileForm() {}
-
 }

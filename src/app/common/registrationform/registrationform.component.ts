@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { MatButton } from '@angular/material/button';
+import { ToastrService } from 'ngx-toastr';
+import { DepartmentService } from '../../core/department.service';
 
 @Component({
   selector: 'app-registrationform',
@@ -12,16 +14,16 @@ import { MatButton } from '@angular/material/button';
   templateUrl: './registrationform.component.html',
   styleUrl: './registrationform.component.css',
 })
-export class RegistrationformComponent {
+export class RegistrationformComponent implements OnInit {
   authService: AuthService = inject(AuthService);
-  roleOptions = [
-    'HR',
-    'Fullstack Developer',
-    'Frontend Developer',
-    'Backend Developer',
-    'Cloud',
-  ];
-
+  toast: ToastrService = inject(ToastrService);
+  deptService: DepartmentService = inject(DepartmentService);
+  roleOptions: any;
+  ngOnInit(): void {
+    this.deptService.getAllDepartment().subscribe((res) => {
+      this.roleOptions = res;
+    });
+  }
   registrationForm = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -112,7 +114,10 @@ export class RegistrationformComponent {
     formData.append('experience', this.experience.value);
     formData.append('salary', this.salary.value);
     this.authService.addEmployee(formData).subscribe((res) => {
-      console.log(res);
+      this.toast.success('Registered Successfully', 'Success', {
+        timeOut: 3000,
+        closeButton: true,
+      });
       this.registrationForm.reset();
     });
   }

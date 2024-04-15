@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-leaves',
@@ -42,6 +43,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 })
 export class ManageLeavesComponent implements OnInit {
   leaveService: LeaveService = inject(LeaveService);
+  toast: ToastrService = inject(ToastrService);
   leaveRequests: any;
   sanitizer: DomSanitizer = inject(DomSanitizer);
   @ViewChild(MatSort) sort!: MatSort;
@@ -100,11 +102,27 @@ export class ManageLeavesComponent implements OnInit {
   }
   approveLeave(element: any) {
     this.leaveService.approveLeaveRequest(element.id).subscribe((res) => {
+      this.toast.info(
+        'Leave Approved For ' + element.employee.firstName,
+        'Info',
+        {
+          timeOut: 3000,
+          closeButton: true,
+        }
+      );
       this.loadData();
     });
   }
   rejectLeave(element: any) {
     this.leaveService.rejectLeaveRequest(element.id).subscribe((res) => {
+      this.toast.info(
+        'Leave Rejected For ' + element.employee.firstName,
+        'Info',
+        {
+          timeOut: 3000,
+          closeButton: true,
+        }
+      );
       this.loadData();
     });
   }

@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 export const data = [
   {
@@ -50,7 +51,7 @@ export const data = [
 })
 export class LoginformComponent implements OnInit {
   authService: AuthService = inject(AuthService);
-
+  toast: ToastrService = inject(ToastrService);
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -92,17 +93,22 @@ export class LoginformComponent implements OnInit {
       this.router.navigate(['/adminDashboard']);
       localStorage.setItem('role', 'admin');
       localStorage.setItem('email', this.id.value);
+      this.toast.success('Loggedin Successfully', 'Success ', {
+        timeOut: 3000,
+        closeButton: true,
+      });
       return;
     } else {
       this.authService.isEmployee.next(true);
       localStorage.setItem('role', 'employee');
       localStorage.setItem('email', this.id.value);
       this.router.navigate(['/employeeDashboard']);
+      this.toast.success('Loggedin Successfully', 'Success ', {
+        timeOut: 3000,
+        closeButton: true,
+      });
       // this.logInAuthService.login();
       return;
     }
-    this.authService.isAdmin.next(false);
-    this.authService.isEmployee.next(false);
-    alert('Invalid credentials');
   }
 }

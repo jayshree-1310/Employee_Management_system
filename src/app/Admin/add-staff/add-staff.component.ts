@@ -1,5 +1,5 @@
 import { NgClass, TitleCasePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { DepartmentService } from '../../core/department.service';
 
 @Component({
   selector: 'app-add-staff',
@@ -16,16 +18,16 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './add-staff.component.html',
   styleUrl: './add-staff.component.css',
 })
-export class AddStaffComponent {
+export class AddStaffComponent implements OnInit {
   authService: AuthService = inject(AuthService);
-  roleOptions = [
-    'HR',
-    'Fullstack Developer',
-    'Frontend Developer',
-    'Backend Developer',
-    'Cloud',
-  ];
-
+  toast: ToastrService = inject(ToastrService);
+  deptService: DepartmentService = inject(DepartmentService);
+  roleOptions: any;
+  ngOnInit(): void {
+    this.deptService.getAllDepartment().subscribe((res) => {
+      this.roleOptions = res;
+    });
+  }
   constructor(private http: HttpClient) {}
   addStaffForm = new FormGroup({
     email: new FormControl('', [
@@ -117,7 +119,10 @@ export class AddStaffComponent {
     formData.append('experience', this.experience.value);
     formData.append('salary', this.salary.value);
     this.authService.addEmployee(formData).subscribe((res) => {
-      console.log(res);
+      this.toast.success('Added Successfully', 'Success', {
+        timeOut: 3000,
+        closeButton: true,
+      });
       this.addStaffForm.reset();
     });
   }

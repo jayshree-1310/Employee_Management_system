@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { LeaveService } from '../../core/leave.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-apply-leave',
@@ -19,6 +20,7 @@ export class ApplyLeaveComponent implements OnInit {
   leaveForm: FormGroup;
   userMail: any;
   leaveService: LeaveService = inject(LeaveService);
+  toast: ToastrService = inject(ToastrService);
   ngOnInit(): void {
     this.userMail = localStorage.getItem('email');
     console.log(this.userMail);
@@ -51,6 +53,10 @@ export class ApplyLeaveComponent implements OnInit {
     formData.append('description', this.description.value);
     formData.append('register_id', this.userMail);
     this.leaveService.submitLeaveRequest(formData).subscribe((res) => {
+      this.toast.success('Leave Request Sent  ', 'Success', {
+        timeOut: 3000,
+        closeButton: true,
+      });
       this.leaveForm.reset();
     });
   }

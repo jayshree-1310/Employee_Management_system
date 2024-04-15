@@ -16,6 +16,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AttendanceService } from '../../core/attendance.service';
 import { AuthService } from '../../core/auth.service';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-attendance',
@@ -40,6 +41,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 export class ManageAttendanceComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  toast: ToastrService = inject(ToastrService);
   sanitizer: DomSanitizer = inject(DomSanitizer);
   attendanceService: AttendanceService = inject(AttendanceService);
   userList!: any;
@@ -126,6 +128,10 @@ export class ManageAttendanceComponent implements OnInit {
           while (this.employeeIds.length != 0) {
             this.employeeIds.pop();
           }
+          this.toast.success('Attendance Taken Successfully', 'Success', {
+            timeOut: 3000,
+            closeButton: true,
+          });
         });
     }
   }

@@ -21,6 +21,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AddDepartmentPopupComponent } from '../add-department-popup/add-department-popup.component';
 import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-department-popup.component';
 import { DepartmentService } from '../../core/department.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-manage-dept',
@@ -44,6 +45,7 @@ import { DepartmentService } from '../../core/department.service';
 })
 export class ManageDeptComponent implements OnInit {
   departmentService: DepartmentService = inject(DepartmentService);
+  toast: ToastrService = inject(ToastrService);
   constructor(private dialog: MatDialog) {}
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -88,7 +90,10 @@ export class ManageDeptComponent implements OnInit {
   }
   deleteDepartment(id: any) {
     this.departmentService.deleteDepartment(id).subscribe((res) => {
-      console.log(res);
+      this.toast.success('Department Deleted Successfully', 'Success', {
+        timeOut: 3000,
+        closeButton: true,
+      });
     });
   }
 }

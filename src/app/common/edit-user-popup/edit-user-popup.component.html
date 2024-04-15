@@ -111,7 +111,9 @@
                   [ngClass]="{'is-valid':(department.touched)&&!(department.errors?.['required']),'is-invalid':((department.touched) && (department.errors?.['required']))}"
                 >
                   @for (item of deptArray; track $index) {
-                  <option value="{{ item }}">{{ item }}</option>
+                  <option value="{{ item.departmentName }}">
+                    {{ item.departmentName }}
+                  </option>
                   }
                 </select>
                 @if (department.touched && department.errors?.['required']) {

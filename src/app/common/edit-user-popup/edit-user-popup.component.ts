@@ -14,6 +14,7 @@ import {
 } from '@angular/material/dialog';
 import { DepartmentService } from '../../core/department.service';
 import { AuthService } from '../../core/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-user-popup',
@@ -24,21 +25,18 @@ import { AuthService } from '../../core/auth.service';
 })
 export class EditUserPopupComponent implements OnInit {
   authService: AuthService = inject(AuthService);
+  deptService: DepartmentService = inject(DepartmentService);
+  toast: ToastrService = inject(ToastrService);
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<EditUserPopupComponent>
   ) {}
-  deptArray: string[] = [
-    'Frontend Developer',
-    'Backend Developer',
-    'Fullstack Developer',
-    'Data Analyst',
-    'Finance',
-    'Marketing',
-    'HR',
-  ];
+  deptArray: any;
   userdata: any;
   ngOnInit(): void {
+    this.deptService.getAllDepartment().subscribe((res) => {
+      this.deptArray = res;
+    });
     this.userdata = this.data;
     this.editUserForm.setValue({
       fname: this.userdata.data.firstName,
@@ -116,7 +114,10 @@ export class EditUserPopupComponent implements OnInit {
       .updateEmployee(this.userdata.data.id, formData)
       .subscribe((res) => {
         this.closePopup();
-        console.log(res);
+        this.toast.success('Edited Successfully', 'Success', {
+          timeOut: 3000,
+          closeButton: true,
+        });
       });
     // this.manageStaff
     //   .editUser(this.userData.data.email, formData)

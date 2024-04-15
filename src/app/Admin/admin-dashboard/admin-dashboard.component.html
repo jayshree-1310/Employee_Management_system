@@ -12,7 +12,7 @@
               <i class="fa fa-layer-group fa-4x opacity-75"></i>
             </div>
             <div class="col">
-              <h1 class="fs-2">8</h1>
+              <h1 class="fs-2">{{ totalDept }}</h1>
               <h6 class="fs-5">Departments</h6>
             </div>
           </div>
@@ -36,7 +36,7 @@
               <i class="fa fa-users fa-4x opacity-75"></i>
             </div>
             <div class="col">
-              <h1 class="fs-2">500</h1>
+              <h1 class="fs-2">{{ totalStaff }}</h1>
               <h6 class="fs-5">Staff</h6>
             </div>
           </div>
@@ -60,7 +60,7 @@
               <i class="fa fa-arrow-right-from-bracket fa-4x opacity-75"></i>
             </div>
             <div class="col-7">
-              <h1 class="fs-2">0</h1>
+              <h1 class="fs-2">{{ leaveRequest }}</h1>
               <h6 class="fs-5">Leave Request</h6>
             </div>
           </div>
@@ -84,7 +84,7 @@
               <i class="fa fa-indian-rupee-sign fa-4x opacity-75"></i>
             </div>
             <div class="col">
-              <h1 class="fs-2">{{ "100000" | currency : "INR" }}</h1>
+              <h1 class="fs-2">{{ totalSalary | currency : "INR" }}</h1>
               <h6 class="fs-5">Salary</h6>
             </div>
           </div>
@@ -99,6 +99,45 @@
           </h3>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <div class="mt-2 col-md-3">
+      <div class="row">
+        <h2>Staff</h2>
+      </div>
+      <div class="row d-flex justify-content-end">
+        <select
+          (change)="onChartTypeChange($event)"
+          class="form-select form-select-sm w-auto mb-2 selectbg"
+        >
+          <option value="pie">Pie Chart</option>
+          <option value="bar">Bar Chart</option>
+          <option value="doughnut">Doughnut Chart</option>
+          <option value="line">Line Chart</option>
+          <option value="polar">Polar Chart</option>
+        </select>
+      </div>
+      <canvas id="myChart"></canvas>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="mt-2 col-md-3">
+      <div class="row">
+        <h2>Salary</h2>
+      </div>
+      <div class="row d-flex justify-content-end">
+        <select
+          (change)="onSalaryChartTypeChange($event)"
+          class="form-select form-select-sm w-auto mb-2 selectbg"
+        >
+          <option value="pie">Pie Chart</option>
+          <option value="bar">Bar Chart</option>
+          <option value="doughnut">Doughnut Chart</option>
+          <option value="line">Line Chart</option>
+          <option value="polar">Polar Chart</option>
+        </select>
+      </div>
+      <canvas id="mySalaryChart"></canvas>
     </div>
   </div>
 </div>
