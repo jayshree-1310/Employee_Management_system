@@ -69,6 +69,7 @@ export class ManageAttendanceComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+  
   loadData() {
     this.authService.getAllEmployee().subscribe((res) => {
       this.userList = res;
