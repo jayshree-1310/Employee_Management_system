@@ -44,6 +44,15 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './manage-dept.component.css',
 })
 export class ManageDeptComponent implements OnInit {
+  nextPage() {
+    this.pageNumber++;
+    this.loadData();
+  }
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+  }
+  
   departmentService: DepartmentService = inject(DepartmentService);
   toast: ToastrService = inject(ToastrService);
   constructor(private dialog: MatDialog) {}
@@ -56,12 +65,14 @@ export class ManageDeptComponent implements OnInit {
     this.loadData();
   }
 
+  pageNumber=0;
+
   loadData() {
-    this.departmentService.getAllDepartment().subscribe((res) => {
+    this.departmentService.getAllDepartmentPage(this.pageNumber).subscribe((res) => {
       this.departmentData = res;
-      this.dataSource = new MatTableDataSource(this.departmentData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.departmentData.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
   displayColumns: string[] = ['no', 'name', 'action'];

@@ -81,7 +81,6 @@ prevPage() {
     this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
       this.userdata = res;
       this.dataSource = new MatTableDataSource(this.userdata.content);
-      console.log(this.userdata.content);
       // this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
     });

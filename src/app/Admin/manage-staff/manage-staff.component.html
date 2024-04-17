@@ -131,13 +131,22 @@
       [pageIndex]="0"
       showFirstLastButtons
     ></mat-paginator> -->
-    <button mat-mini-fab class="me-2"
-    color="primary"
-    matTooltip="Previous" (click)="prevPage()">
-  <mat-icon >keyboard_arrow_left</mat-icon></button>
-    <button mat-mini-fab
-    color="primary"
-    matTooltip="Next" (click)="nextPage()">
-  <mat-icon>keyboard_arrow_right</mat-icon></button>
+    <button
+      mat-mini-fab
+      class="me-2"
+      color="primary"
+      matTooltip="Previous"
+      (click)="prevPage()"
+    >
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <button
+      mat-mini-fab
+      color="primary" 
+      matTooltip="Next" 
+      (click)="nextPage()"
+      >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
   </mat-card-footer>
 </mat-card>
