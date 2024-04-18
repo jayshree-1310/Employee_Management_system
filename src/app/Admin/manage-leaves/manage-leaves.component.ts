@@ -7,6 +7,7 @@ import {
   inject,
 } from '@angular/core';
 import { LeaveService } from '../../core/leave.service';
+import * as alertify from 'alertifyjs';
 
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -101,29 +102,55 @@ export class ManageLeavesComponent implements OnInit {
     return ''; // Or provide a placeholder image
   }
   approveLeave(element: any) {
-    this.leaveService.approveLeaveRequest(element.id).subscribe((res) => {
-      this.toast.info(
-        'Leave Approved For ' + element.employee.firstName,
-        'Info',
-        {
-          timeOut: 3000,
-          closeButton: true,
-        }
-      );
-      this.loadData();
-    });
+    alertify
+      .confirm(
+        'Approve Leave',
+        'Are you Sure to Approve the leave of ' +
+          element.employee.firstName +
+          ' ?',
+        () => {
+          this.leaveService.approveLeaveRequest(element.id).subscribe((res) => {
+            this.toast.info(
+              'Leave Approved For ' + element.employee.firstName,
+              'Info',
+              {
+                timeOut: 3000,
+                closeButton: true,
+              }
+            );
+            this.loadData();
+          });
+        },
+        function () {}
+      )
+      .set('labels', { ok: 'Yes', cancel: 'No' })
+      .set({ transition: 'flipx' })
+      .set('movable', false);
   }
   rejectLeave(element: any) {
-    this.leaveService.rejectLeaveRequest(element.id).subscribe((res) => {
-      this.toast.info(
-        'Leave Rejected For ' + element.employee.firstName,
-        'Info',
-        {
-          timeOut: 3000,
-          closeButton: true,
-        }
-      );
-      this.loadData();
-    });
+    alertify
+      .confirm(
+        'Reject Leave',
+        'Are you Sure to Reject leave the of ' +
+          element.employee.firstName +
+          ' ?',
+        () => {
+          this.leaveService.rejectLeaveRequest(element.id).subscribe((res) => {
+            this.toast.info(
+              'Leave Rejected For ' + element.employee.firstName,
+              'Info',
+              {
+                timeOut: 3000,
+                closeButton: true,
+              }
+            );
+            this.loadData();
+          });
+        },
+        function () {}
+      )
+      .set('labels', { ok: 'Yes', cancel: 'No' })
+      .set({ transition: 'flipx' })
+      .set('movable', false);
   }
 }
