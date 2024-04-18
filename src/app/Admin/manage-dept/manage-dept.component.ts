@@ -44,6 +44,19 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './manage-dept.component.css',
 })
 export class ManageDeptComponent implements OnInit {
+  departmentService: DepartmentService = inject(DepartmentService);
+  toast: ToastrService = inject(ToastrService);
+  constructor(private dialog: MatDialog) {}
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource: any;
+  route: Router = inject(Router);
+  departmentData: any;
+ 
+  ngOnInit(): void {
+    this.loadData();
+  }
+
   nextPage() {
     this.pageNumber++;
     this.loadData();
@@ -53,18 +66,6 @@ export class ManageDeptComponent implements OnInit {
     this.loadData();
   }
   
-  departmentService: DepartmentService = inject(DepartmentService);
-  toast: ToastrService = inject(ToastrService);
-  constructor(private dialog: MatDialog) {}
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  dataSource: any;
-  route: Router = inject(Router);
-  departmentData: any;
-  ngOnInit(): void {
-    this.loadData();
-  }
-
   pageNumber=0;
 
   loadData() {

@@ -54,14 +54,6 @@ import { saveAs } from 'file-saver';
   styleUrl: './manage-staff.component.css',
 })
 export class ManageStaffComponent implements OnInit {
-nextPage() {
-  this.pageNumber++;
-  this.loadData();
-}
-prevPage() {
-  this.pageNumber--;
-  this.loadData();
-}
   authService: AuthService = inject(AuthService);
   toast: ToastrService = inject(ToastrService);
   dialog: MatDialog = inject(MatDialog);
@@ -75,8 +67,18 @@ prevPage() {
   ngOnInit(): void {
     this.loadData();
   }
+
   pageNumber=0;
 
+  nextPage() {
+    this.pageNumber++;
+    this.loadData();
+  }
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+  }
+  
   loadData() {
     this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
       this.userdata = res;
