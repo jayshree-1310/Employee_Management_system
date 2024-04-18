@@ -32,6 +32,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './manage-salary.component.css',
 })
 export class ManageSalaryComponent implements OnInit {
+
   salaryService: AuthService = inject(AuthService);
   toast: ToastrService = inject(ToastrService);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -51,18 +52,29 @@ export class ManageSalaryComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
-  
+
+  pageNumber=0;
+
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+    }
+    nextPage() {
+      this.pageNumber++;
+      this.loadData();
+    }
+
   loadData() {
-    this.salaryService.getAllEmployee().subscribe((res: any) => {
-      this.sdata = res.map((item: any) => ({
+    this.salaryService.getAllEmployeePage(this.pageNumber).subscribe((res: any) => {
+      this.sdata = res.content.map((item: any) => ({
         ...item,
         basic: 0,
         allowance: 0,
         total: item.salary,
       }));
       this.dataSource = new MatTableDataSource(this.sdata);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
   filterChange(data: Event) {

@@ -25,4 +25,9 @@ export class AttendanceService {
       'http://localhost:9090/api/getAttendanceByDate' + '/' + date
     );
   }
+  getAttendancesByDatePage(date: any,pageNumber:any) {
+    return this.http.get(
+      'http://localhost:9090/api/getAttendanceByDatePage/' + pageNumber + '/' + date
+    );
+  }
 }

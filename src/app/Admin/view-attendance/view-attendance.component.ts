@@ -37,6 +37,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './view-attendance.component.css',
 })
 export class ViewAttendanceComponent {
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   sanitizer: DomSanitizer = inject(DomSanitizer);
@@ -57,12 +58,24 @@ export class ViewAttendanceComponent {
     this.presentDate = this.getPreviousDate();
     this.loadData(this.presentDate);
   }
+
+  prevPage() {
+    this.pageNumber--;
+    this.loadData(this.presentDate);
+    }
+    nextPage() {
+      this.pageNumber++;
+      this.loadData(this.presentDate);
+    }
+    
+  pageNumber=0;
+
   loadData(date: any) {
-    this.attendanceService.getAttendancesByDate(date).subscribe((res) => {
+    this.attendanceService.getAttendancesByDatePage(date,this.pageNumber).subscribe((res) => {
       this.attendanceList = res;
-      this.dataSource = new MatTableDataSource(this.attendanceList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.attendanceList.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
   getPreviousDate() {
