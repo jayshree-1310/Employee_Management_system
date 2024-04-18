@@ -42,6 +42,14 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './manage-leaves.component.css',
 })
 export class ManageLeavesComponent implements OnInit {
+nextPage() {
+  this.pageNumber++;
+  this.loadData();
+}
+prevPage() {
+  this.pageNumber--;
+  this.loadData();
+}
   leaveService: LeaveService = inject(LeaveService);
   toast: ToastrService = inject(ToastrService);
   leaveRequests: any;
@@ -55,12 +63,15 @@ export class ManageLeavesComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+
+  pageNumber=0;
+
   loadData() {
-    this.leaveService.getPendingLeaveRequests().subscribe((res) => {
+    this.leaveService.getPendingLeavesRequestsPage(this.pageNumber).subscribe((res) => {
       this.leaveRequests = res;
-      this.dataSource = new MatTableDataSource(this.leaveRequests);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.leaveRequests.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
 
