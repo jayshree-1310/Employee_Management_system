@@ -30,11 +30,13 @@ export class AuthService {
   addEmployee(formData: any) {
     return this.http.post('http://localhost:9090/api/addEmployee', formData);
   }
-  getAllEmployee(){
-    return this.http.get('http://localhost:9090/api/getAllEmployee' );
+  getAllEmployee() {
+    return this.http.get('http://localhost:9090/api/getAllEmployee');
   }
-  getAllEmployeePage(pageNumber:any) {
-    return this.http.get('http://localhost:9090/api/getAllEmployeePage/' +pageNumber);
+  getAllEmployeePage(pageNumber: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getAllEmployeePage/' + pageNumber
+    );
   }
   deleteEmployee(id: any) {
     return this.http.delete('http://localhost:9090/api/deleteEmployee/' + id);

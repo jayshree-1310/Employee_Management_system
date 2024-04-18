@@ -52,9 +52,7 @@ export class AddStaffComponent implements OnInit {
     ]),
     contact: new FormControl('', [
       Validators.required,
-      Validators.pattern(
-        /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/
-      ),
+      Validators.pattern('^[6-9][0-9]{9}$'),
     ]),
     gender: new FormControl('', [Validators.required]),
     dateOfBirth: new FormControl('', Validators.required),

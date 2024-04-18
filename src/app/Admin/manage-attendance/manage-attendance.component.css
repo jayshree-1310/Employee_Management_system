@@ -8,4 +8,5 @@ table {
 }
 .table-responsive {
   overflow-x: auto;
+  overflow-y: auto;
 }

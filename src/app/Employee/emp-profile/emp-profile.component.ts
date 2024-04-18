@@ -1,7 +1,12 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { RouterLink, RouterLinkActive, RouterOutlet ,Router} from '@angular/router';
+import {
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+  Router,
+} from '@angular/router';
 import { EmployeeService } from '../../core/employee-service.service';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
@@ -26,11 +31,8 @@ export class EmpProfileComponent implements OnInit {
   sanitizer: DomSanitizer = inject(DomSanitizer);
 
   constructor(
-    private route: ActivatedRoute,
     private employeeService: EmployeeService,
-    private dialog: MatDialog,
-    private authService: AuthService,
-    private router: Router
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +43,6 @@ export class EmpProfileComponent implements OnInit {
       });
   }
   getImageUrl(): SafeUrl {
-    // Extracting image type from base64 string
     const typeMatch = this.employee.image.match(
       /^data:(image\/[a-z]+);base64,/i
     );
@@ -56,7 +57,6 @@ export class EmpProfileComponent implements OnInit {
         'data:image/png;base64,' + this.employee.image
       );
     }
-    return ''; // Or provide a placeholder image
   }
   editUser(element: any) {
     const _editUserPopup = this.dialog.open(EditUserPopupComponent, {
@@ -69,13 +69,8 @@ export class EmpProfileComponent implements OnInit {
     });
     _editUserPopup.afterClosed().subscribe((updatedProfile) => {
       if (updatedProfile) {
-        
         element = updatedProfile;
-        
-        
       }
     });
   }
-  
-  
 }

@@ -57,13 +57,14 @@ export class ManageStaffComponent implements OnInit {
   dataSource: any;
   userdata: any;
   route: Router = inject(Router);
+  totalemp: any;
   constructor() {}
 
   ngOnInit(): void {
     this.loadData();
   }
 
-  pageNumber=0;
+  pageNumber = 0;
 
   nextPage() {
     this.pageNumber++;
@@ -71,13 +72,15 @@ export class ManageStaffComponent implements OnInit {
   }
   prevPage() {
     this.pageNumber--;
+
     this.loadData();
   }
-  
+
   loadData() {
     this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
       this.userdata = res;
       this.dataSource = new MatTableDataSource(this.userdata.content);
+      console.log(this.userdata);
       // this.dataSource.paginator = this.paginator;
       // this.dataSource.sort = this.sort;
     });

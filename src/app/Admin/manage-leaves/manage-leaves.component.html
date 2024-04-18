@@ -112,22 +112,35 @@
       [pageIndex]="0"
       showFirstLastButtons
     ></mat-paginator> -->
-    <button
-    mat-mini-fab
-    class="me-2"
-    color="primary"
-    matTooltip="Previous"
-    (click)="prevPage()"
-  >
-    <mat-icon>keyboard_arrow_left</mat-icon>
-  </button>
-  <button
-    mat-mini-fab
-    color="primary" 
-    matTooltip="Next" 
-    (click)="nextPage()"
-    >
-    <mat-icon>keyboard_arrow_right</mat-icon>
-  </button>
+    <div class="row justify-content-end me-2" style="white-space: nowrap">
+      @if(this.leaveRequests.totalPages>0) {
+      <div class="col-1 pt-3">
+        <span class="text-muted text-end"
+          >Page : {{ this.leaveRequests.number + 1 }} of
+          {{ this.leaveRequests.totalPages }}</span
+        >
+      </div>
+      }
+      <div class="col-1">
+        <button
+          mat-icon-button
+          color="primary"
+          matTooltip="Previous"
+          (click)="prevPage()"
+          [disabled]="this.leaveRequests.first"
+        >
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button
+          mat-icon-button
+          color="primary"
+          matTooltip="Next"
+          (click)="nextPage()"
+          [disabled]="this.leaveRequests.last"
+        >
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
+    </div>
   </mat-card-footer>
 </mat-card>

@@ -28,13 +28,12 @@ import { LeaveService } from '../../core/leave.service';
     MatTooltipModule,
     MatChipsModule,
     DatePipe,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './leave-history.component.html',
   styleUrl: './leave-history.component.css',
 })
 export class LeaveHistoryComponent {
-
   sanitizer: DomSanitizer = inject(DomSanitizer);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -47,13 +46,13 @@ export class LeaveHistoryComponent {
   nextPage() {
     this.pageNumber++;
     this.loadData();
-    }
+  }
   prevPage() {
     this.pageNumber--;
     this.loadData();
-    }
+  }
 
-  pageNumber=0;
+  pageNumber = 0;
 
   loadData() {
     this.leaveService.getAllLeavePage(this.pageNumber).subscribe((res) => {

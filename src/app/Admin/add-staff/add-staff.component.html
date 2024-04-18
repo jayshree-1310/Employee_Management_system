@@ -1,5 +1,5 @@
-<div class="container d-flex justify-content-center align-items-center mt-5">
-  <div class="row box-area mt-md-3 col-md-8">
+<div class="container d-flex justify-content-center align-items-center mt-3">
+  <div class="row box-area mt-md-3 col-md-8 border">
     <div
       class="text-center mt-2 text-muted mb-2"
       style="font-weight: bold; font-size: 1.5em"
@@ -195,11 +195,11 @@
           </div>
           <div class="col">
             <input
-              type="number"
+              type="text"
               class="form-control"
               placeholder="Contact Number"
               formControlName="contact"
-              [ngClass]="{'is-valid':(contact.touched || contact.dirty)&&!(contact.errors?.['required'] || (contact.errors?.['pattern'])),'is-invalid':((contact.touched||id.dirty) && (contact.errors?.['required'] || (contact.errors?.['pattern'])))}"
+              [ngClass]="{'is-valid':(contact.touched || contact.dirty)&&!(contact.errors?.['required'] || (contact.errors?.['pattern'])),'is-invalid':((contact.touched||contact.dirty) && (contact.errors?.['required'] || (contact.errors?.['pattern'])))}"
             />
             @if ((contact.touched || contact.dirty) &&
             contact.errors?.['required']) {

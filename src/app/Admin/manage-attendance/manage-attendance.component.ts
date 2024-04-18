@@ -39,7 +39,6 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './manage-attendance.component.css',
 })
 export class ManageAttendanceComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   toast: ToastrService = inject(ToastrService);
   sanitizer: DomSanitizer = inject(DomSanitizer);
@@ -69,24 +68,24 @@ export class ManageAttendanceComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
-  
-  nextPage() {
-    this.pageNumber++;
-    this.loadData();
-  }
-  prevPage() {
-    this.pageNumber--;
-    this.loadData();
-  }
-  
-  pageNumber=0;
+
+  // nextPage() {
+  //   this.pageNumber++;
+  //   this.loadData();
+  // }
+  // prevPage() {
+  //   this.pageNumber--;
+  //   this.loadData();
+  // }
+
+  pageNumber = 0;
 
   loadData() {
-    this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
+    this.authService.getAllEmployee().subscribe((res) => {
       this.userList = res;
-      this.dataSource = new MatTableDataSource(this.userList.content);
+      this.dataSource = new MatTableDataSource(this.userList);
       // this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
+      this.dataSource.sort = this.sort;
     });
   }
   filterChange(data: Event) {

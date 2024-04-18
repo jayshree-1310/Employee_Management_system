@@ -12,7 +12,7 @@ import { ManageSalaryComponent } from './Admin/manage-salary/manage-salary.compo
 
 import { HolidayListComponent } from './Employee/holiday-list/holiday-list.component';
 import { ApplyLeaveComponent } from './Employee/apply-leave/apply-leave.component';
-import { UpdateProfileComponent } from './common/update-profile/update-profile.component';
+
 import { ManageAttendanceComponent } from './Admin/manage-attendance/manage-attendance.component';
 import { LeaveHistoryComponent } from './Admin/leave-history/leave-history.component';
 import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance.component';
@@ -83,11 +83,7 @@ export const routes: Routes = [
     component: ApplyLeaveComponent,
     title: 'apply-leave',
   },
-  {
-    path: 'update-profile',
-    component: UpdateProfileComponent,
-    title: 'update-profile',
-  },
+
   {
     path: 'manage-attendance',
     component: ManageAttendanceComponent,
@@ -100,7 +96,7 @@ export const routes: Routes = [
   },
   {
     path: 'salary-breakup',
-    component:SalaryComponent,
-    title:'my-salary'
-  }
+    component: SalaryComponent,
+    title: 'my-salary',
+  },
 ];
