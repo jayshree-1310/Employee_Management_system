@@ -1,12 +1,5 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import {
-  AfterViewInit,
-  Component,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  inject,
-} from '@angular/core';
+import { Component, OnInit, ViewChild, inject } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
@@ -29,6 +22,8 @@ import { EditUserPopupComponent } from '../../Common/edit-user-popup/edit-user-p
 import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
+import * as alertify from 'alertifyjs';
+
 @Component({
   selector: 'app-manage-staff',
   standalone: true,
@@ -107,13 +102,24 @@ export class ManageStaffComponent implements OnInit {
     this.route.navigate(['/add-staff']);
   }
   deleteEmployee(id: any) {
-    this.authService.deleteEmployee(id).subscribe((res) => {
-      this.toast.success('Employee Deleted Successfully', 'Success', {
-        timeOut: 3000,
-        closeButton: true,
-      });
-      this.loadData();
-    });
+    alertify
+      .confirm(
+        'Remove User',
+        'Are you Sure to remove this user?',
+        () => {
+          this.authService.deleteEmployee(id).subscribe((res) => {
+            this.loadData();
+            this.toast.success('Deleted Successfully', 'Success', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          });
+        },
+        function () {}
+      )
+      .set('labels', { ok: 'Yes', cancel: 'No' })
+      .set({ transition: 'flipx' })
+      .set('movable', false);
   }
   editUser(element: any) {
     const _editUserPopup = this.dialog.open(EditUserPopupComponent, {

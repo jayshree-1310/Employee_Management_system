@@ -22,6 +22,7 @@ import { AddDepartmentPopupComponent } from '../add-department-popup/add-departm
 import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-department-popup.component';
 import { DepartmentService } from '../../core/department.service';
 import { ToastrService } from 'ngx-toastr';
+import * as alertify from 'alertifyjs';
 
 @Component({
   selector: 'app-manage-dept',
@@ -101,11 +102,23 @@ export class ManageDeptComponent implements OnInit {
     });
   }
   deleteDepartment(id: any) {
-    this.departmentService.deleteDepartment(id).subscribe((res) => {
-      this.toast.success('Department Deleted Successfully', 'Success', {
-        timeOut: 3000,
-        closeButton: true,
-      });
-    });
+    alertify
+      .confirm(
+        'Delete Department',
+        'Are you Sure to Delete Department?',
+        () => {
+          this.departmentService.deleteDepartment(id).subscribe((res) => {
+            this.toast.success('Department Deleted Successfully', 'Success', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+            this.loadData();
+          });
+        },
+        function () {}
+      )
+      .set('labels', { ok: 'Yes', cancel: 'No' })
+      .set({ transition: 'flipx' })
+      .set('movable', false);
   }
 }
