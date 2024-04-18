@@ -51,6 +51,7 @@ export class ManageSalaryComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+  
   loadData() {
     this.salaryService.getAllEmployee().subscribe((res: any) => {
       this.sdata = res.map((item: any) => ({

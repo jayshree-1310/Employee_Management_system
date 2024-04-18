@@ -62,12 +62,24 @@ export class ManageStaffComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+
+  pageNumber=0;
+
+  nextPage() {
+    this.pageNumber++;
+    this.loadData();
+  }
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+  }
+  
   loadData() {
-    this.authService.getAllEmployee().subscribe((res) => {
+    this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
       this.userdata = res;
-      this.dataSource = new MatTableDataSource(this.userdata);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.userdata.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
 

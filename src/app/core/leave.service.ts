@@ -29,6 +29,9 @@ export class LeaveService {
   getPendingLeaveRequests() {
     return this.http.get<any[]>('http://localhost:9090/api/pendingLeaves');
   }
+  getPendingLeavesRequestsPage(pageNumber:any) {
+    return this.http.get<any[]>('http://localhost:9090/api/pendingLeavesPage/'+pageNumber);
+  }
   approveLeaveRequest(requestId: any) {
     return this.http.post<any>(
       'http://localhost:9090/api/approveLeave' + '/' + requestId,

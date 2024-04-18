@@ -69,12 +69,24 @@ export class ManageAttendanceComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+  
+  nextPage() {
+    this.pageNumber++;
+    this.loadData();
+  }
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+  }
+  
+  pageNumber=0;
+
   loadData() {
-    this.authService.getAllEmployee().subscribe((res) => {
+    this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
       this.userList = res;
-      this.dataSource = new MatTableDataSource(this.userList);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.userList.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
   filterChange(data: Event) {

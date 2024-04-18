@@ -56,12 +56,24 @@ export class ManageLeavesComponent implements OnInit {
   ngOnInit(): void {
     this.loadData();
   }
+
+  pageNumber=0;
+
+  nextPage() {
+    this.pageNumber++;
+    this.loadData();
+  }
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+  }
+  
   loadData() {
-    this.leaveService.getPendingLeaveRequests().subscribe((res) => {
+    this.leaveService.getPendingLeavesRequestsPage(this.pageNumber).subscribe((res) => {
       this.leaveRequests = res;
-      this.dataSource = new MatTableDataSource(this.leaveRequests);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.leaveRequests.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
 

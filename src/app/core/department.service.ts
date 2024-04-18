@@ -12,6 +12,9 @@ export class DepartmentService {
   getAllDepartment() {
     return this.http.get('http://localhost:9090/api/getAllDepartment');
   }
+  getAllDepartmentPage(pageNumber:any) {
+    return this.http.get('http://localhost:9090/api/getAllDepartmentPage/'+pageNumber);
+  }
   deleteDepartment(id: any) {
     return this.http.delete(
       'http://localhost:9090/api/deleteDepartment' + '/' + id
