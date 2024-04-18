@@ -47,4 +47,7 @@ export class LeaveService {
   getAllLeave() {
     return this.http.get<any[]>('http://localhost:9090/api/getAllLeave');
   }
+  getAllLeavePage(pageNumber:any) {
+    return this.http.get('http://localhost:9090/api/getAllLeavePage/'+pageNumber);
+  }
 }

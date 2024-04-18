@@ -34,6 +34,7 @@ import { LeaveService } from '../../core/leave.service';
   styleUrl: './leave-history.component.css',
 })
 export class LeaveHistoryComponent {
+
   sanitizer: DomSanitizer = inject(DomSanitizer);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,12 +43,24 @@ export class LeaveHistoryComponent {
   ngOnInit(): void {
     this.loadData();
   }
+
+  nextPage() {
+    this.pageNumber++;
+    this.loadData();
+    }
+  prevPage() {
+    this.pageNumber--;
+    this.loadData();
+    }
+
+  pageNumber=0;
+
   loadData() {
-    this.leaveService.getAllLeave().subscribe((res) => {
+    this.leaveService.getAllLeavePage(this.pageNumber).subscribe((res) => {
       this.leaveData = res;
-      this.dataSource = new MatTableDataSource(this.leaveData);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
+      this.dataSource = new MatTableDataSource(this.leaveData.content);
+      // this.dataSource.paginator = this.paginator;
+      // this.dataSource.sort = this.sort;
     });
   }
   dataSource: any;
