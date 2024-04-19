@@ -5,20 +5,7 @@
   </div>
 </div>
 <mat-card class="ms-2 me-2 mt-2">
-  <mat-card-header>
-    <div fxFlex="45" fxFlex.lt-md="100" class="mb5">
-      <mat-form-field class="w-50 w-sm-75">
-        <input
-          matInput
-          type="text"
-          placeholder="Search here..."
-          (keyup)="filterChange($event)"
-        />
-        <button matSuffix mat-icon-button color="primary">
-          <mat-icon class="search-icon">search</mat-icon>
-        </button>
-      </mat-form-field>
-    </div>
+  <mat-card-header class="mb-3">
     <div class="d-flex ms-auto align-items-center">
       <button
         mat-mini-fab

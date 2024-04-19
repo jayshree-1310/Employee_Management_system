@@ -37,7 +37,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   styleUrl: './view-attendance.component.css',
 })
 export class ViewAttendanceComponent {
-
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   sanitizer: DomSanitizer = inject(DomSanitizer);
@@ -46,6 +45,7 @@ export class ViewAttendanceComponent {
   attendanceList!: any;
   dataSource: any;
   presentDate: any;
+  searchdata: any = '';
   displayColumns: string[] = [
     'image',
     'name',
@@ -62,21 +62,34 @@ export class ViewAttendanceComponent {
   prevPage() {
     this.pageNumber--;
     this.loadData(this.presentDate);
-    }
-    nextPage() {
-      this.pageNumber++;
-      this.loadData(this.presentDate);
-    }
-    
-  pageNumber=0;
+  }
+  nextPage() {
+    this.pageNumber++;
+    this.loadData(this.presentDate);
+  }
+
+  pageNumber = 0;
 
   loadData(date: any) {
-    this.attendanceService.getAttendancesByDatePage(date,this.pageNumber).subscribe((res) => {
-      this.attendanceList = res;
-      this.dataSource = new MatTableDataSource(this.attendanceList.content);
-      // this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
-    });
+    if (this.searchdata != '') {
+      this.attendanceService
+        .getSearchedAttendance(this.searchdata, this.pageNumber, date)
+        .subscribe((res) => {
+          this.attendanceList = res;
+          this.dataSource = new MatTableDataSource(this.attendanceList.content);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    } else {
+      this.attendanceService
+        .getAttendancesByDatePage(date, this.pageNumber)
+        .subscribe((res) => {
+          this.attendanceList = res;
+          this.dataSource = new MatTableDataSource(this.attendanceList.content);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    }
   }
   getPreviousDate() {
     const today = new Date();
@@ -100,9 +113,10 @@ export class ViewAttendanceComponent {
   changeDate() {
     this.loadData(this.presentDate);
   }
-  filterChange(data: Event) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
+  filterChange() {
+    this.loadData(this.presentDate);
+    // const value = (data.target as HTMLInputElement).value;
+    // this.dataSource.filter = value.trim().toLowerCase();
   }
   getImageUrl(element: any): SafeUrl {
     if (element) {

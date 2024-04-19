@@ -23,6 +23,7 @@ import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-depa
 import { DepartmentService } from '../../core/department.service';
 import { ToastrService } from 'ngx-toastr';
 import * as alertify from 'alertifyjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-dept',
@@ -40,6 +41,7 @@ import * as alertify from 'alertifyjs';
     MatMenuModule,
     DatePipe,
     CurrencyPipe,
+    FormsModule,
   ],
   templateUrl: './manage-dept.component.html',
   styleUrl: './manage-dept.component.css',
@@ -53,7 +55,7 @@ export class ManageDeptComponent implements OnInit {
   dataSource: any;
   route: Router = inject(Router);
   departmentData: any;
- 
+  searchdata: any = '';
   ngOnInit(): void {
     this.loadData();
   }
@@ -66,22 +68,36 @@ export class ManageDeptComponent implements OnInit {
     this.pageNumber--;
     this.loadData();
   }
-  
-  pageNumber=0;
+
+  pageNumber = 0;
 
   loadData() {
-    this.departmentService.getAllDepartmentPage(this.pageNumber).subscribe((res) => {
-      this.departmentData = res;
-      this.dataSource = new MatTableDataSource(this.departmentData.content);
-      // this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
-    });
+    if (this.searchdata != '') {
+      this.departmentService
+        .getSearchedDepartment(this.searchdata, this.pageNumber)
+        .subscribe((res) => {
+          this.departmentData = res;
+          this.dataSource = new MatTableDataSource(this.departmentData.content);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    } else {
+      this.departmentService
+        .getAllDepartmentPage(this.pageNumber)
+        .subscribe((res) => {
+          this.departmentData = res;
+          this.dataSource = new MatTableDataSource(this.departmentData.content);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    }
   }
   displayColumns: string[] = ['no', 'name', 'action'];
 
-  filterChange(data: Event) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
+  filterChange() {
+    this.loadData();
+    // const value = (data.target as HTMLInputElement).value;
+    // this.dataSource.filter = value.trim().toLowerCase();
   }
   addEmployee() {
     this.dialog.open(AddDepartmentPopupComponent, {

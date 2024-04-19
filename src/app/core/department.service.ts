@@ -12,8 +12,10 @@ export class DepartmentService {
   getAllDepartment() {
     return this.http.get('http://localhost:9090/api/getAllDepartment');
   }
-  getAllDepartmentPage(pageNumber:any) {
-    return this.http.get('http://localhost:9090/api/getAllDepartmentPage/'+pageNumber);
+  getAllDepartmentPage(pageNumber: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getAllDepartmentPage/' + pageNumber
+    );
   }
   deleteDepartment(id: any) {
     return this.http.delete(
@@ -25,6 +27,14 @@ export class DepartmentService {
     return this.http.patch(
       'http://localhost:9090/api/editDepartment' + '/' + id,
       data
+    );
+  }
+  getSearchedDepartment(keyword: any, pageNumber: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getSearchedDepartment/' +
+        keyword +
+        '/' +
+        pageNumber
     );
   }
 }

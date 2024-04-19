@@ -11,8 +11,9 @@
         <input
           matInput
           type="text"
+          [(ngModel)]="searchdata"
           placeholder="Search here..."
-          (keyup)="filterChange($event)"
+          (keyup)="filterChange()"
         />
         <button matSuffix mat-icon-button color="primary">
           <mat-icon class="search-icon">search</mat-icon>

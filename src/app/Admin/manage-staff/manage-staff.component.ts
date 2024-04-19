@@ -23,6 +23,7 @@ import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import * as alertify from 'alertifyjs';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-staff',
@@ -44,6 +45,7 @@ import * as alertify from 'alertifyjs';
     RouterLinkActive,
     RouterOutlet,
     MatDialogModule,
+    FormsModule,
   ],
   templateUrl: './manage-staff.component.html',
   styleUrl: './manage-staff.component.css',
@@ -58,6 +60,7 @@ export class ManageStaffComponent implements OnInit {
   userdata: any;
   route: Router = inject(Router);
   totalemp: any;
+  searchdata: any = '';
   constructor() {}
 
   ngOnInit(): void {
@@ -77,15 +80,27 @@ export class ManageStaffComponent implements OnInit {
   }
 
   loadData() {
-    this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
-      this.userdata = res;
-      this.dataSource = new MatTableDataSource(this.userdata.content);
-      console.log(this.userdata);
-      // this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
-    });
+    if (this.searchdata != '') {
+      this.authService
+        .getSearchedEmployee(this.searchdata, this.pageNumber)
+        .subscribe((res) => {
+          this.userdata = res;
+          this.dataSource = new MatTableDataSource(this.userdata.content);
+          // console.log(this.userdata);
+        });
+    } else {
+      this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
+        this.userdata = res;
+        this.dataSource = new MatTableDataSource(this.userdata.content);
+        // console.log(this.userdata);
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+      });
+    }
   }
-
+  filterChange() {
+    this.loadData();
+  }
   displayColumns: string[] = [
     'no',
     'name',
@@ -97,10 +112,11 @@ export class ManageStaffComponent implements OnInit {
     'action',
   ];
 
-  filterChange(data: Event) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
-  }
+  // filterChange(data: Event) {
+  //   console.log((data.target as HTMLInputElement).value);
+  //   const value = (data.target as HTMLInputElement).value;
+  //   this.dataSource.filter = value.trim().toLowerCase();
+  // }
   addEmployee() {
     this.route.navigate(['/add-staff']);
   }

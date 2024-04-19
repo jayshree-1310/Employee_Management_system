@@ -25,9 +25,22 @@ export class AttendanceService {
       'http://localhost:9090/api/getAttendanceByDate' + '/' + date
     );
   }
-  getAttendancesByDatePage(date: any,pageNumber:any) {
+  getAttendancesByDatePage(date: any, pageNumber: any) {
     return this.http.get(
-      'http://localhost:9090/api/getAttendanceByDatePage/' + pageNumber + '/' + date
+      'http://localhost:9090/api/getAttendanceByDatePage/' +
+        pageNumber +
+        '/' +
+        date
+    );
+  }
+  getSearchedAttendance(keyword: any, pageNumber: any, date: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getSearchedAttendance/' +
+        keyword +
+        '/' +
+        pageNumber +
+        '/' +
+        date
     );
   }
 }

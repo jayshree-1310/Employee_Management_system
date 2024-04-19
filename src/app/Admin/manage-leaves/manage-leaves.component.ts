@@ -21,6 +21,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ToastrService } from 'ngx-toastr';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-manage-leaves',
@@ -38,6 +39,7 @@ import { ToastrService } from 'ngx-toastr';
     MatTooltipModule,
     MatMenuModule,
     DatePipe,
+    FormsModule,
   ],
   templateUrl: './manage-leaves.component.html',
   styleUrl: './manage-leaves.component.css',
@@ -50,14 +52,14 @@ export class ManageLeavesComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
-
+  searchdata: any = '';
   constructor() {}
 
   ngOnInit(): void {
     this.loadData();
   }
 
-  pageNumber=0;
+  pageNumber = 0;
 
   nextPage() {
     this.pageNumber++;
@@ -67,14 +69,27 @@ export class ManageLeavesComponent implements OnInit {
     this.pageNumber--;
     this.loadData();
   }
-  
+
   loadData() {
-    this.leaveService.getPendingLeavesRequestsPage(this.pageNumber).subscribe((res) => {
-      this.leaveRequests = res;
-      this.dataSource = new MatTableDataSource(this.leaveRequests.content);
-      // this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
-    });
+    if (this.searchdata != '') {
+      this.leaveService
+        .getSearchedLeave(this.searchdata, this.pageNumber)
+        .subscribe((res) => {
+          this.leaveRequests = res;
+          this.dataSource = new MatTableDataSource(this.leaveRequests.content);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    } else {
+      this.leaveService
+        .getPendingLeavesRequestsPage(this.pageNumber)
+        .subscribe((res) => {
+          this.leaveRequests = res;
+          this.dataSource = new MatTableDataSource(this.leaveRequests.content);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    }
   }
 
   displayColumns: string[] = [
@@ -89,9 +104,10 @@ export class ManageLeavesComponent implements OnInit {
     'action',
   ];
 
-  filterChange(data: Event) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
+  filterChange() {
+    this.loadData();
+    // const value = (data.target as HTMLInputElement).value;
+    // this.dataSource.filter = value.trim().toLowerCase();
   }
   getImageUrl(element: any): SafeUrl {
     if (element) {

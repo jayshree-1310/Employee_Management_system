@@ -29,8 +29,23 @@ export class LeaveService {
   getPendingLeaveRequests() {
     return this.http.get<any[]>('http://localhost:9090/api/pendingLeaves');
   }
-  getPendingLeavesRequestsPage(pageNumber:any) {
-    return this.http.get<any[]>('http://localhost:9090/api/pendingLeavesPage/'+pageNumber);
+  getPendingLeavesRequestsPage(pageNumber: any) {
+    return this.http.get<any[]>(
+      'http://localhost:9090/api/pendingLeavesPage/' + pageNumber
+    );
+  }
+  getSearchedLeave(keyword: any, pageNumber: any) {
+    return this.http.get<any[]>(
+      'http://localhost:9090/api/getSearchedLeave/' + keyword + '/' + pageNumber
+    );
+  }
+  getAllSearchedLeave(keyword: any, pageNumber: any) {
+    return this.http.get<any[]>(
+      'http://localhost:9090/api/getAllSearchedLeave/' +
+        keyword +
+        '/' +
+        pageNumber
+    );
   }
   approveLeaveRequest(requestId: any) {
     return this.http.post<any>(
@@ -47,7 +62,9 @@ export class LeaveService {
   getAllLeave() {
     return this.http.get<any[]>('http://localhost:9090/api/getAllLeave');
   }
-  getAllLeavePage(pageNumber:any) {
-    return this.http.get('http://localhost:9090/api/getAllLeavePage/'+pageNumber);
+  getAllLeavePage(pageNumber: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getAllLeavePage/' + pageNumber
+    );
   }
 }

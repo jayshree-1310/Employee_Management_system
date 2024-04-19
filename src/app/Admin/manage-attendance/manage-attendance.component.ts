@@ -49,6 +49,7 @@ export class ManageAttendanceComponent implements OnInit {
   tempIds: Set<number> = new Set<number>();
   employeeIds: any[] = [];
   presentDate: any;
+
   displayColumns: string[] = [
     'select',
     'image',
@@ -88,10 +89,7 @@ export class ManageAttendanceComponent implements OnInit {
       this.dataSource.sort = this.sort;
     });
   }
-  filterChange(data: Event) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
-  }
+
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource?.data?.length ?? 0;

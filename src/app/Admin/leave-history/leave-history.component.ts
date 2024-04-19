@@ -12,6 +12,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { CommonModule, DatePipe } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { LeaveService } from '../../core/leave.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-leave-history',
@@ -29,6 +30,7 @@ import { LeaveService } from '../../core/leave.service';
     MatChipsModule,
     DatePipe,
     CommonModule,
+    FormsModule,
   ],
   templateUrl: './leave-history.component.html',
   styleUrl: './leave-history.component.css',
@@ -39,6 +41,7 @@ export class LeaveHistoryComponent {
   @ViewChild(MatSort) sort!: MatSort;
   leaveData!: any;
   leaveService: LeaveService = inject(LeaveService);
+  searchdata: any = '';
   ngOnInit(): void {
     this.loadData();
   }
@@ -55,12 +58,19 @@ export class LeaveHistoryComponent {
   pageNumber = 0;
 
   loadData() {
-    this.leaveService.getAllLeavePage(this.pageNumber).subscribe((res) => {
-      this.leaveData = res;
-      this.dataSource = new MatTableDataSource(this.leaveData.content);
-      // this.dataSource.paginator = this.paginator;
-      // this.dataSource.sort = this.sort;
-    });
+    if (this.searchdata != '') {
+      this.leaveService
+        .getAllSearchedLeave(this.searchdata, this.pageNumber)
+        .subscribe((res) => {
+          this.leaveData = res;
+          this.dataSource = new MatTableDataSource(this.leaveData.content);
+        });
+    } else {
+      this.leaveService.getAllLeavePage(this.pageNumber).subscribe((res) => {
+        this.leaveData = res;
+        this.dataSource = new MatTableDataSource(this.leaveData.content);
+      });
+    }
   }
   dataSource: any;
   displayColumns: string[] = [
@@ -96,8 +106,9 @@ export class LeaveHistoryComponent {
     return ''; // Or provide a placeholder image
   }
 
-  filterChange(data: any) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
+  filterChange() {
+    this.loadData();
+    // const value = (data.target as HTMLInputElement).value;
+    // this.dataSource.filter = value.trim().toLowerCase();
   }
 }

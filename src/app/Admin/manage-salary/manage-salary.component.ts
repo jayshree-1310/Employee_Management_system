@@ -40,6 +40,7 @@ export class ManageSalaryComponent implements OnInit {
   tempSalaryData: any;
   dataSource: any;
   salaryData: any;
+  searchdata: any = '';
   displayColumns: string[] = [
     'no',
     'Name',
@@ -65,24 +66,40 @@ export class ManageSalaryComponent implements OnInit {
   }
 
   loadData() {
-    this.salaryService
-      .getAllEmployeePage(this.pageNumber)
-      .subscribe((res: any) => {
-        this.tempSalaryData = res;
-        this.sdata = res.content.map((item: any) => ({
-          ...item,
-          basic: 0,
-          allowance: 0,
-          total: item.salary,
-        }));
-        this.dataSource = new MatTableDataSource(this.sdata);
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
-      });
+    if (this.searchdata != '') {
+      this.salaryService
+        .getSearchedEmployee(this.searchdata, this.pageNumber)
+        .subscribe((res: any) => {
+          this.tempSalaryData = res;
+          this.sdata = res.content.map((item: any) => ({
+            ...item,
+            basic: 0,
+            allowance: 0,
+            total: item.salary,
+          }));
+          this.dataSource = new MatTableDataSource(this.sdata);
+        });
+    } else {
+      this.salaryService
+        .getAllEmployeePage(this.pageNumber)
+        .subscribe((res: any) => {
+          this.tempSalaryData = res;
+          this.sdata = res.content.map((item: any) => ({
+            ...item,
+            basic: 0,
+            allowance: 0,
+            total: item.salary,
+          }));
+          this.dataSource = new MatTableDataSource(this.sdata);
+          // this.dataSource.paginator = this.paginator;
+          // this.dataSource.sort = this.sort;
+        });
+    }
   }
-  filterChange(data: Event) {
-    const value = (data.target as HTMLInputElement).value;
-    this.dataSource.filter = value.trim().toLowerCase();
+  filterChange() {
+    this.loadData();
+    // const value = (data.target as HTMLInputElement).value;
+    // this.dataSource.filter = value.trim().toLowerCase();
   }
   calculateTotal(row: any): void {
     row.total = row.basic + row.allowance;

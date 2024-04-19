@@ -53,4 +53,12 @@ export class AuthService {
       formData
     );
   }
+  getSearchedEmployee(keyword: any, pageNumber: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getSearchedEmployee/' +
+        keyword +
+        '/' +
+        pageNumber
+    );
+  }
 }
