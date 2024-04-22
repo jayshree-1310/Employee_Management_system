@@ -86,16 +86,17 @@ export class ManageStaffComponent implements OnInit {
         .subscribe((res) => {
           this.userdata = res;
           this.dataSource = new MatTableDataSource(this.userdata.content);
-          // console.log(this.userdata);
+          
         });
+
     } else {
       this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
         this.userdata = res;
         this.dataSource = new MatTableDataSource(this.userdata.content);
-        // console.log(this.userdata);
-        // this.dataSource.paginator = this.paginator;
-        // this.dataSource.sort = this.sort;
+        
+        
       });
+
     }
   }
   filterChange() {
@@ -112,11 +113,7 @@ export class ManageStaffComponent implements OnInit {
     'action',
   ];
 
-  // filterChange(data: Event) {
-  //   console.log((data.target as HTMLInputElement).value);
-  //   const value = (data.target as HTMLInputElement).value;
-  //   this.dataSource.filter = value.trim().toLowerCase();
-  // }
+  
   addEmployee() {
     this.route.navigate(['/add-staff']);
   }
