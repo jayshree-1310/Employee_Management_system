@@ -1,4 +1,4 @@
-<div class="container mt-5 mb-5">
+<!-- <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-12">
             <div class="text-center lh-1 mb-2">
@@ -143,4 +143,94 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+<div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+        <mat-card>
+          
+            <div class="text-center mt-3 mb-3" > 
+                <h2>Employee Payslip</h2> 
+              </div>
+        
+          <!-- <mat-card-content> -->
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <div class=" abc mb-3">
+                    <span class="fw-bolder">EMP Code:</span> <small class="ms-3">{{employee?.id}}</small>
+                </div>
+                <div class="abc mb-3">
+                  <span class="fw-bolder">PF No.:</span>
+                  <span class="ms-2">000000{{employee?.id}}</span>
+                </div>
+                <div class="abc mb-3">
+                  <span class="fw-bolder">Bank Name:</span>
+                  <span class="ms-2">SBI</span>
+                </div>
+                <div class="abc mb-3">
+                  <span class="fw-bolder">Designation:</span>
+                  <span class="ms-2">{{employee?.department}}</span>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="abc mb-3">
+                  <span class="fw-bolder">Name:</span>
+                  <span class="ms-2">{{employee?.firstName}} {{employee?.lastName}}</span>
+                </div>
+                <div class="abc mb-3">
+                  <span class="fw-bolder">Email Id:</span>
+                  <span class="ms-2">{{employee?.email}}</span>
+                </div>
+              </div>
+            </div>
+            <table class="mt-4 table table-bordered">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col">Earnings</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Deductions</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                    
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">Basic</th>
+                        <td>{{employee?.salary}}</td>
+                        <td>PF</td>
+                        <td>{{employee?.salary*0.2}}</td>
+                    </tr>
+                    <tr>
+                        <th scope="row">HRA</th>
+                        <td>{{employee?.salary*0.2}}</td>
+                        <td>TDS</td>
+                        <td>0.00</td>
+                    </tr>
+                    <tr class="border-top">
+                        <th scope="row">Total Earning</th>
+                        <td>{{employee?.salary*1.2}}</td>
+                        <td>Total Deductions</td>
+                        <td>{{employee?.salary*0.2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="row mb-4">
+              <div class="col-md-6">
+                <span class="fw-bold">Net Pay:</span>
+                
+                <span>{{employee?.salary}}</span>
+              </div>
+            </div>
+            <div class="d-flex justify-content-end">
+              <div class="text-center">
+                <p class="fw-bolder me-3">On Behalf of Argusoft India Pvt Ltd.</p>
+                <p class="mb-3">Authorised Signatory</p>
+              </div>
+            </div>
+          <!-- </mat-card-content> -->
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  
