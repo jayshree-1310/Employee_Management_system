@@ -17,7 +17,7 @@ import { ManageAttendanceComponent } from './Admin/manage-attendance/manage-atte
 import { LeaveHistoryComponent } from './Admin/leave-history/leave-history.component';
 import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance.component';
 import path from 'path';
-import { SalaryComponent } from './Employee/salary/salary.component';
+import { SalaryslipComponent } from './Employee/salaryslip/salaryslip.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -94,9 +94,10 @@ export const routes: Routes = [
     component: ViewAttendanceComponent,
     title: 'view-attendance',
   },
+
   {
-    path: 'salary-breakup',
-    component: SalaryComponent,
-    title: 'my-salary',
-  },
+    path: 'salary-slip',
+    component: SalaryslipComponent,
+    title: 'my-salaryslip',
+  }
 ];
