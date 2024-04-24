@@ -18,6 +18,7 @@ import { LeaveHistoryComponent } from './Admin/leave-history/leave-history.compo
 import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance.component';
 import path from 'path';
 import { SalaryslipComponent } from './Employee/salaryslip/salaryslip.component';
+import { TodoComponent } from './Common/todo/todo.component';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -99,5 +100,15 @@ export const routes: Routes = [
     path: 'salary-slip',
     component: SalaryslipComponent,
     title: 'my-salaryslip',
-  }
+  },
+  {
+    path: 'tasks',
+    component: TodoComponent,
+    title: 'Task',
+  },
+  {
+    path: 'salary-slip',
+    component: SalaryslipComponent,
+    title: 'Salary',
+  },
 ];
