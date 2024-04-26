@@ -67,4 +67,10 @@ export class LeaveService {
       'http://localhost:9090/api/getAllLeavePage/' + pageNumber
     );
   }
+
+  getLeaveRequestsOfEmployee(email: any) {
+    return this.http.get(
+      'http://localhost:9090/api/getLeaveRequestsOfEmployee' + '/' + email
+    );
+  }
 }

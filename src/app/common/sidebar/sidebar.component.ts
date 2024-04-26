@@ -1,4 +1,4 @@
-import { Component, DoCheck, OnInit, inject } from '@angular/core';
+import { Component, DoCheck, OnDestroy, OnInit, inject } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,17 +32,17 @@ import { AuthService } from '../../core/auth.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
-export class SidebarComponent implements DoCheck {
+export class SidebarComponent implements DoCheck, OnDestroy {
   authService: AuthService = inject(AuthService);
   router: Router = inject(Router);
   isAdmin!: boolean;
   isEmployee!: boolean;
   badgevisible = false;
   ngDoCheck(): void {
-    this.authService.isAdmin.subscribe((isAdmin) => {
+    this.authService.isAdminSubject.subscribe((isAdmin) => {
       this.isAdmin = isAdmin;
     });
-    this.authService.isEmployee.subscribe((isEmployee) => {
+    this.authService.isEmployeeSubject.subscribe((isEmployee) => {
       this.isEmployee = isEmployee;
     });
     if (this.router.url === '/login') {
@@ -52,12 +52,16 @@ export class SidebarComponent implements DoCheck {
   }
   logout() {
     if (this.isAdmin) {
-      this.authService.logoutAdmin();
+      this.authService.logOutAdmin();
       this.router.navigate(['login']);
     } else if (this.isEmployee) {
-      this.authService.logoutEmployee();
+      this.authService.logOutEmployee();
       this.router.navigate(['login']);
     }
+  }
+  ngOnDestroy(): void {
+    this.authService.isAdminSubject.unsubscribe();
+    this.authService.isEmployeeSubject.unsubscribe();
   }
   badgevisibility() {
     this.badgevisible = true;

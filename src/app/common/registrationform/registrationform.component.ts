@@ -6,6 +6,7 @@ import { AuthService } from '../../core/auth.service';
 import { MatButton } from '@angular/material/button';
 import { ToastrService } from 'ngx-toastr';
 import { DepartmentService } from '../../core/department.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registrationform',
@@ -19,6 +20,7 @@ export class RegistrationformComponent implements OnInit {
   toast: ToastrService = inject(ToastrService);
   deptService: DepartmentService = inject(DepartmentService);
   roleOptions: any;
+  route: Router = inject(Router);
   ngOnInit(): void {
     this.deptService.getAllDepartment().subscribe((res) => {
       this.roleOptions = res;
@@ -117,6 +119,7 @@ export class RegistrationformComponent implements OnInit {
         closeButton: true,
       });
       this.registrationForm.reset();
+      this.route.navigate(['login']);
     });
   }
 }

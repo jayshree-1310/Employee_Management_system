@@ -1,28 +1,17 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  RouterLink,
-  RouterLinkActive,
-  RouterOutlet,
-  Router,
-} from '@angular/router';
+
 import { EmployeeService } from '../../core/employee-service.service';
-import { ActivatedRoute } from '@angular/router';
+
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { EditUserPopupComponent } from '../../Common/edit-user-popup/edit-user-popup.component';
 import { MatDialog } from '@angular/material/dialog';
-import { AuthService } from '../../core/auth.service';
+
 @Component({
   selector: 'app-emp-profile',
   standalone: true,
-  imports: [
-    MatIconModule,
-    RouterLink,
-    RouterLinkActive,
-    RouterOutlet,
-    MatButtonModule,
-  ],
+  imports: [MatIconModule, MatButtonModule],
   templateUrl: './emp-profile.component.html',
   styleUrl: './emp-profile.component.css',
 })

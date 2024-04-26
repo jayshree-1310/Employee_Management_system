@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -7,31 +6,33 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private _router: Router) {}
-  public isAdmin = new BehaviorSubject<boolean>(false);
-  public isEmployee = new BehaviorSubject<boolean>(false);
-  logoutAdmin() {
-    this.isAdmin.next(false);
-    this._router.navigate(['/login']);
-    localStorage.removeItem('token');
+  constructor(private http: HttpClient) {
+    if (this.getUserRole() === 'admin') {
+      this.isAdminSubject.next(true);
+    } else if (this.getUserRole() === 'employee') {
+      this.isEmployeeSubject.next(true);
+    }
+    this.getUserByEmail(localStorage.getItem('email')).subscribe((value) => {
+      this.userData = value;
+    });
   }
-  logoutEmployee() {
-    this.isEmployee.next(false);
-    this._router.navigate(['/login']);
-    localStorage.removeItem('token');
-  }
-  loggedIn() {
-    return !!localStorage.getItem('token');
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
+  public isAdminSubject = new BehaviorSubject<boolean>(false);
+  public isEmployeeSubject = new BehaviorSubject<boolean>(false);
+  userData: any;
+  isLoggedIn() {
+    return localStorage.getItem('email') != null;
   }
   addEmployee(formData: any) {
     return this.http.post('http://localhost:9090/api/addEmployee', formData);
   }
+  loginEmployee(body: any) {
+    return this.http.post('http://localhost:9090/api/loginEmployee', body);
+  }
   getAllEmployee() {
     return this.http.get('http://localhost:9090/api/getAllEmployee');
+  }
+  getUserByEmail(email: any) {
+    return this.http.get('http://localhost:9090/api/employee' + '/' + email);
   }
   getAllEmployeePage(pageNumber: any) {
     return this.http.get(
@@ -60,5 +61,41 @@ export class AuthService {
         '/' +
         pageNumber
     );
+  }
+
+  onLoggedIn() {
+    this.getUserByEmail(localStorage.getItem('email')).subscribe((value) => {
+      this.userData = value;
+    });
+    this.loginAsAdmin();
+    this.loginAsEmployee();
+  }
+  getUserRole() {
+    return localStorage.getItem('role') != null
+      ? localStorage.getItem('role')?.toString()
+      : '';
+  }
+
+  loginAsAdmin() {
+    if (this.getUserRole() === 'admin') {
+      this.isAdminSubject.next(true);
+    } else {
+      this.isAdminSubject.next(false);
+    }
+  }
+  loginAsEmployee() {
+    if (this.getUserRole() === 'employee' && this.isLoggedIn()) {
+      this.isEmployeeSubject.next(true);
+    } else {
+      this.isEmployeeSubject.next(false);
+    }
+  }
+  logOutAdmin() {
+    localStorage.clear();
+    this.isAdminSubject.next(false);
+  }
+  logOutEmployee() {
+    localStorage.clear();
+    this.isEmployeeSubject.next(false);
   }
 }

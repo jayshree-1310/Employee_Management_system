@@ -52,6 +52,7 @@ export const data = [
 export class LoginformComponent implements OnInit {
   authService: AuthService = inject(AuthService);
   toast: ToastrService = inject(ToastrService);
+  userData: any;
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -73,42 +74,64 @@ export class LoginformComponent implements OnInit {
     return this.loginform.get('password') as FormControl;
   }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    localStorage.clear();
+  }
   ngOnInit(): void {
-    this.authService.isAdmin.next(false);
-    this.authService.isEmployee.next(false);
+    this.authService.isAdminSubject.next(false);
+    this.authService.isEmployeeSubject.next(false);
   }
 
   submitLoginForm() {
-    let obj = data.find((o) => o.email === this.id.value);
-    let isUser = this.password.value === obj?.password;
-    if (!isUser) {
-      this.authService.isAdmin.next(false);
-      this.authService.isEmployee.next(false);
-      alert('Invalid credentials');
-      return;
-    }
-    if (obj?.role === 'admin') {
-      this.authService.isAdmin.next(true);
-      this.router.navigate(['/adminDashboard']);
-      localStorage.setItem('role', 'admin');
-      localStorage.setItem('email', this.id.value);
-      this.toast.success('Loggedin Successfully', 'Success ', {
-        timeOut: 3000,
-        closeButton: true,
-      });
-      return;
-    } else {
-      this.authService.isEmployee.next(true);
-      localStorage.setItem('role', 'employee');
-      localStorage.setItem('email', this.id.value);
-      this.router.navigate(['/employeeDashboard']);
-      this.toast.success('Loggedin Successfully', 'Success ', {
-        timeOut: 3000,
-        closeButton: true,
-      });
-      // this.logInAuthService.login();
-      return;
-    }
+    this.authService.loginEmployee(this.loginform.value).subscribe({
+      next: (res) => {
+        this.userData = res;
+        console.log(this.userData);
+        if (this.userData.status) {
+          if (this.userData.role === 'admin') {
+            localStorage.setItem('email', this.userData.email);
+            localStorage.setItem('role', this.userData.role);
+            this.authService.onLoggedIn();
+            this.router.navigate(['/admin/adminDashboard']);
+            this.toast.success('Loggedin Successfully', 'Welcome ', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          } else {
+            localStorage.setItem('email', this.userData.email);
+            localStorage.setItem('role', this.userData.role);
+            this.authService.onLoggedIn();
+            this.router.navigate(['/employee/employeeDashboard']);
+            this.toast.success('Loggedin Successfully', 'Welcome ', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          }
+        } else {
+          if (this.userData.message == 'Not Match') {
+            this.toast.error('Invalid Credential', 'Verify Email or Password', {
+              timeOut: 3000,
+              closeButton: true,
+            });
+          }
+          if (this.userData.message == 'Not Exist') {
+            this.toast.error(
+              'Register First Before login',
+              "User Doesn't Exist",
+              {
+                timeOut: 3000,
+                closeButton: true,
+              }
+            );
+          }
+        }
+      },
+      error: (err) => {
+        this.toast.error('Register First Before login', "User Doesn't Exist", {
+          timeOut: 3000,
+          closeButton: true,
+        });
+      },
+    });
   }
 }

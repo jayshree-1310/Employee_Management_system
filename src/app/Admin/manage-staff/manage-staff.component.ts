@@ -86,17 +86,12 @@ export class ManageStaffComponent implements OnInit {
         .subscribe((res) => {
           this.userdata = res;
           this.dataSource = new MatTableDataSource(this.userdata.content);
-          
         });
-
     } else {
       this.authService.getAllEmployeePage(this.pageNumber).subscribe((res) => {
         this.userdata = res;
         this.dataSource = new MatTableDataSource(this.userdata.content);
-        
-        
       });
-
     }
   }
   filterChange() {
@@ -113,9 +108,8 @@ export class ManageStaffComponent implements OnInit {
     'action',
   ];
 
-  
   addEmployee() {
-    this.route.navigate(['/add-staff']);
+    this.route.navigate(['/admin/add-staff']);
   }
   deleteEmployee(id: any) {
     alertify

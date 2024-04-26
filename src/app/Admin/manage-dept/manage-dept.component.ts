@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatMenuModule } from '@angular/material/menu';
-import { Router } from '@angular/router';
+
 import { MatDialog } from '@angular/material/dialog';
 import { AddDepartmentPopupComponent } from '../add-department-popup/add-department-popup.component';
 import { EditDepartmentPopupComponent } from '../edit-department-popup/edit-department-popup.component';
@@ -53,7 +53,7 @@ export class ManageDeptComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   dataSource: any;
-  route: Router = inject(Router);
+
   departmentData: any;
   searchdata: any = '';
   ngOnInit(): void {

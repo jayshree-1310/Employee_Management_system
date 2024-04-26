@@ -19,6 +19,9 @@ import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance
 import path from 'path';
 import { SalaryslipComponent } from './Employee/salaryslip/salaryslip.component';
 import { TodoComponent } from './Common/todo/todo.component';
+import { authGuard } from './core/guards/auth.guard';
+import { adminGuard } from './core/guards/admin.guard';
+import { employeeGuard } from './core/guards/employee.guard';
 
 export const routes: Routes = [
   { path: '', component: LoginformComponent, pathMatch: 'full' },
@@ -28,87 +31,100 @@ export const routes: Routes = [
     title: 'Register',
   },
   { path: 'login', component: LoginformComponent, title: 'Login' },
-  {
-    path: 'adminDashboard',
-    component: AdminDashboardComponent,
-    title: 'adminDashboard',
-  },
-  {
-    path: 'employeeDashboard',
-    component: EmployeeDashboardComponent,
-    title: 'employeeDashboard',
-  },
-  {
-    path: 'manage-staff',
-    component: ManageStaffComponent,
-    title: 'manage-staff',
-  },
-  {
-    path: 'add-staff',
-    component: AddStaffComponent,
-    title: 'add-staff',
-  },
-  {
-    path: 'manage-dept',
-    component: ManageDeptComponent,
-    title: 'manage-dept',
-  },
-  {
-    path: 'manage-leaves',
-    component: ManageLeavesComponent,
-    title: 'manage-leaves',
-  },
-  {
-    path: 'leave-history',
-    component: LeaveHistoryComponent,
-    title: 'Leave-History',
-  },
-  {
-    path: 'manage-salary',
-    component: ManageSalaryComponent,
-    title: 'manage-salary',
-  },
 
   {
-    path: 'holiday-list',
-    component: HolidayListComponent,
-    title: 'holiday-list',
+    path: 'admin',
+    title: 'Admin',
+    canActivate: [authGuard, adminGuard],
+    children: [
+      {
+        path: 'adminDashboard',
+        component: AdminDashboardComponent,
+        title: 'adminDashboard',
+      },
+      {
+        path: 'manage-staff',
+        component: ManageStaffComponent,
+        title: 'manage-staff',
+      },
+      {
+        path: 'add-staff',
+        component: AddStaffComponent,
+        title: 'add-staff',
+      },
+      {
+        path: 'manage-dept',
+        component: ManageDeptComponent,
+        title: 'manage-dept',
+      },
+      {
+        path: 'manage-leaves',
+        component: ManageLeavesComponent,
+        title: 'manage-leaves',
+      },
+      {
+        path: 'leave-history',
+        component: LeaveHistoryComponent,
+        title: 'Leave-History',
+      },
+      {
+        path: 'manage-salary',
+        component: ManageSalaryComponent,
+        title: 'manage-salary',
+      },
+      {
+        path: 'manage-attendance',
+        component: ManageAttendanceComponent,
+        title: 'manage-attendance',
+      },
+      {
+        path: 'view-attendance',
+        component: ViewAttendanceComponent,
+        title: 'view-attendance',
+      },
+      {
+        path: 'tasks',
+        component: TodoComponent,
+        title: 'Task',
+      },
+    ],
   },
   {
-    path: 'emp-profile',
-    component: EmpProfileComponent,
-    title: 'emp-profile',
-  },
-  {
-    path: 'apply-leave',
-    component: ApplyLeaveComponent,
-    title: 'apply-leave',
-  },
+    path: 'employee',
+    title: 'Employee',
+    canActivate: [authGuard, employeeGuard],
+    children: [
+      {
+        path: 'employeeDashboard',
+        component: EmployeeDashboardComponent,
+        title: 'employeeDashboard',
+      },
 
-  {
-    path: 'manage-attendance',
-    component: ManageAttendanceComponent,
-    title: 'manage-attendance',
-  },
-  {
-    path: 'view-attendance',
-    component: ViewAttendanceComponent,
-    title: 'view-attendance',
-  },
-
-  {
-    path: 'salary-slip',
-    component: SalaryslipComponent,
-    title: 'my-salaryslip',
-  },
-  {
-    path: 'tasks',
-    component: TodoComponent,
-    title: 'Task',
-  },
-  {
-    path: 'salary-slip',
-    component: SalaryslipComponent,
-    title: 'Salary',
+      {
+        path: 'holiday-list',
+        component: HolidayListComponent,
+        title: 'holiday-list',
+      },
+      {
+        path: 'emp-profile',
+        component: EmpProfileComponent,
+        title: 'emp-profile',
+      },
+      {
+        path: 'apply-leave',
+        component: ApplyLeaveComponent,
+        title: 'apply-leave',
+      },
+      {
+        path: 'tasks',
+        component: TodoComponent,
+        title: 'Task',
+      },
+      {
+        path: 'salary-slip',
+        component: SalaryslipComponent,
+        title: 'Salary',
+      },
+    ],
   },
 ];

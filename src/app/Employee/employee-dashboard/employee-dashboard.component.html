@@ -12,7 +12,7 @@
               <i class="fa fa-layer-group fa-4x opacity-75"></i>
             </div>
             <div class="col">
-              <h5 class="fs-2">{{employee?.firstName}}</h5>
+              <h5 class="fs-2">{{ employee?.firstName }}</h5>
               <h6 class="fs-5">My Profile</h6>
             </div>
           </div>
@@ -20,7 +20,7 @@
         <div class="card-footer pb-0">
           <h3>
             <a
-              routerLink="/emp-profile"
+              routerLink="/employee/emp-profile"
               class="card-text-1 text-decoration-none fw-medium fs-5"
               >View My Profile <i class="fa fa-arrow-alt-circle-right"></i
             ></a>
@@ -36,7 +36,7 @@
               <i class="fa fa-users fa-4x opacity-75"></i>
             </div>
             <div class="col">
-              <h1 class="fs-2">0</h1>
+              <h1 class="fs-2">{{ this.leaveData }}</h1>
               <h6 class="fs-5">Leaves</h6>
             </div>
           </div>
@@ -44,7 +44,7 @@
         <div class="card-footer pb-0">
           <h3>
             <a
-              routerLink="/apply-leave"
+              routerLink="/employee/apply-leave"
               class="card-text-2 text-decoration-none fw-medium fs-5"
               >Apply Leave <i class="fa fa-arrow-alt-circle-right"></i
             ></a>
@@ -68,7 +68,7 @@
         <div class="card-footer pb-0">
           <h3>
             <a
-              routerLink="/holiday-list"
+              routerLink="/employee/holiday-list"
               class="card-text-3 text-decoration-none fw-medium fs-5"
               >View List <i class="fa fa-arrow-alt-circle-right"></i
             ></a>
@@ -92,7 +92,7 @@
         <div class="card-footer pb-0">
           <h3>
             <a
-              routerLink="/salary-slip"
+              routerLink="/employee/salary-slip"
               class="card-text-4 text-decoration-none fw-medium fs-5"
               >View Details <i class="fa fa-arrow-alt-circle-right"></i
             ></a>
