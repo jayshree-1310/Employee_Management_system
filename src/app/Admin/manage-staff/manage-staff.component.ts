@@ -18,7 +18,7 @@ import {
 } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { EditUserPopupComponent } from '../../Common/edit-user-popup/edit-user-popup.component';
+import { EditUserPopupComponent } from '../edit-user-popup/edit-user-popup.component';
 import { ToastrService } from 'ngx-toastr';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';

@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { EmployeeService } from '../../core/employee-service.service';
 
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { EditUserPopupComponent } from '../../Common/edit-user-popup/edit-user-popup.component';
+import { EditUserPopupComponent } from '../../Admin/edit-user-popup/edit-user-popup.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

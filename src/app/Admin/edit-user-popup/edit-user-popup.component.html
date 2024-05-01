@@ -107,7 +107,7 @@
                   name="department"
                   id="department"
                   formControlName="department"
-                  class="form-select bg-light w-75"
+                  class="form-select bg-light w-50"
                   [ngClass]="{'is-valid':(department.touched)&&!(department.errors?.['required']),'is-invalid':((department.touched) && (department.errors?.['required']))}"
                 >
                   @for (item of deptArray; track $index) {

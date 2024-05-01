@@ -25,11 +25,12 @@ import { ToastrService } from 'ngx-toastr';
 export class EditDepartmentPopupComponent implements OnInit {
   departmentService: DepartmentService = inject(DepartmentService);
   toast: ToastrService = inject(ToastrService);
+  deptData: any;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private ref: MatDialogRef<EditDepartmentPopupComponent>
   ) {}
-  deptData: any;
   ngOnInit(): void {
     this.deptData = this.data;
     this.editDepartmentForm.setValue({

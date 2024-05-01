@@ -329,9 +329,7 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   renderSalaryChart() {
-    // console.log(this.myChart);
     if (this.mySalaryChart) {
-      // console.log('hello');
       this.mySalaryChart.destroy();
     }
     const ctx1 = document.getElementById('mySalaryChart') as HTMLCanvasElement;
@@ -539,12 +537,10 @@ export class AdminDashboardComponent implements OnInit {
 
   onChartTypeChange(event: any): void {
     this.chartType = event.target.value;
-    // console.log(this.chartType);
     this.renderChart();
   }
   onSalaryChartTypeChange(event: any): void {
     this.salaryChartType = event.target.value;
-    // console.log(this.chartType);
     this.renderSalaryChart();
   }
 }

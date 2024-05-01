@@ -41,7 +41,21 @@ export class LeaveHistoryComponent {
   @ViewChild(MatSort) sort!: MatSort;
   leaveData!: any;
   leaveService: LeaveService = inject(LeaveService);
-  searchdata: any = '';
+  searchdata = '';
+  dataSource: any;
+  pageNumber = 0;
+  displayColumns: string[] = [
+    'no',
+    'photo',
+    'name',
+    'email',
+    'department',
+    'reason',
+    'description',
+    'leaveFromDate',
+    'leaveToDate',
+    'status',
+  ];
   ngOnInit(): void {
     this.loadData();
   }
@@ -54,8 +68,6 @@ export class LeaveHistoryComponent {
     this.pageNumber--;
     this.loadData();
   }
-
-  pageNumber = 0;
 
   loadData() {
     if (this.searchdata != '') {
@@ -72,22 +84,9 @@ export class LeaveHistoryComponent {
       });
     }
   }
-  dataSource: any;
-  displayColumns: string[] = [
-    'no',
-    'photo',
-    'name',
-    'email',
-    'department',
-    'reason',
-    'description',
-    'leaveFromDate',
-    'leaveToDate',
-    'status',
-  ];
+
   getImageUrl(element: any): SafeUrl {
     if (element) {
-      // Extracting image type from base64 string
       const typeMatch = element.employee.image.match(
         /^data:(image\/[a-z]+);base64,/i
       );
@@ -103,12 +102,10 @@ export class LeaveHistoryComponent {
         );
       }
     }
-    return ''; // Or provide a placeholder image
+    return '';
   }
 
   filterChange() {
     this.loadData();
-    // const value = (data.target as HTMLInputElement).value;
-    // this.dataSource.filter = value.trim().toLowerCase();
   }
 }
