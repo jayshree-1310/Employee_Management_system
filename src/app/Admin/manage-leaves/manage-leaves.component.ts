@@ -159,7 +159,7 @@ export class ManageLeavesComponent implements OnInit {
     alertify
       .confirm(
         'Reject Leave',
-        'Are you Sure to Reject leave the of ' +
+        'Are you Sure to Reject the leave of ' +
           element.employee.firstName +
           ' ?',
         () => {
