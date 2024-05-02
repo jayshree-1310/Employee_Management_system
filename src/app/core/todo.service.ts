@@ -6,29 +6,24 @@ import { Injectable } from '@angular/core';
 })
 export class TodoService {
   constructor(private http: HttpClient) {}
+  url = 'http://localhost:9090/api';
+
   addTasks(data: any) {
-    return this.http.post('http://localhost:9090/api/addTask', data);
+    return this.http.post(this.url + '/addTask', data);
   }
   getTasks(email: any) {
-    return this.http.get('http://localhost:9090/api/getTask' + '/' + email);
+    return this.http.get(this.url + '/getTask' + '/' + email);
   }
   updateTaskStatus(taskId: any, newStatus: string) {
     return this.http.put(
-      'http://localhost:9090/api/changeStatus' +
-        '/' +
-        taskId +
-        '/status/' +
-        newStatus,
+      this.url + '/changeStatus' + '/' + taskId + '/status/' + newStatus,
       null
     );
   }
   deleteTask(id: any) {
-    return this.http.delete('http://localhost:9090/api/deleteTask' + '/' + id);
+    return this.http.delete(this.url + '/deleteTask' + '/' + id);
   }
   updateTask(id: any, description: any) {
-    return this.http.put(
-      'http://localhost:9090/api/updateTask' + '/' + id,
-      description
-    );
+    return this.http.put(this.url + '/updateTask' + '/' + id, description);
   }
 }

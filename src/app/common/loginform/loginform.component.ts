@@ -14,27 +14,6 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
-export const data = [
-  {
-    email: 'admin@gmail.com',
-    password: 'Admin@123',
-    role: 'admin',
-  },
-  {
-    email: 'employee@gmail.com',
-    password: 'Employee@123',
-    role: 'employee',
-  },
-  {
-    email: 'emp3@gmail.com',
-    password: 'emp3',
-  },
-  {
-    email: 'emp4@gmail.com',
-    password: 'emp4',
-  },
-];
-
 @Component({
   selector: 'app-loginform',
   standalone: true,
@@ -53,6 +32,13 @@ export class LoginformComponent implements OnInit {
   authService: AuthService = inject(AuthService);
   toast: ToastrService = inject(ToastrService);
   userData: any;
+  constructor(private router: Router) {
+    localStorage.clear();
+  }
+  ngOnInit(): void {
+    this.authService.isAdminSubject.next(false);
+    this.authService.isEmployeeSubject.next(false);
+  }
   loginform = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -74,19 +60,10 @@ export class LoginformComponent implements OnInit {
     return this.loginform.get('password') as FormControl;
   }
 
-  constructor(private router: Router) {
-    localStorage.clear();
-  }
-  ngOnInit(): void {
-    this.authService.isAdminSubject.next(false);
-    this.authService.isEmployeeSubject.next(false);
-  }
-
   submitLoginForm() {
     this.authService.loginEmployee(this.loginform.value).subscribe({
       next: (res) => {
         this.userData = res;
-        console.log(this.userData);
         if (this.userData.status) {
           if (this.userData.role === 'admin') {
             localStorage.setItem('email', this.userData.email);
@@ -109,10 +86,14 @@ export class LoginformComponent implements OnInit {
           }
         } else {
           if (this.userData.message == 'Not Match') {
-            this.toast.error('Invalid Credential', 'Verify Email or Password', {
-              timeOut: 3000,
-              closeButton: true,
-            });
+            this.toast.error(
+              'Invalid Credential',
+              'Invalid Email or Password',
+              {
+                timeOut: 3000,
+                closeButton: true,
+              }
+            );
           }
           if (this.userData.message == 'Not Exist') {
             this.toast.error(

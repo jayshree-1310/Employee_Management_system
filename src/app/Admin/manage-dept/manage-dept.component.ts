@@ -78,8 +78,6 @@ export class ManageDeptComponent implements OnInit {
         .subscribe((res) => {
           this.departmentData = res;
           this.dataSource = new MatTableDataSource(this.departmentData.content);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     } else {
       this.departmentService
@@ -87,8 +85,6 @@ export class ManageDeptComponent implements OnInit {
         .subscribe((res) => {
           this.departmentData = res;
           this.dataSource = new MatTableDataSource(this.departmentData.content);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     }
   }
@@ -96,8 +92,6 @@ export class ManageDeptComponent implements OnInit {
 
   filterChange() {
     this.loadData();
-    // const value = (data.target as HTMLInputElement).value;
-    // this.dataSource.filter = value.trim().toLowerCase();
   }
   addEmployee() {
     this.dialog.open(AddDepartmentPopupComponent, {

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AttendanceService {
   constructor(private http: HttpClient) {}
+  url = 'http://localhost:9090/api';
   markAttendace(
     employeeIds: number[],
     presentDate: any,
@@ -18,24 +19,20 @@ export class AttendanceService {
       present: present,
       halfDay: halfDay,
     };
-    return this.http.post('http://localhost:9090/api/markAttendace', payload);
+    return this.http.post(this.url + '/markAttendace', payload);
   }
   getAttendancesByDate(date: any) {
-    return this.http.get(
-      'http://localhost:9090/api/getAttendanceByDate' + '/' + date
-    );
+    return this.http.get(this.url + '/getAttendanceByDate' + '/' + date);
   }
   getAttendancesByDatePage(date: any, pageNumber: any) {
     return this.http.get(
-      'http://localhost:9090/api/getAttendanceByDatePage/' +
-        pageNumber +
-        '/' +
-        date
+      this.url + '/getAttendanceByDatePage/' + pageNumber + '/' + date
     );
   }
   getSearchedAttendance(keyword: any, pageNumber: any, date: any) {
     return this.http.get(
-      'http://localhost:9090/api/getSearchedAttendance/' +
+      this.url +
+        '/getSearchedAttendance/' +
         keyword +
         '/' +
         pageNumber +

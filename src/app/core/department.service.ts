@@ -6,35 +6,27 @@ import { Injectable } from '@angular/core';
 })
 export class DepartmentService {
   constructor(private http: HttpClient) {}
+  url = 'http://localhost:9090/api';
+
   addDepartment(dept: any) {
-    return this.http.post('http://localhost:9090/api/addDepartment', dept);
+    return this.http.post(this.url + '/addDepartment', dept);
   }
   getAllDepartment() {
-    return this.http.get('http://localhost:9090/api/getAllDepartment');
+    return this.http.get(this.url + '/getAllDepartment');
   }
   getAllDepartmentPage(pageNumber: any) {
-    return this.http.get(
-      'http://localhost:9090/api/getAllDepartmentPage/' + pageNumber
-    );
+    return this.http.get(this.url + '/getAllDepartmentPage/' + pageNumber);
   }
   deleteDepartment(id: any) {
-    return this.http.delete(
-      'http://localhost:9090/api/deleteDepartment' + '/' + id
-    );
+    return this.http.delete(this.url + '/deleteDepartment' + '/' + id);
   }
 
   editDepartment(id: string, data: any) {
-    return this.http.patch(
-      'http://localhost:9090/api/editDepartment' + '/' + id,
-      data
-    );
+    return this.http.patch(this.url + '/editDepartment' + '/' + id, data);
   }
   getSearchedDepartment(keyword: any, pageNumber: any) {
     return this.http.get(
-      'http://localhost:9090/api/getSearchedDepartment/' +
-        keyword +
-        '/' +
-        pageNumber
+      this.url + '/getSearchedDepartment/' + keyword + '/' + pageNumber
     );
   }
 }

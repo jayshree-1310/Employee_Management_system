@@ -119,14 +119,5 @@ export class EditUserPopupComponent implements OnInit {
           closeButton: true,
         });
       });
-    // this.manageStaff
-    //   .editUser(this.userData.data.email, formData)
-    //   .subscribe((res) => {
-    //     this.closePopup();
-    //     this.toast.success('Edit Successfully', 'Success', {
-    //       timeOut: 3000,
-    //       closeButton: true,
-    //     });
-    //   });
   }
 }

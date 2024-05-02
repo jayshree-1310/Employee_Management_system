@@ -77,8 +77,6 @@ export class ManageLeavesComponent implements OnInit {
         .subscribe((res) => {
           this.leaveRequests = res;
           this.dataSource = new MatTableDataSource(this.leaveRequests.content);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     } else {
       this.leaveService
@@ -86,8 +84,6 @@ export class ManageLeavesComponent implements OnInit {
         .subscribe((res) => {
           this.leaveRequests = res;
           this.dataSource = new MatTableDataSource(this.leaveRequests.content);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     }
   }
@@ -106,8 +102,6 @@ export class ManageLeavesComponent implements OnInit {
 
   filterChange() {
     this.loadData();
-    // const value = (data.target as HTMLInputElement).value;
-    // this.dataSource.filter = value.trim().toLowerCase();
   }
   getImageUrl(element: any): SafeUrl {
     if (element) {

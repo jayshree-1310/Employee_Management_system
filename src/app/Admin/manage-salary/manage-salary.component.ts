@@ -18,7 +18,6 @@ import { ToastrService } from 'ngx-toastr';
   standalone: true,
   imports: [
     MatTableModule,
-    MatPaginatorModule,
     MatSortModule,
     MatCardModule,
     MatButtonModule,
@@ -34,7 +33,7 @@ import { ToastrService } from 'ngx-toastr';
 export class ManageSalaryComponent implements OnInit {
   salaryService: AuthService = inject(AuthService);
   toast: ToastrService = inject(ToastrService);
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   @ViewChild(MatSort) sort!: MatSort;
   sdata: any;
   tempSalaryData: any;
@@ -91,15 +90,11 @@ export class ManageSalaryComponent implements OnInit {
             total: item.salary,
           }));
           this.dataSource = new MatTableDataSource(this.sdata);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     }
   }
   filterChange() {
     this.loadData();
-    // const value = (data.target as HTMLInputElement).value;
-    // this.dataSource.filter = value.trim().toLowerCase();
   }
   calculateTotal(row: any): void {
     row.total = row.basic + row.allowance;

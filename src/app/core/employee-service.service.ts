@@ -6,14 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class EmployeeService {
-  private apiUrl = 'http://localhost:8080/api/employees';
-
   constructor(private http: HttpClient) {}
+  url = 'http://localhost:9090/api';
 
-  getAllEmployees(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
-  }
   getEmployeeByEmail(email: any): Observable<any> {
-    return this.http.get<any>(`http://localhost:9090/api/employee/${email}`);
+    return this.http.get<any>(`${this.url}/employee/${email}`);
   }
 }

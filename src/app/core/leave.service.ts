@@ -19,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class LeaveService {
   constructor(private http: HttpClient) {}
+  url = 'http://localhost:9090/api';
 
   submitLeaveRequest(leaveRequest: any) {
     return this.http.post<any>(
@@ -27,50 +28,40 @@ export class LeaveService {
     );
   }
   getPendingLeaveRequests() {
-    return this.http.get<any[]>('http://localhost:9090/api/pendingLeaves');
+    return this.http.get<any[]>(this.url + '/pendingLeaves');
   }
   getPendingLeavesRequestsPage(pageNumber: any) {
-    return this.http.get<any[]>(
-      'http://localhost:9090/api/pendingLeavesPage/' + pageNumber
-    );
+    return this.http.get<any[]>(this.url + '/pendingLeavesPage/' + pageNumber);
   }
   getSearchedLeave(keyword: any, pageNumber: any) {
     return this.http.get<any[]>(
-      'http://localhost:9090/api/getSearchedLeave/' + keyword + '/' + pageNumber
+      this.url + '/getSearchedLeave/' + keyword + '/' + pageNumber
     );
   }
   getAllSearchedLeave(keyword: any, pageNumber: any) {
     return this.http.get<any[]>(
-      'http://localhost:9090/api/getAllSearchedLeave/' +
-        keyword +
-        '/' +
-        pageNumber
+      this.url + '/getAllSearchedLeave/' + keyword + '/' + pageNumber
     );
   }
   approveLeaveRequest(requestId: any) {
     return this.http.post<any>(
-      'http://localhost:9090/api/approveLeave' + '/' + requestId,
+      this.url + '/approveLeave' + '/' + requestId,
       {}
     );
   }
   rejectLeaveRequest(requestId: any) {
-    return this.http.post<any>(
-      'http://localhost:9090/api/rejectLeave' + '/' + requestId,
-      {}
-    );
+    return this.http.post<any>(this.url + '/rejectLeave' + '/' + requestId, {});
   }
   getAllLeave() {
-    return this.http.get<any[]>('http://localhost:9090/api/getAllLeave');
+    return this.http.get<any[]>(this.url + '/getAllLeave');
   }
   getAllLeavePage(pageNumber: any) {
-    return this.http.get(
-      'http://localhost:9090/api/getAllLeavePage/' + pageNumber
-    );
+    return this.http.get(this.url + '/getAllLeavePage/' + pageNumber);
   }
 
   getLeaveRequestsOfEmployee(email: any) {
     return this.http.get(
-      'http://localhost:9090/api/getLeaveRequestsOfEmployee' + '/' + email
+      this.url + '/getLeaveRequestsOfEmployee' + '/' + email
     );
   }
 }

@@ -77,8 +77,6 @@ export class ViewAttendanceComponent {
         .subscribe((res) => {
           this.attendanceList = res;
           this.dataSource = new MatTableDataSource(this.attendanceList.content);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     } else {
       this.attendanceService
@@ -86,8 +84,6 @@ export class ViewAttendanceComponent {
         .subscribe((res) => {
           this.attendanceList = res;
           this.dataSource = new MatTableDataSource(this.attendanceList.content);
-          // this.dataSource.paginator = this.paginator;
-          // this.dataSource.sort = this.sort;
         });
     }
   }
@@ -115,8 +111,6 @@ export class ViewAttendanceComponent {
   }
   filterChange() {
     this.loadData(this.presentDate);
-    // const value = (data.target as HTMLInputElement).value;
-    // this.dataSource.filter = value.trim().toLowerCase();
   }
   getImageUrl(element: any): SafeUrl {
     if (element) {

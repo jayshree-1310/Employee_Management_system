@@ -19,47 +19,37 @@ export class AuthService {
   public isAdminSubject = new BehaviorSubject<boolean>(false);
   public isEmployeeSubject = new BehaviorSubject<boolean>(false);
   userData: any;
+  url = 'http://localhost:9090/api';
   isLoggedIn() {
     return localStorage.getItem('email') != null;
   }
   addEmployee(formData: any) {
-    return this.http.post('http://localhost:9090/api/addEmployee', formData);
+    return this.http.post(this.url + '/addEmployee', formData);
   }
   loginEmployee(body: any) {
-    return this.http.post('http://localhost:9090/api/loginEmployee', body);
+    return this.http.post(this.url + '/loginEmployee', body);
   }
   getAllEmployee() {
-    return this.http.get('http://localhost:9090/api/getAllEmployee');
+    return this.http.get(this.url + '/getAllEmployee');
   }
   getUserByEmail(email: any) {
-    return this.http.get('http://localhost:9090/api/employee' + '/' + email);
+    return this.http.get(this.url + '/employee' + '/' + email);
   }
   getAllEmployeePage(pageNumber: any) {
-    return this.http.get(
-      'http://localhost:9090/api/getAllEmployeePage/' + pageNumber
-    );
+    return this.http.get(this.url + '/getAllEmployeePage/' + pageNumber);
   }
   deleteEmployee(id: any) {
-    return this.http.delete('http://localhost:9090/api/deleteEmployee/' + id);
+    return this.http.delete(this.url + '/deleteEmployee/' + id);
   }
   updateEmployee(id: any, formData: any) {
-    return this.http.patch(
-      'http://localhost:9090/api/updateEmployee/' + id,
-      formData
-    );
+    return this.http.patch(this.url + '/updateEmployee/' + id, formData);
   }
   addSalary(id: string, formData: any) {
-    return this.http.patch(
-      'http://localhost:9090/api/addSalary' + '/' + id,
-      formData
-    );
+    return this.http.patch(this.url + '/addSalary' + '/' + id, formData);
   }
   getSearchedEmployee(keyword: any, pageNumber: any) {
     return this.http.get(
-      'http://localhost:9090/api/getSearchedEmployee/' +
-        keyword +
-        '/' +
-        pageNumber
+      this.url + '/getSearchedEmployee/' + keyword + '/' + pageNumber
     );
   }
 
