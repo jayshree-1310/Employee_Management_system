@@ -61,9 +61,13 @@ export class ManageStaffComponent implements OnInit {
   route: Router = inject(Router);
   totalemp: any;
   searchdata: any = '';
+  downloadData: any;
   constructor() {}
 
   ngOnInit(): void {
+    this.authService.getAllEmployee().subscribe((res) => {
+      this.downloadData = res;
+    });
     this.loadData();
   }
 
@@ -152,7 +156,7 @@ export class ManageStaffComponent implements OnInit {
     }
   }
   private exportToExcel() {
-    const flattenedData = this.flattenData(this.userdata);
+    const flattenedData = this.flattenData(this.downloadData);
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(flattenedData);
     const workbook: XLSX.WorkBook = {
       Sheets: { data: worksheet },
@@ -165,7 +169,7 @@ export class ManageStaffComponent implements OnInit {
     this.saveFile(excelBuffer, 'table_data.xlsx');
   }
   private exportToCsv() {
-    const flattenedData = this.flattenData(this.userdata);
+    const flattenedData = this.flattenData(this.downloadData);
     const csvData = this.convertToCSV(flattenedData);
     const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
     saveAs(blob, 'table_data.csv');
