@@ -18,7 +18,7 @@ import { LeaveHistoryComponent } from './Admin/leave-history/leave-history.compo
 import { ViewAttendanceComponent } from './Admin/view-attendance/view-attendance.component';
 import path from 'path';
 import { SalaryslipComponent } from './Employee/salaryslip/salaryslip.component';
-import { TodoComponent } from './Common/todo/todo.component';
+import { TodoComponent } from './common/todo/todo.component';
 import { authGuard } from './core/guards/auth.guard';
 import { adminGuard } from './core/guards/admin.guard';
 import { employeeGuard } from './core/guards/employee.guard';
